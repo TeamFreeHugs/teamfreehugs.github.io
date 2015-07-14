@@ -14,25 +14,27 @@
 	function go() {
 		var inbox = document.getElementById('inboxItems');
 		var code = getCode();
-		console.log('Loading...');
-		if (code == null) {
-			var text = document.createElement('p');
-			text.innerHTML = "You don't seem to have accepted the code yet!";
-			var url = "https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io";
-			var frame = document.createElement('iframe');
-			frame.src = url;
-			inbox.appendChild(text);
-			inbox.appendChild(frame);
-		}
 		code = getCode().substring(13);
 	}
 
 	go();
 </script>
+<style>
+.round {
+	border-radius: 25px;
+	background: #00FFFB;
+	border: 2px solid #00FFFB;
+	padding: 20px;
+	width: 200px;
+	height: 150px;
+}
+
+.bottom {
+	z-index: -10000;
+}
+</style>
 </head>
 <body>
-	<div id="inboxItems">
-		<a onclick="console.log('Hi')" href="javascript:alert()">test</a>
-	</div>
+	<div id="inboxItems" class="round bottom"></div>
 </body>
 </html>
