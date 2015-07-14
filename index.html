@@ -4,18 +4,14 @@
 <meta charset="UTF-8">
 <title>Inbox Reader</title>
 <script>
-	function getParameterByName(name) {
-		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
-				.exec(location.search);
-		return results === null ? "" : decodeURIComponent(results[1].replace(
-				/\+/g, " "));
+	function getCode() {
+		var idx = window.location.hash.indexOf("#")
+		var hash = idx != -1 ? url.substring(idx+1) : "";
 	}
 
 	function go() {
 		var inbox = document.getElementById('inboxItems');
-		var code = getParameterByName('error_description');
-		var inbox.innerHTML = code;
+		var inbox.innerHTML = getCode();
 	}
 	go();
 </script>
