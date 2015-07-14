@@ -3,34 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Inbox Reader</title>
-<script>
-	function getCode() {
-		console.log(window.location.hash);
-		var url = window.location.hash;
-		var hash = url.substring(url.indexOf("#") + 1);
-		return hash;
-	}
-	function prepareContent() {
-		console.log('Preparing content...');
-
-	}
-
-	if (window.attachEvent) {
-		window.attachEvent('onload', prepareContent);
-	} else {
-		if (window.onload) {
-			var curronload = window.onload;
-			var newonload = function() {
-				curronload();
-				prepareContent();
-			};
-			window.onload = newonload;
-		} else {
-			window.onload = prepareContent;
-		}
-	}
-	
-</script>
 <style>
 .round {
 	border-radius: 25px;
@@ -49,7 +21,26 @@
 <body onload="prepareContent();">
 	<div id="inboxItems" class="round bottom"
 		style="width: 1000px; height: 400px; margin: 0 auto;">
-		<p>Loading, please wait for content to load...</p>
+		<p id="loadText">Loading, please wait for content to load...</p>
 	</div>
+
+	<script>
+		function getCode() {
+			console.log(window.location.hash);
+			var url = window.location.hash;
+			var hash = url.substring(url.indexOf("#") + 1);
+			return hash;
+		}
+		function prepareContent() {
+			var header = document.getElementById('loadText');
+			header.innerHTML = "Javascript detected, loading...";
+			var code = getCode();
+			if (code === "") {
+				window.open('https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io', '_blank', 'width=400,height=400');
+			} else {
+				header.innerHTML = "Your code is: <pre>" + code + "</pre> Please wait for me to load your inbox!";
+			}
+		}
+	</script>
 </body>
 </html>
