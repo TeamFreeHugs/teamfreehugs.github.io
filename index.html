@@ -11,7 +11,7 @@
 		return hash;
 	}
 
-	document.onload = function() {
+	function go() {
 		var inbox = document.getElementById('inboxItems');
 		var code = getCode();
 		console.log('Loading...');
@@ -26,6 +26,8 @@
 		}
 		code = getCode().substring(13);
 	}
+	
+	go();
 </script>
 </head>
 <body>
