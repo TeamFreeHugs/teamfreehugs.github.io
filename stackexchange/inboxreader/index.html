@@ -43,7 +43,7 @@
 				}
 			}
 			rawFile.send(null);
-			return "";
+			return "ERRR";
 		}
 
 		function prepareContent() {
@@ -58,7 +58,6 @@
 				var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
 						+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
 				header.innerHTML = readTextFile(inboxContentURL);
-				console.log(readTextFile(inboxContentURL));
 			}
 		}
 	</script>
