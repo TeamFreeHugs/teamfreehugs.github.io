@@ -38,11 +38,13 @@
 			rawFile.onreadystatechange = function() {
 				if (rawFile.readyState === 4) {
 					if (rawFile.status === 200 || rawFile.status == 0) {
+						alert(rawFile.responseText == undefined)
 						return rawFile.responseText;
 					}
 				}
 			}
 			rawFile.send(null);
+			return "";
 		}
 
 		function prepareContent() {
