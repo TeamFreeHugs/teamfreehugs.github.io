@@ -36,7 +36,7 @@
 			header.innerHTML = "Javascript detected, loading...";
 			var code = getCode();
 			if (code === "") {
-				window.open('https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io', '_blank', 'width=400,height=400');
+				window.location = 'https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io';
 			} else {
 				header.innerHTML = "Your code is: <pre>" + code + "</pre> Please wait for me to load your inbox!";
 			}
