@@ -20,6 +20,8 @@
 			var url = "https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io";
 			var frame = document.createElement('iframe');
 			frame.src = url;
+			inbox.appendChild(text);
+			inbox.appendChild(frame);
 		}
 		code = getCode().substring(13);
 	}
