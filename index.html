@@ -8,6 +8,7 @@
 		console.log(window.location.hash);
 		var idx = window.location.hash.indexOf("#");
 		var hash = idx != -1 ? url.substring(idx+1) : "";
+		return hash;
 	}
 
 	function go() {
