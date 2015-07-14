@@ -4,13 +4,23 @@
 <meta charset="UTF-8">
 <title>Inbox Reader</title>
 <script>
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
+				.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(
+				/\+/g, " "));
+	}
+
+	function go() {
+		var inbox = document.getElementById('inboxItems');
+		var code = getParameterByName('error_description');
+		var inbox.innerHTML = code;
+	}
+	go();
 </script>
 </head>
 <body>
-	<div>
-		<button
-			onclick="https://stackexchange.com/oauth?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://htmlpreview.github.io/">
-			Connect!</button>
-	</div>
+	<div id="inboxItems"></div>
 </body>
 </html>
