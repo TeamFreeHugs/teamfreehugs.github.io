@@ -58,7 +58,7 @@
 				var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
 						+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
 				var text = readTextFile(inboxContentURL);
-				header.innerHTML = text;
+				header.innerHTML = text == undefined;
 			}
 		}
 	</script>
