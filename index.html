@@ -10,14 +10,9 @@
 		var hash = url.substring(url.indexOf("#") + 1);
 		return hash;
 	}
-
-	function go() {
-		var inbox = document.getElementById('inboxItems');
-		var code = getCode();
-		code = getCode().substring(13);
+	function prepareContent() {
+		console.log('Preparing content...');
 	}
-
-	go();
 </script>
 <style>
 .round {
@@ -34,7 +29,10 @@
 }
 </style>
 </head>
-<body>
-	<div id="inboxItems" class="round bottom" style="width: 800; height: 400px;"></div>
+<body onload="prepareContent();">
+	<div id="inboxItems" class="round bottom"
+		style="width: 1000px; height: 400px; margin: 0 auto;">
+		<p>Loading, please wait for content to load...</p>
+	</div>
 </body>
 </html>
