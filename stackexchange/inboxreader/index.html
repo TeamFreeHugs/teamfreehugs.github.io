@@ -31,6 +31,21 @@
 			var hash = url.substring(url.indexOf("#") + 1);
 			return hash;
 		}
+
+		function readTextFile(file) {
+			var rawFile = new XMLHttpRequest();
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function() {
+				if (rawFile.readyState === 4) {
+					if (rawFile.status === 200 || rawFile.status == 0) {
+						var allText = rawFile.responseText;
+						alert(allText);
+					}
+				}
+			}
+			rawFile.send(null);
+		}
+
 		function prepareContent() {
 			var header = document.getElementById('loadText');
 			header.innerHTML = "Javascript detected, loading...";
@@ -38,7 +53,12 @@
 			if (code === "") {
 				window.location = 'https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io/stackexchange/inboxreader';
 			} else {
-				header.innerHTML = "Your code is: <pre>" + code + "</pre> Please wait for me to load your inbox!";
+				header.innerHTML = "Your code is: <pre>" + code
+						+ "</pre> Please wait for me to load your inbox!";
+				var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
+						+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
+				var text = readTextFile(inboxContentURL);
+				header.innerHTML = text;
 			}
 		}
 	</script>
