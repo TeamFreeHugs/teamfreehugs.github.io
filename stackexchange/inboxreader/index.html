@@ -38,7 +38,6 @@
 			rawFile.onreadystatechange = function() {
 				if (rawFile.readyState === 4) {
 					if (rawFile.status === 200 || rawFile.status == 0) {
-						alert(rawFile.responseText == undefined)
 						return rawFile.responseText;
 					}
 				}
@@ -58,7 +57,7 @@
 						+ "</pre> Please wait for me to load your inbox!";
 				var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
 						+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
-				header.innerHTML = readTextFile(inboxContentURL);
+				header.innerHTML = readTextFile((inboxContentURL);
 				console.log(readTextFile(inboxContentURL));
 			}
 		}
