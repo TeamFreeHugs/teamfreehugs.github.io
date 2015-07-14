@@ -11,7 +11,7 @@
 		return hash;
 	}
 
-	window.onload = function go() {
+	document.onload = function go() {
 		var inbox = document.getElementById('inboxItems');
 		window
 				.open('https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io');
