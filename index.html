@@ -13,8 +13,11 @@
 
 	window.onload = function go() {
 		var inbox = document.getElementById('inboxItems');
-		var code = getCode().substring(12);
-		inbox.innerHTML = code;
+		if (hash == null) {
+			window.open('https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io', 'Approve Me', 'height=300,width=500');
+			
+		}
+		var code = getCode().substring(13);
 	}
 </script>
 </head>
