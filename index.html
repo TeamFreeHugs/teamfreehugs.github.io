@@ -11,13 +11,17 @@
 		return hash;
 	}
 
-	document.onload = function go() {
+	function go() {
 		var inbox = document.getElementById('inboxItems');
-		window
-				.open('https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io');
-		window.close();
-		var code = getCode().substring(13);
-		console.log(code);
+		var code = getCode();
+		if (code == null) {
+			var text = document.createElement('p');
+			text.innerHTML = "You don't seem to have accepted the code yet!";
+			var url = "https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io";
+			var frame = document.createElement('iframe');
+			frame.src = url;
+		}
+		code = getCode().substring(13);
 	}
 </script>
 </head>
