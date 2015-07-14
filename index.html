@@ -13,7 +13,8 @@
 
 	window.onload = function go() {
 		var inbox = document.getElementById('inboxItems');
-		inbox.innerHTML = getCode();
+		var code = getCode().substring(12);
+		inbox.innerHTML = code;
 	}
 </script>
 </head>
