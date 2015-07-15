@@ -2,22 +2,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Read It Aloud</title>
+<title>Fun Things</title>
 <link rel="stylesheet" type="text/css"
 	href="https://rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
-<script>
-	function play(id) {
-		var text = document.getElementById(id).value;
-		var url = 'http://translate.google.com/translate_tts?tl=en&q=' + text;
-		var a = new Audio(url);
-		a.play();
-	}
-</script>
 </head>
 <body>
 	<div class="round bottom shadow">
-		<input type="text" id="text" />
-		<button onclick="play('text');">Speak it</button>
+		<h3>Links</h3>
+		<hr>
+
+		<p id="back">
+			<a href="#"
+				onclick="window.location='http://teamfreehugs.github.io/'">Parent
+				Directory</a>
+		</p>
+		<a href="sayit.html">/sayit</a>
 	</div>
 </body>
 </html>
