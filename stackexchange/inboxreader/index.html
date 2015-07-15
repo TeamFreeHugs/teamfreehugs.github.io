@@ -59,7 +59,9 @@
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
 				link.href = "#";
-				link.onclick = "window.open(\'" + ele.link + "\')";
+				link.addListener("click", function() {
+					window.open(ele.link);
+				});
 				link.innerHTML = title;
 				element.appendChild(top);
 				element.appendChild(link);
