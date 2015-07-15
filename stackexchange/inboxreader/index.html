@@ -50,8 +50,7 @@
 				var siteImg = ele.site.favicon_url;
 				var title = ele.title;
 				//Construct element now :)
-				var element = document.createElement('div'), p = document
-						.createElement('p'), link = document.createElement('a'), img = document
+				var element = document.createElement('div'), link = document.createElement('a'), img = document
 						.createElement('img'), top = document
 						.createElement('p');
 				link.href = ele.link;
@@ -60,11 +59,10 @@
 				top.appendChild(img);
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
-				p.innerHTML = ele.item_type.replace('_', ' ');
 				link.href = ele.link;
 				link.innerHTML = title;
 				img.src = siteImg;
-				element.appendChild(p);
+				element.appendChild(top);
 				element.appendChild(link);
 				element.appendChild(document.createElement('hr'));
 				document.body.appendChild(element);
