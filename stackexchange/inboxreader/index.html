@@ -59,11 +59,11 @@
 				top.appendChild(img);
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
-				link.href = elementLink;
+				link.href = "#";
 				console.log(elementLink);
-//				link.onclick = function() {
-//					window.open(link);
-//				};
+				link.onclick = function() {
+					window.open(elementLink);
+				};
 				link.innerHTML = title;
 				element.appendChild(top);
 				element.appendChild(link);
