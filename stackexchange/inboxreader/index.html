@@ -9,11 +9,14 @@
 	href="http://sstatic.net/stackexchange/img/favicon.ico"></link>
 </head>
 <body onload="prepareContent();">
-	<p id="back" style="display: none;"></p>
+	<p id="back" style="display: none;">
+		<a href="javascript:back()">BACK</a>
+	</p>
 	<div id="inboxItems" class="round bottom"
-		style="width: 1000px; height: 400px; margin: 0 auto;"></div>
-	<p id="loadText" style="">Loading, please wait for content to
-		load...</p>
+		style="width: 1000px; height: 400px; margin: 0 auto;">
+		<p id="loadText" style="">Loading, please wait for content to
+			load...</p>
+	</div>
 
 	<script>
 		function getCode() {
@@ -67,7 +70,7 @@
 				element.appendChild(top);
 				element.appendChild(link);
 				element.appendChild(document.createElement('hr'));
-				document.body.appendChild(element);
+				document.getElementById('inboxItems').appendChild(element);
 				ele = null;
 			}
 		}
@@ -85,7 +88,7 @@
 				setItems(code);
 				if (document.referrer.indexOf('teamfreehugs.github.io') != -1) {
 					var backLink = document.getElementById('back');
-					backLink.innerHTML = "<a href=\"javascript:back()\">BACK</a>";
+					backLink.style.display = "";
 				}
 			}
 		}
