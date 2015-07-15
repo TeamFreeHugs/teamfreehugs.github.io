@@ -49,7 +49,7 @@
 					continue;
 				var siteImg = ele.site.favicon_url;
 				var title = ele.title;
-				var link = ele.link;
+				var elementLink = ele.link;
 				//Construct element now :)
 				var element = document.createElement('div'), link = document
 						.createElement('a'), img = document
@@ -59,8 +59,8 @@
 				top.appendChild(img);
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
-				link.href = link;
-				console.log(link);
+				link.href = elementLink;
+				console.log(elementLink);
 //				link.onclick = function() {
 //					window.open(link);
 //				};
