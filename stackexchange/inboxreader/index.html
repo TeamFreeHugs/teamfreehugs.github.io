@@ -50,16 +50,15 @@
 				var siteImg = ele.site.favicon_url;
 				var title = ele.title;
 				//Construct element now :)
-				var element = document.createElement('div'), link = document.createElement('a'), img = document
+				var element = document.createElement('div'), link = document
+						.createElement('a'), img = document
 						.createElement('img'), top = document
 						.createElement('p');
-				link.href = ele.link;
-				link.innerHTML = title;
-				img.src = siteImg;
 				top.appendChild(img);
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
-				link.href = ele.link;
+				link.href = "#";
+				link.onclick = "window.open(" + ele.link + ")";
 				link.innerHTML = title;
 				img.src = siteImg;
 				element.appendChild(top);
