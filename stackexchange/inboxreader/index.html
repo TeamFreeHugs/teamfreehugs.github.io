@@ -8,7 +8,8 @@
 <body onload="prepareContent();">
 	<div id="inboxItems" class="round bottom"
 		style="width: 1000px; height: 400px; margin: 0 auto;">
-		<p id="loadText">Loading, please wait for content to load...</p>
+		<p id="loadText" style="">Loading, please wait for content to
+			load...</p>
 	</div>
 
 	<script>
@@ -51,13 +52,14 @@
 				//Construct element now :)
 				var element = document.createElement('div'), p = document
 						.createElement('p'), link = document.createElement('a'), img = document
-						.createElement('img');
-				p.innerHTML = ele.item_type.replace('_', ' ');
+						.createElement('img'), top = document
+						.createElement('p');
 				link.href = ele.link;
 				link.innerHTML = title;
 				img.src = siteImg;
-				element.appendChild(img);
-				element.appendChild(p);
+				top.appendChild(img);
+				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
+				element.appendChild(top);
 				element.appendChild(link);
 				element.appendChild(document.createElement('hr'));
 				document.body.appendChild(element);
