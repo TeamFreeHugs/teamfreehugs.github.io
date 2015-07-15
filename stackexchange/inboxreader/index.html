@@ -11,9 +11,9 @@
 <body onload="prepareContent();">
 	<div id="inboxItems" class="round bottom"
 		style="width: 1000px; height: 400px; margin: 0 auto;">
-		<p id="loadText" style="">Loading, please wait for content to
-			load...</p>
 	</div>
+	<p id="loadText" style="">Loading, please wait for content to
+			load...</p>
 
 	<script>
 		function getCode() {
@@ -43,7 +43,7 @@
 			var inboxJSON = readTextFile(inboxContentURL);
 			var json = JSON.parse(inboxJSON);
 			var items = json.items;
-			document.getElementsByTagName('body')[0].innerHTML = '';
+			document.getElementById('inboxItems').innerHTML = '';
 			for (item = 0; item < items.length; ++item) {
 				var ele = items[item];
 				if (ele == undefined)
