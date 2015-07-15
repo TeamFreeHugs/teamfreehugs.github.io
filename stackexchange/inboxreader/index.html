@@ -57,7 +57,8 @@
 						+ "</pre> Please wait for me to load your inbox!";
 				var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
 						+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
-				header.innerHTML = readTextFile(inboxContentURL);
+				var inboxJSON = readTextFile(inboxContentURL);
+				var json = JSON.parse(inboxJSON);
 			}
 		}
 	</script>
