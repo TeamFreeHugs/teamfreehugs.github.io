@@ -33,6 +33,37 @@
 			return rawFile.responseText;
 		}
 
+		function setItems(code) {
+			var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
+					+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
+			var inboxJSON = readTextFile(inboxContentURL);
+			var json = JSON.parse(inboxJSON);
+			var items = json.items;
+			document.getElementsByTagName('body')[0].innerHTML = '';
+			for (item = 0; item < items.length; ++item) {
+				var ele = items[item];
+				if (ele.site == undefined)
+					continue;
+				if (ele.site == undefined)
+					continue;
+				var siteImg = ele.site.favicon_url;
+				var title = ele.title;
+				//Construct element now :)
+				var element = document.createElement('div'), p = document
+						.createElement('p'), link = document.createElement('a'), img = document
+						.createElement('img');
+				p.innerHTML = ele.item_type.replace('_', ' ');
+				link.href = ele.link;
+				link.innerHTML = title;
+				img.src = siteImg;
+				element.appendChild(img);
+				element.appendChild(p);
+				element.appendChild(link);
+				element.appendChild(document.createElement('hr'));
+				document.body.appendChild(element);
+			}
+		}
+
 		function prepareContent() {
 			var header = document.getElementById('loadText');
 			header.innerHTML = "Javascript detected, loading...";
@@ -42,37 +73,12 @@
 			} else {
 				header.innerHTML = "Your code is: <pre>" + code
 						+ "</pre> Please wait for me to load your inbox!";
-				var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
-						+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
-				var inboxJSON = readTextFile(inboxContentURL);
-				var json = JSON.parse(inboxJSON);
-				var items = json.items;
 				var item;
 				var old = document.getElementById('inboxItems');
 				console.log(old == null);
 				old.parentElement.removeChild(old);
-				for (item = 0; item < items.length; ++item) {
-					var ele = items[item];
-					var site = ele.site;
-					var siteName = site.name;
-					var siteImg = site.favicon_url;
-					var title = ele.title;
-					//Construct element now :)
-					var element = document.createElement('div'), p = document
-							.createElement('p'), link = document
-							.createElement('a'), img = document
-							.createElement('img');
-					p.innerHTML = ele.item_type.replace('_', ' ');
-					link.href = "#";
-					link.onclick = "window.open(" + ele.link + ")";
-					link.innerHTML = title;
-					img.src = siteImg;
-					element.appendChild(img);
-					element.appendChild(p);
-					element.appendChild(link);
-					element.appendChild(document.createElement('hr'));
-					document.body.appendChild(element);
-				}
+				window.setInterval(setItems(code), 300000);
+				setItems(code);
 			}
 		}
 	</script>
