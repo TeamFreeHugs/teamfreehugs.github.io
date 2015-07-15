@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Inbox Reader</title>
 <link rel="stylesheet" type="text/css" href="styles.css"></link>
+<link rel="icon" type="image/ico"
+	href="http://sstatic.net/stackexchange/img/favicon.ico"></link>
 </head>
 <body onload="prepareContent();">
 	<div id="inboxItems" class="round bottom"
@@ -59,11 +61,7 @@
 				top.appendChild(img);
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
-				link.href = "#";
-				console.log(elementLink);
-				link.onclick = function() {
-					window.open(elementLink);
-				};
+				link.href = elementLink;
 				link.innerHTML = title;
 				element.appendChild(top);
 				element.appendChild(link);
