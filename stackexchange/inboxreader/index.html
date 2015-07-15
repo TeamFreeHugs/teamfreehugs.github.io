@@ -36,14 +36,14 @@
 
 		function setItems(code) {
 			var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
-					+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
+					+ code + '&key=Wb06jBCijTyKIkKf8YzuSg((';
 			var inboxJSON = readTextFile(inboxContentURL);
 			var json = JSON.parse(inboxJSON);
 			var items = json.items;
 			document.getElementsByTagName('body')[0].innerHTML = '';
 			for (item = 0; item < items.length; ++item) {
 				var ele = items[item];
-				if (ele.site == undefined)
+				if (ele == undefined)
 					continue;
 				if (ele.site == undefined)
 					continue;
@@ -59,6 +59,7 @@
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
 				link.href = "#";
+				console.log(ele.link);
 				link.onclick = function() {
 					window.open(ele.link);
 				};
@@ -67,6 +68,7 @@
 				element.appendChild(link);
 				element.appendChild(document.createElement('hr'));
 				document.body.appendChild(element);
+				ele = null;
 			}
 		}
 
