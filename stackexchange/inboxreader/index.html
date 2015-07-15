@@ -52,6 +52,7 @@
 				//Construct element now :)
 				var element = document.createElement('div'), p = document
 						.createElement('p'), link = document.createElement('a'), img = document
+<<<<<<< HEAD
 						.createElement('img'), top = document
 						.createElement('p');
 				link.href = ele.link;
@@ -60,6 +61,15 @@
 				top.appendChild(img);
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
+=======
+						.createElement('img');
+				p.innerHTML = ele.item_type.replace('_', ' ');
+				link.href = ele.link;
+				link.innerHTML = title;
+				img.src = siteImg;
+				element.appendChild(img);
+				element.appendChild(p);
+>>>>>>> 5c01a9e8583d1b0d984d4cd5a71ee1833047ef67
 				element.appendChild(link);
 				element.appendChild(document.createElement('hr'));
 				document.body.appendChild(element);
