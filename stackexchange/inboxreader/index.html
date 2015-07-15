@@ -54,13 +54,14 @@
 						.createElement('a'), img = document
 						.createElement('img'), top = document
 						.createElement('p');
+				img.src = siteImg;
+				alert(img.src);
 				top.appendChild(img);
 				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
 				element.appendChild(top);
 				link.href = "#";
 				link.onclick = "window.open(" + ele.link + ")";
 				link.innerHTML = title;
-				img.src = siteImg;
 				element.appendChild(top);
 				element.appendChild(link);
 				element.appendChild(document.createElement('hr'));
