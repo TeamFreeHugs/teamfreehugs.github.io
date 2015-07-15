@@ -3,20 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Inbox Reader</title>
-<style>
-.round {
-	border-radius: 25px;
-	background: #81F0CF;
-	border: 2px solid #81F0CF;
-	padding: 20px;
-	width: 200px;
-	height: 150px;
-}
-
-.bottom {
-	z-index: -10000;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="styles.css"></link>
 </head>
 <body onload="prepareContent();">
 	<div id="inboxItems" class="round bottom"
@@ -59,6 +46,30 @@
 						+ code + "&key=Wb06jBCijTyKIkKf8YzuSg((";
 				var inboxJSON = readTextFile(inboxContentURL);
 				var json = JSON.parse(inboxJSON);
+				var items = json.items;
+				alert(items.length);
+				var item;
+				var old = document.getElementById('inboxItems');
+				console.log(old == null);
+				old.parentElement.removeChild(old);
+				for (item = 0; item < items.length; ++item) {
+					var ele = items[item];
+					var site = ele.site;
+					var siteName = site.name;
+					var siteImg = site.favicon_url;
+					var link = ele.link;
+					var title = ele.title;
+					//Construct element now :)
+					var element = document.createElement('div'), link = document
+							.createElement('a'), img = document
+							.createElement('img');
+					link.href = link;
+					link.innerHTML = title;
+					img.src = siteImg;
+					element.appendChild(img);
+					element.appendChild(link);
+					document.body.appendChild(element);
+				}
 			}
 		}
 	</script>
