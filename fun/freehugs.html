@@ -29,7 +29,7 @@
 }
 
 .big-font {
-font-size: 300%;
+	font-size: 300%;
 }
 </style>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -40,18 +40,23 @@ font-size: 300%;
 		var text = document.getElementById('text');
 		var type = parseInt(text.className.substring(4, 5));
 		if (type == 6) {
-			type = 1; 
+			type = 1;
 		} else {
 			++type;
 		}
 		text.className = "type" + type + " big-font";
 	}
-	
+
 	window.setInterval(go, 1000);
 </script>
 </head>
 <body>
 	<div class="round bottom shadow" style="margin: 0 auto;">
+		<p id="back">
+			<a href="#"
+				onclick="window.location='http://teamfreehugs.github.io/fun/'">Parent
+				Directory</a>
+		</p>
 		<p align="center">
 			<span class="type1 big-font" id="text">FREE HUGS!!</span>
 		</p>
