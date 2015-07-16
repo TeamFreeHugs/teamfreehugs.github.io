@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FREE HUGS!!!</title>
+<style>
+.type1 {
+	color: red;
+}
+
+.type2 {
+	color: orange;
+}
+
+.type3 {
+	color: yellow;
+}
+
+.type4 {
+	color: green;
+}
+
+.type5 {
+	color: blue;
+}
+
+.type6 {
+	color: purple;
+}
+
+.big-font {
+font-size: 300%;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
+<script>
+	function go() {
+		var text = document.getElementById('text');
+		var type = parseInt(text.className.substring(4, 5));
+		if (type == 6) {
+			type = 0; 
+		} else {
+			++type;
+		}
+		text.className = "type" + type + " big-font";
+	}
+	
+	window.setInterval(go, 1000);
+</script>
+</head>
+<body>
+	<div class="round bottom shadow" style="margin: 0 auto;">
+		<p align="center">
+			<span class="type1 big-font" id="text">FREE HUGS!!</span>
+		</p>
+	</div>
+</body>
+</html>
