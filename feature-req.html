@@ -8,11 +8,12 @@
 	href="https://cdn.rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
 <script>
 	function submit() {
+
+		var username = document.getElementById('username');
+		var password = document.getElementById('password');
 		
-		
-		var github = new Github({
-			
-		});
+		var 
+
 	}
 </script>
 </head>
@@ -22,12 +23,17 @@
 		<hr>
 		<p>Hello! Did you find a bug in this site? Or do you want
 			something to be added?</p>
-		<p>If you</p>
 		<div id="report">
 			<p>
 				Bug title: <input id="title" type="text"></input>
 			</p>
 			<hr>
+			<p>
+				Username: <input id="username"></input>
+			</p>
+			<p>
+				Password: <input id="password"></input>
+			</p>
 			<button id="submit" onclick="submit()" value="Sumbit this bug!"></button>
 			<br>
 		</div>

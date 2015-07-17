@@ -1,17 +1,77 @@
-<!DOCTYPE html>
+<!DOCTYPE html/>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Bugs</title>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+	function submit() {
+
+		var username = document.getElementById('username');
+		var password = document.getElementById('password');
+
+		var title = document.getElementById('title');
+
+		var text = document.getElementById('body');
+
+		var obj = new Object();
+
+		obj.title = title.value;
+
+		obj.body = text.value;
+
+		obj.assignee = "Eyeballcode";
+
+		obj.milestone = 1;
+
+		obj.state = "open";
+
+		obj.labels = [ "bug" ];
+
+		var JSONString = JSON.stringify(obj);
+
+		$
+				.post(
+						"https://api.github.com/repos/TeamFreeHugs/teamfreehugs.github.io/issues",
+						JSONString, function(data) {
+
+						});
+
+	}
+</script>
 </head>
 <body>
 	<div class="round bottom shadow">
 		<h2>Bugs</h2>
 		<hr>
-		<p>Hello! Did you find a bug in this site? Or do you want something to be added?</p>
-		<p>If you want to add something, this is not the place for it. Click <a href="feature-req.html">here</a> instead!</p>
+		<p>Hello! Did you find a bug in this site? Or do you want
+			something to be added?</p>
+		<p>
+			If you want to add something, this is not the place for it. Click <a
+				href="feature-req.html">here</a> instead!
+		</p>
+
+
+		<div id="report">
+			<p>
+				Bug title: <input id="title" type="text"></input>
+			</p>
+			<p>
+				<textarea id="body"></textarea>
+			</p>
+
+			<hr>
+			<p>
+				Username: <input id="username"></input>
+			</p>
+			<p>
+				Password: <input id="password"></input>
+			</p>
+			<button id="submit" onclick="submit()">Submit this bug!</button>
+			<br>
+		</div>
 	</div>
 </body>
 </html>
