@@ -10,7 +10,7 @@
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.2.2/packaged/jquery.noty.packaged.min.js"></script>
 </head>
-<body onload="getAuthToken() warning()">
+<body onload="getAuthToken()">
 
 	<script type="text/javascript">
 		function getCode() {
@@ -58,6 +58,7 @@
 		}
 
 		function getAuthToken() {
+			noty({text: 'WARNING: THIS IS STILL IN DEV. DON\'T REPORT BUGS ABOUT THIS HERE'});
 			if (getString("code") == "") {
 				window.location = 'https://github.com/login/oauth/authorize?client_id=61ab3ede672413a14598&redirect_uri=http://teamfreehugs.github.io/bugs.html&scope=public_repo';
 
@@ -82,9 +83,6 @@
 			}
 		}
 
-		function warning() {
-			noty({text: 'WARNING: THIS IS STILL IN DEV. DON\'T REPORT BUGS ABOUT THIS HERE'});
-		}
 	</script>
 	<div class="round bottom shadow">
 		<h2>Bugs</h2>
