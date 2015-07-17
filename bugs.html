@@ -62,7 +62,8 @@
 				var code = getString("code").substring(4);
 				//Please don't abuse!
 				var decoded = atob('MGY3OGU4MjdiYjE4NjM4ZTY4Mzk5YWVkOGNkMGU0MjA2NWFjMjRiZg==');
-				alert(decoded);
+				console.log(decoded);
+				console.log(code);
 				$
 						.post(
 								'https://github.com/login/oauth/access_token?client_id=61ab3ede672413a14598&client_secret='
