@@ -7,8 +7,10 @@
 	href="https://cdn.rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"
 	type="text/javascript"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery-noty/2.2.2/packaged/jquery.noty.packaged.min.js"></script>
 </head>
-<body onload="getAuthToken()">
+<body onload="getAuthToken() warning()">
 
 	<script type="text/javascript">
 		function getCode() {
@@ -78,6 +80,10 @@
 						"X-Requested-With");
 				client.send('');
 			}
+		}
+
+		function warning() {
+			noty({text: 'WARNING: THIS IS STILL IN DEV. DON\'T REPORT BUGS ABOUT THIS HERE'});
 		}
 	</script>
 	<div class="round bottom shadow">
