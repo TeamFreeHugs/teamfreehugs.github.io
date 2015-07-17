@@ -66,22 +66,17 @@
 				console.log(decoded);
 				console.log(code);
 
-				$
-						.ajax({
-							url : 'https://github.com/login/oauth/access_token?client_id=61ab3ede672413a14598&client_secret='
-									+ decoded
-									+ '&code='
-									+ code
-									+ '&redirect_uri=http://teamfreehugs.github.io/bugs.html',
-							type : 'POST',
-							headers : {
-								"Access-Control-Allow-Origin" : "*",
-								"Access-Control-Allow-Headers" : "X-Requested-With"
-							},
-							success : function(data) {
-								console.info(data);
-							}
-						});
+				var url = 'https://github.com/login/oauth/access_token?client_id=61ab3ede672413a14598&client_secret='
+						+ decoded
+						+ '&code='
+						+ code
+						+ '&redirect_uri=http://teamfreehugs.github.io/bugs.html',
+				var client = new XMLHttpRequest();
+				client.open("POST", url);
+				client.setRequestHeader("Access-Control-Allow-Origin", "*");
+				client.setRequestHeader("Access-Control-Allow-Headers",
+						"X-Requested-With");
+				client.send('');
 			}
 		}
 	</script>
