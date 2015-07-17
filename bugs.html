@@ -46,34 +46,42 @@
 			var auth;
 
 		}
-		
+
 		function getString(name) {
-		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-		        results = regex.exec(location.search);
-		    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
+					.exec(location.search);
+			return results === null ? "" : decodeURIComponent(results[1]
+					.replace(/\+/g, " "));
 		}
 
 		function getAuthToken() {
 			if (getString("code") == "") {
 				window.location = 'https://github.com/login/oauth/authorize?client_id=61ab3ede672413a14598&redirect_uri=http://teamfreehugs.github.io/bugs.html&scope=public_repo';
-				
+
 			} else if (getString("code") != "") {
 				var code = getString("code").substring(4);
 				//Please don't abuse!
 				var decoded = atob('MGY3OGU4MjdiYjE4NjM4ZTY4Mzk5YWVkOGNkMGU0MjA2NWFjMjRiZg==');
 				console.log(decoded);
 				console.log(code);
+
 				$
-						.post(
-								'https://github.com/login/oauth/access_token?client_id=61ab3ede672413a14598&client_secret='
-										+ decoded
-										+ '&code='
-										+ code
-										+ '&redirect_uri=http://teamfreehugs.github.io/bugs.html',
-								function(date, status) {
-									alert('Yay! Testing 123');
-								});
+						.ajax({
+							url : 'https://github.com/login/oauth/access_token?client_id=61ab3ede672413a14598&client_secret='
+									+ decoded
+									+ '&code='
+									+ code
+									+ '&redirect_uri=http://teamfreehugs.github.io/bugs.html',
+							type : 'POST',
+							headers : {
+								"Access-Control-Allow-Origin" : "*",
+								"Access-Control-Allow-Headers" : "X-Requested-With"
+							},
+							success : function(data) {
+								console.info(data);
+							}
+						});
 			}
 		}
 	</script>
