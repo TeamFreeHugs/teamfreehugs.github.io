@@ -13,54 +13,69 @@
 	<script type="text/javascript">
 		function getCode() {
 			console.log(window.location.hash);
-		var url = window.location.hash;
-		var hash = url.substring(url.indexOf("#") + 1);
-		return hash;
-	}
-
-	function submit() {
-
-		var username = document.getElementById('username');
-		var password = document.getElementById('password');
-
-		var title = document.getElementById('title');
-
-		var text = document.getElementById('body');
-
-		var obj = new Object();
-
-		obj.title = title.value;
-
-		obj.body = text.value;
-
-		obj.assignee = "Eyeballcode";
-
-		obj.milestone = 1;
-
-		obj.state = "open";
-
-		obj.labels = [ "bug" ];
-
-		var JSONString = JSON.stringify(obj);
-
-		var auth;
-
-
-	}
-	
-	function getAuthToken() {
-		if (getCode().substring(4) == "") {
-			window.location = 'https://github.com/login/oauth/authorize?client_id=61ab3ede672413a14598&redirect_uri=http://teamfreehugs.github.io/bugs.html&scope=public_repo';
-		} else if (getCode().indexOf('code') != -1) {
-			var code = getCode().substring(4);
-			//Please don't abuse!
-			var decoded = window.atob('MGY3OGU4MjdiYjE4NjM4ZTY4Mzk5YWVkOGNkMGU0MjA2NWFjMjRiZg==');
-			$.post("https://github.com/login/oauth/access_token?client_id=61ab3ede672413a14598&client_secret=" + decoded + '&code=' + code + '&redirect_uri=http://teamfreehugs.github.io/bugs.html', function(date, status) {
-				alert('Yay! Testing 123');
-			});
+			var url = window.location.hash;
+			var hash = url.substring(url.indexOf("#") + 1);
+			return hash;
 		}
-	}
-</script>
+
+		function submit() {
+
+			var username = document.getElementById('username');
+			var password = document.getElementById('password');
+
+			var title = document.getElementById('title');
+
+			var text = document.getElementById('body');
+
+			var obj = new Object();
+
+			obj.title = title.value;
+
+			obj.body = text.value;
+
+			obj.assignee = "Eyeballcode";
+
+			obj.milestone = 1;
+
+			obj.state = "open";
+
+			obj.labels = [ "bug" ];
+
+			var JSONString = JSON.stringify(obj);
+
+			var auth;
+
+		}
+		
+		function getString(name) {
+		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		        results = regex.exec(location.search);
+		    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		function getAuthToken() {
+			if (getCode().substring(4) == "") {
+				window.location = 'https://github.com/login/oauth/authorize?client_id=61ab3ede672413a14598&redirect_uri=http://teamfreehugs.github.io/bugs.html&scope=public_repo';
+				
+			} else if (getString("code") != "") {
+				var code = getCode().substring(4);
+				//Please don't abuse!
+				var decoded = window
+						.atob('MGY3OGU4MjdiYjE4NjM4ZTY4Mzk5YWVkOGNkMGU0MjA2NWFjMjRiZg==');
+				$
+						.post(
+								'https://github.com/login/oauth/access_token?client_id=61ab3ede672413a14598&client_secret='
+										+ decoded
+										+ '&code='
+										+ code
+										+ '&redirect_uri=http://teamfreehugs.github.io/bugs.html',
+								function(date, status) {
+									alert('Yay! Testing 123');
+								});
+			}
+		}
+	</script>
 	<div class="round bottom shadow">
 		<h2>Bugs</h2>
 		<hr>
