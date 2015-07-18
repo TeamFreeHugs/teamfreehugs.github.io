@@ -98,13 +98,22 @@
 					noty({
 						text : 'Sorry, we don\'t support your browser.'
 					});
+					console.log('ERROR');
 					return;
 				}
+
+				console.log('Yay!');
 
 				request.onload = function() {
 					var responseText = request.responseText;
 					console.log(responseText);
+					console.log(request);
 				}
+				request.onerror = function() {
+					console.log('There was an error!');
+				}
+
+				request.send()
 			}
 		}
 	</script>
