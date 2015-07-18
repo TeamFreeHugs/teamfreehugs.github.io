@@ -2,98 +2,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Inbox Reader</title>
+<title>Index of /stackexchange/inboxreader</title>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
-<link rel="icon" type="image"
-	href="http://sstatic.net/stackexchange/img/favicon.ico"></link>
 </head>
-<body onload="prepareContent();">
-	<p id="back">
-		<a href="..">Parent
-			Directory</a>
-	</p>
-	<div id="inboxItems" class="round bottom shadow"
-		style="width: 1000px; margin: 0 auto;">
-		<p id="loadText" style="">Loading, please wait for content to
-			load...</p>
+</head>
+<body>
+	<div class="round bottom shadow">
+		<h3>Links</h3>
+		<hr>
+
+		<p id="back">
+			<a href="..">Parent Directory</a>
+		</p>
+		<p>
+			<a href="nice.html">/nice</a>
+		</p>
+		<p>
+			<a href="clean.html"
+				title="Clean version of /inboxreader">/clean</a>
+		</p>
 	</div>
-
-	<script>
-		function getCode() {
-			console.log(window.location.hash);
-			var url = window.location.hash;
-			var hash = url.substring(url.indexOf("#") + 1);
-			return hash;
-		}
-
-		function readTextFile(file) {
-			var rawFile = new XMLHttpRequest();
-			rawFile.open("GET", file, false);
-			rawFile.onreadystatechange = function() {
-				if (rawFile.readyState === 4) {
-					if (rawFile.status === 200 || rawFile.status == 0) {
-						return rawFile.responseText;
-					}
-				}
-			}
-			rawFile.send(null);
-			return rawFile.responseText;
-		}
-
-		function setItems(code) {
-			var inboxContentURL = 'https://api.stackexchange.com/2.2/inbox?access_token='
-					+ code + '&key=Wb06jBCijTyKIkKf8YzuSg((';
-			var inboxJSON = readTextFile(inboxContentURL);
-			var json = JSON.parse(inboxJSON);
-			var items = json.items;
-			document.getElementById('inboxItems').innerHTML = '';
-			for (item = 0; item < items.length; ++item) {
-				var ele = items[item];
-				if (ele == undefined)
-					continue;
-				if (ele.site == undefined)
-					continue;
-				var siteImg = ele.site.favicon_url;
-				var title = ele.title;
-				var elementLink = ele.link;
-				//Construct element now :)
-				var element = document.createElement('div'), link = document
-						.createElement('a'), img = document
-						.createElement('img'), top = document
-						.createElement('p');
-				img.src = siteImg;
-				top.appendChild(img);
-				top.innerHTML += "   " + ele.item_type.replace('_', ' ');
-				element.appendChild(top);
-				link.href = elementLink;
-				link.target = "_blank";
-				link.innerHTML = title;
-				element.appendChild(top);
-				element.appendChild(link);
-				element.appendChild(document.createElement('hr'));
-				document.getElementById('inboxItems').appendChild(element);
-				ele = null;
-			}
-		}
-
-		function prepareContent() {
-			var header = document.getElementById('loadText');
-			header.innerHTML = "Javascript detected, loading...";
-			var code = getCode().substring(13);
-			if (code === "") {
-				window.location = 'https://stackexchange.com/oauth/dialog?client_id=5176&scope=read_inbox,no_expiry&redirect_uri=http://teamfreehugs.github.io/stackexchange/inboxreader';
-			} else {
-				header.innerHTML = "Your code is: <pre>" + code
-						+ "</pre> Please wait for me to load your inbox!";
-				window.setInterval(setItems(code), 300000);
-				setItems(code);
-				if (document.referrer.indexOf('teamfreehugs.github.io') != -1) {
-					var backLink = document.getElementById('back');
-					backLink.style.display = "";
-				}
-			}
-		}
-	</script>
 </body>
 </html>
