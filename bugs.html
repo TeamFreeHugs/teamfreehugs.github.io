@@ -57,11 +57,30 @@
 					.replace(/\+/g, " "));
 		}
 
+		function createCORSRequest(method, url) {
+			var xhr = new XMLHttpRequest();
+			if ("withCredentials" in xhr) {
+				// Check if the XMLHttpRequest object has a "withCredentials" property.
+				// "withCredentials" only exists on XMLHTTPRequest2 objects.
+				xhr.open(method, url, true);
+			} else if (typeof XDomainRequest != "undefined") {
+				// Otherwise, check if XDomainRequest.
+				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+				xhr = new XDomainRequest();
+				xhr.open(method, url);
+			} else {
+				// Otherwise, CORS is not supported by the browser.
+				xhr = null;
+			}
+			return xhr;
+		}
+
 		function getAuthToken() {
-			noty({text: 'WARNING: THIS IS STILL IN DEV. DON\'T REPORT BUGS ABOUT THIS HERE'});
+			noty({
+				text : 'WARNING: THIS IS STILL IN DEV. DON\'T REPORT BUGS ABOUT THIS HERE.<br>Report them manually instead.'
+			});
 			if (getString("code") == "") {
 				window.location = 'https://github.com/login/oauth/authorize?client_id=61ab3ede672413a14598&redirect_uri=http://teamfreehugs.github.io/bugs.html&scope=public_repo';
-
 			} else if (getString("code") != "") {
 				var code = getString("code").substring(4);
 				//Please don't abuse!
@@ -74,15 +93,20 @@
 						+ '&code='
 						+ code
 						+ '&redirect_uri=http://teamfreehugs.github.io/bugs.html';
-				var client = new XMLHttpRequest();
-				client.open("POST", url);
-				client.setRequestHeader("Access-Control-Allow-Origin", "*");
-				client.setRequestHeader("Access-Control-Allow-Headers",
-						"X-Requested-With");
-				client.send('');
+				var request = createCORSRequest('POST', url);
+				if (!request) {
+					noty({
+						text : 'Sorry, we don\'t support your browser.'
+					});
+					return;
+				}
+
+				request.onload = function() {
+					var responseText = request.responseText;
+					console.log(responseText);
+				}
 			}
 		}
-
 	</script>
 	<div class="round bottom shadow">
 		<h2>Bugs</h2>
