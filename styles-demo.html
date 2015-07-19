@@ -67,7 +67,7 @@
 <body>
 	<div class="round bottom shadow" style="width: auto;">
 		<p>
-		<a href=".">Parent Directory</a>
+			<a href=".">Parent Directory</a>
 		</p>
 		<div style="width: 400px;">
 			<h3>Markdown CSS:</h3>
@@ -83,9 +83,10 @@
 					onmouseout="hide();">Spoilers</h4>
 				<hr>
 				<blockquote id="spoiler-demo" class="quote"
-					onmouseenter="fadein('spoiler-demo');"
-					onmouseout="fadeout('spoiler-demo');">Hey! I'm a
-					spoiler! I like to hide!</blockquote>
+					onmouseenter="fadein('spoiler-text');"
+					onmouseout="fadeout('spoiler-text');">
+					<p id="spoiler-text" class="spoiler-insides">Hey! I'm a spoiler! I like to hide!</p>
+				</blockquote>
 			</div>
 			<div id="code">
 				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code

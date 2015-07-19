@@ -14,6 +14,10 @@
 	height: auto;
 }
 
+.spoiler-insides {
+	padding: 0px;
+}
+
 @
 keyframes fadein {
 	from: opacity: 0%;
