@@ -33,3 +33,13 @@ to: {
 	opacity: 0%
 }
 }
+
+.spoilerIn {
+	animation-name: fadein;
+	animation-duration: 3s;
+}
+
+.spoilerOut {
+	animation-name: fadeout;
+	animation-duration: 3s;
+}

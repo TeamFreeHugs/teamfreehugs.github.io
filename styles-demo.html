@@ -43,7 +43,7 @@
 			className : 'info'
 		});
 	}
-	function infoQuote() {
+	function infoSpoiler() {
 		$('#spoiler-title').notify('Quotes that hide', {
 			className : 'info'
 		});
@@ -52,24 +52,22 @@
 	function hide() {
 		$('.notifyjs-container').click();
 	};
-	
+
 	function fadein(id) {
 		var e = document.getElementById(id);
-		e.style.animation-name = "fadein";
-		e.style.animation-duration = "3s";
+		e.className = 'fadein';
 	}
-	
+
 	function fadeout(id) {
 		var e = document.getElementById(id);
-		e.style.animation-name = "fadeout";
-		e.style.animation-duration = "3s";
+		e.className = 'fadeout';
 	}
 </script>
 </head>
 <body>
 	<div class="round bottom shadow" style="width: auto;">
 		<p>
-			<a href=".">Parent Directory</a>
+		<a href=".">Parent Directory</a>
 		</p>
 		<div style="width: 400px;">
 			<h3>Markdown CSS:</h3>
@@ -81,12 +79,12 @@
 				<blockquote class="quote">Hey! I'm a quote!</blockquote>
 			</div>
 			<div id="spoiler">
-				<h4 id="spoiler-title()" onmouseenter="infoSpoiler();"
+				<h4 id="spoiler-title" onmouseenter="infoSpoiler();"
 					onmouseout="hide();">Spoilers</h4>
 				<hr>
 				<blockquote id="spoiler-demo" class="quote"
-					onmouseenter="fadein('spoiler-demo')"
-					onmouseout="fadeout('spoiler-demo')">Hey! I'm a
+					onmouseenter="fadein('spoiler-demo');"
+					onmouseout="fadeout('spoiler-demo');">Hey! I'm a
 					spoiler! I like to hide!</blockquote>
 			</div>
 			<div id="code">
