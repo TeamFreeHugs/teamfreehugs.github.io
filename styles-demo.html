@@ -19,11 +19,17 @@
 <script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
 <script>
 	function flip(id) {
-		var e = document.getElementById(id);
-		if (e.style.display == "none")
+		var e = document.getElementById(id + "-code");
+		var t = document.getElementById(id);
+		if (e.style.display == "none") {
 			e.style.display = "block";
-		else
+			t.innerHTML = t.innerHTML.substring(0, t.innerHTML.length - 1)
+					+ '&#9650;';
+		} else {
 			e.style.display = "none";
+			t.innerHTML = t.innerHTML.substring(0, t.innerHTML.length - 1)
+					+ '&#9660;';
+		}
 	}
 
 	function infoCode() {
@@ -31,7 +37,6 @@
 			className : 'info'
 		});
 	}
-	
 
 	function infoQuote() {
 		$('#quote-title').notify('Quotes Quotes Quotes', {
@@ -53,7 +58,8 @@
 			<h3>Markdown CSS:</h3>
 			<hr>
 			<div id="spoiler">
-				<h4 id="quote-title" onmouseenter="infoQuote();" onmouseout="hide();">Spoiler</h4>
+				<h4 id="quote-title" onmouseenter="infoQuote();"
+					onmouseout="hide();">Spoiler</h4>
 				<hr>
 				<blockquote class="quote">Hey! I'm a spoiler!</blockquote>
 			</div>
@@ -61,22 +67,23 @@
 				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code
 					Blocks</h4>
 				<hr>
-				<h5 onclick="flip('java')">Java Code:</h5>
-				<div id="java">
+				<h5 id="java" onclick="flip('java')">Java Code:&#9650;</h5>
+				<div id="java-code">
 					<pre class="code prettyprint linenums">
 public static void main(String[] args) {//Main Method, This is a verrrrrrrrrry lonnnnnnnng String
   System.out.println("Hello!");
 }</pre>
 				</div>
-				<h5 onclick="flip('javascript')">Javascript code:</h5>
-				<div id="javascript">
+				<h5 id="javascript" onclick="flip('javascript')">Javascript
+					code:&#9650;</h5>
+				<div id="javascript-code">
 					<pre class="code prettyprint linenums">
 function sayHi() {
   alert('Hi!');
 }</pre>
 				</div>
-				<h5 onclick="flip('bash')">Bash Code:</h5>
-				<div id="bash">
+				<h5 id="bash" onclick="flip('bash')">Bash Code:&#9650;</h5>
+				<div id="bash-code">
 					<pre class="code prettyprint linenums">
 echo -n "Hello "
 VAR="Hello"
@@ -86,8 +93,8 @@ else
   echo " Bye!"
 fi</pre>
 				</div>
-				<h5 onclick="flip('css')">CSS Code:</h5>
-				<div id="css">
+				<h5 id="css" onclick="flip('css')">CSS Code:&#9650;</h5>
+				<div id="css-code">
 					<pre class="code prettyprint linenums">
 .quote {
 	border-left: 5px solid #EBC17A;
