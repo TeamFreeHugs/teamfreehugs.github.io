@@ -6,5 +6,7 @@
 }
 
 .code {
-	background-color: #969696;
+	background-color: #E0E0E0;
+	overflow: auto;
+	height: 500px;
 }
