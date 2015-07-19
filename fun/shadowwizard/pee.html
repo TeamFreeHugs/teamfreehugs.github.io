@@ -2,6 +2,8 @@
 <head>
 <meta charset="UTF-8">
 <title>ShadowWizard takes a pee</title>
+<link rel="stylesheet" type="text/css"
+	href="https://rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
 <script>
 	var slide = 0;
 	function next() {
@@ -32,12 +34,21 @@
 </script>
 </head>
 <body>
-	<div id="slide">
-		<img src="http://i.imgur.com/QrCMaCm.png" id="img" slide="1"></img>
-		<p id="text">@ShadowWizard was a rich man. He had many things,
-			such as big 100L tanks of pee.</p>
+	<div class="round bottom shadow" style="height: auto; width: auto;">
+		<p id="back">
+			<a href="..">Parent Directory</a>
+		</p>
+		<div
+			style="border: 5px; border-style: outset; width: 640px; border-color: blue;">
+			<img src="http://i.imgur.com/QrCMaCm.png" id="img" slide="1"></img>
+		</div>
+			<p id="text">@ShadowWizard was a rich man. He had many things,
+				such as big 100L tanks of pee.</p>
 		<br>
-		<button onclick="next()">NEXT</button>
+		<div
+			style="border: 5px; border-style: outset; width: 100px; border-color: blue;">
+			<button onclick="next()" style="width: 100px;">NEXT</button>
+		</div>
 	</div>
 </body>
 </html>
