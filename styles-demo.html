@@ -53,15 +53,6 @@
 		$('.notifyjs-container').click();
 	};
 
-	function fadein(id) {
-		var e = document.getElementById(id);
-		e.className = 'fadein';
-	}
-
-	function fadeout(id) {
-		var e = document.getElementById(id);
-		e.className = 'fadeout';
-	}
 </script>
 </head>
 <body>
@@ -77,16 +68,6 @@
 					onmouseout="hide();">Quote</h4>
 				<hr>
 				<blockquote class="quote">Hey! I'm a quote!</blockquote>
-			</div>
-			<div id="spoiler">
-				<h4 id="spoiler-title" onmouseenter="infoSpoiler();"
-					onmouseout="hide();">Spoilers</h4>
-				<hr>
-				<blockquote id="spoiler-demo" class="quote"
-					onmouseenter="fadein('spoiler-text');"
-					onmouseout="fadeout('spoiler-text');">
-					<p id="spoiler-text" class="spoiler-insides">Hey! I'm a spoiler! I like to hide!</p>
-				</blockquote>
 			</div>
 			<div id="code">
 				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code
