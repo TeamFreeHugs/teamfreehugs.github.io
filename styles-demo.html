@@ -43,8 +43,8 @@
 			className : 'info'
 		});
 	}
-	function infoSpoiler() {
-		$('#spoiler-title').notify('Quotes that hide', {
+	function infoLine() {
+		$('#line-title').notify('Fancy Markdown Line', {
 			className : 'info'
 		});
 	}
@@ -52,7 +52,6 @@
 	function hide() {
 		$('.notifyjs-container').click();
 	};
-
 </script>
 </head>
 <body>
@@ -68,6 +67,14 @@
 					onmouseout="hide();">Quote</h4>
 				<hr>
 				<blockquote class="quote">Hey! I'm a quote!</blockquote>
+			</div>
+			<div id="line">
+				<h4 id="line-title" onmouseenter="infoLine();" onmouseout="hide();">Lines
+					And The &#60;hr&#62; Tag</h4>
+				<hr>
+				<span>^^ Yes, thats the &#60;hr&#62; tag.</span>
+				<span>Here's a nicer version:</span>
+				<hr class="markdown-line"></hr>
 			</div>
 			<div id="code">
 				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code
