@@ -3,6 +3,9 @@
 .quote {
 	border-left: 10px solid #F0B173;
 	background-color: #F5CCA4;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
 }
 
 .code {
