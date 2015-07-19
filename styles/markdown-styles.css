@@ -16,7 +16,7 @@
 
 .markdown-line {
 	height: 1px;
-	border: 0px;
+	border: none;
 	background-color: #D9D9D9;
 	color: #D9D9D9;
 }
