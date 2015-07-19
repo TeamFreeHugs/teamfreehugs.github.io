@@ -13,3 +13,23 @@
 	overflow: auto;
 	height: auto;
 }
+
+@
+keyframes fadein {
+	from: {opacity: 0%
+}
+
+to: {
+	opacity: 100%
+}
+
+}
+@
+keyframes fadeout {
+	from: {opacity: 100%
+}
+
+to: {
+	opacity: 0%
+}
+}
