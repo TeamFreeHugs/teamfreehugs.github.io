@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ShadowWizard takes a pee</title>
+<script>
+	var slide = 0;
+	function next() {
+		var img = document.getElementById('img');
+		var text = document.getElementById('text');
+		if (slide == -1) {
+			img.src = "http://i.imgur.com/QrCMaCm.png";
+			text.innerHTML = "ShadowWizard was a rich man. He had many things, such as big 100L tanks of pee.";
+		} else if (slide === 0) {
+			img.src = "http://i.imgur.com/sU2HR3I.png";
+			text.innerHTML = "One day, he peed at the beach into the ocean.";
+		} else if (slide == 1) {
+			img.src = "http://i.imgur.com/cmh5Jph.png";
+			text.innerHTML = "So @Uni and @ber arrested him and brought him to the station.";
+		} else if (slide == 2) {
+			img.src = "http://i.imgur.com/AfHoxy8.png";
+			text.innerHTML = "On the way back, he peed in the car. So the policeman slapped him and the pee came out of the car...";
+		} else if (slide === 3) {
+			img.src = "http://i.imgur.com/4PNeP81.png";
+			text.innerHTML = "When they got back, he continued peeing in his cell, and drowned";
+		} else if (slide === 4) {
+			img.src = "http://i.imgur.com/yiYiDkg.png";
+			text.innerHTML = "So he was buried. However, even after that, he still peed. Then @Ber and @Uni puked on his pee";
+			slide = -2;
+		}
+		slide++;
+	}
+</script>
+</head>
+<body>
+	<div id="slide">
+		<img src="http://i.imgur.com/QrCMaCm.png" id="img" slide="1"></img>
+		<p id="text">@ShadowWizard was a rich man. He had many things,
+			such as big 100L tanks of pee.</p>
+		<br>
+		<button onclick="next()">NEXT</button>
+	</div>
+</body>
+</html>

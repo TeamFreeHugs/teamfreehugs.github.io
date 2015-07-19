@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FREE HUGS!!!</title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 .type1 {
 	color: red;
@@ -27,10 +28,6 @@
 .type6 {
 	color: purple;
 }
-
-.big-font {
-	font-size: 300%;
-}
 </style>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -44,21 +41,25 @@
 		} else {
 			++type;
 		}
-		text.className = "type" + type + " big-font";
+		text.className = "type" + type;
 	}
 
-	window.setInterval(go, 1000);
+	window.setInterval(go, 500);
+
+	function setFontSize() {
+		var txt = $('#text');
+		txt.css("font-size", $('#box').width() / 6.7);
+	}
 </script>
 </head>
-<body>
-	<div class="round bottom shadow" style="margin: 0 auto; height: auto;">
+<body onload="setFontSize();">
+	<div class="round bottom shadow" style="height: auto; width: auto;"
+		id="box">
 		<p id="back">
-			<a href="#"
-				onclick="window.location='http://teamfreehugs.github.io/fun/'">Parent
-				Directory</a>
-		</p><br><br><br>
+			<a href="..">Parent Directory</a>
+		</p>
 		<p align="center">
-			<span class="type1 big-font" id="text">FREE HUGS!!</span>
+			<span class="type1" id="text">FREE HUGS!!</span>
 		</p>
 	</div>
 </body>
