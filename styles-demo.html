@@ -16,6 +16,7 @@
 	src="https://github.com/google/code-prettify/blob/master/src/lang-css.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/google/code-prettify/master/styles/sons-of-obsidian.css"></link>
+<script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
 <script>
 	function flip(id) {
 		var e = document.getElementById(id);
@@ -24,6 +25,23 @@
 		else
 			e.style.display = "none";
 	}
+
+	function infoCode() {
+		$('#code-title').notify('Press the language title to hide it!', {
+			className : 'info'
+		});
+	}
+	
+
+	function infoQuote() {
+		$('#quote-title').notify('Quotes Quotes Quotes', {
+			className : 'info'
+		});
+	}
+
+	function hide() {
+		$('.notifyjs-container').click();
+	};
 </script>
 </head>
 <body>
@@ -35,12 +53,13 @@
 			<h3>Markdown CSS:</h3>
 			<hr>
 			<div id="spoiler">
-				<h4>Spoiler</h4>
+				<h4 id="quote-title" onmouseenter="infoQuote();" onmouseout="hide();">Spoiler</h4>
 				<hr>
 				<blockquote class="quote">Hey! I'm a spoiler!</blockquote>
 			</div>
 			<div id="code">
-				<h4>Code Blocks</h4>
+				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code
+					Blocks</h4>
 				<hr>
 				<h5 onclick="flip('java')">Java Code:</h5>
 				<div id="java">
