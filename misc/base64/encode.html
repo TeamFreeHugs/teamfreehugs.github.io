@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Base64 Encode</title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/TeamFreeHugs/teamfreehugs.github.io/master/styles/styles.css"></link>
+<script>
+	function go() {
+		var input = $('#in');
+		var out = $('#out');
+		out.val(btoa(input.val()));
+	}
+</script>
+</head>
+<body>
+	<div class="round bottom shadow">
+		<p id="back">
+			<a href=".">Parent Directory</a>
+		</p>
+		<h3>Text Input</h3>
+		<hr>
+		<textarea id="in"></textarea>
+		<h3>Output</h3>
+		<hr>
+		<textarea id="out"></textarea>
+		<button onclick='go()'>Go!</button>
+
+	</div>
+</body>
+</html>
