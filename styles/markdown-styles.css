@@ -8,5 +8,5 @@
 .code {
 	background-color: #E0E0E0;
 	overflow: auto;
-	height: 500px;
+	height: auto;
 }
