@@ -24,11 +24,11 @@
 		if (e.style.display == "none") {
 			e.style.display = "block";
 			t.innerHTML = t.innerHTML.substring(0, t.innerHTML.length - 1)
-					+ '&#9650;';
+					+ '&#9660;';
 		} else {
 			e.style.display = "none";
 			t.innerHTML = t.innerHTML.substring(0, t.innerHTML.length - 1)
-					+ '&#9660;';
+					+ '&#9650;';
 		}
 	}
 
@@ -67,7 +67,7 @@
 				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code
 					Blocks</h4>
 				<hr>
-				<h5 id="java" onclick="flip('java')">Java Code:&#9650;</h5>
+				<h5 id="java" onclick="flip('java')">Java Code:&#9660;</h5>
 				<div id="java-code">
 					<pre class="code prettyprint linenums">
 public static void main(String[] args) {//Main Method, This is a verrrrrrrrrry lonnnnnnnng String
@@ -75,14 +75,14 @@ public static void main(String[] args) {//Main Method, This is a verrrrrrrrrry l
 }</pre>
 				</div>
 				<h5 id="javascript" onclick="flip('javascript')">Javascript
-					code:&#9650;</h5>
+					code:&#9660;</h5>
 				<div id="javascript-code">
 					<pre class="code prettyprint linenums">
 function sayHi() {
   alert('Hi!');
 }</pre>
 				</div>
-				<h5 id="bash" onclick="flip('bash')">Bash Code:&#9650;</h5>
+				<h5 id="bash" onclick="flip('bash')">Bash Code:&#9660;</h5>
 				<div id="bash-code">
 					<pre class="code prettyprint linenums">
 echo -n "Hello "
@@ -93,7 +93,7 @@ else
   echo " Bye!"
 fi</pre>
 				</div>
-				<h5 id="css" onclick="flip('css')">CSS Code:&#9650;</h5>
+				<h5 id="css" onclick="flip('css')">CSS Code:&#9660;</h5>
 				<div id="css-code">
 					<pre class="code prettyprint linenums">
 .quote {
