@@ -13,22 +13,22 @@ function load() {
 	var hrs = document.getElementsByTagName('hr');
 	for (var i = 0; i < hrs.length; ++i) {
 		var entry = hrs[i];
-		var hr = entry.innerHTML;
-		var newHR = document.createElement('blockquote');
-		newHR.className = "markdown-line";
-		newHR.innerHTML = hr;
-		entry.parentElement.insertBefore(newHR, entry);
-		entry.parentElement.removeChild(entry);
+		if (entry.exclude != undefined)
+			entry.className = "markdown-line";
 	}
 
-}
+	var codeBlocks = document.getElementsByTagName('code');
+	for (var i = 0; i < codeBlocks.length; ++i) {
+		var entry = hrs[i];
+		if (entry.exclude != undefined) {
+			var preBlock = document.createElement('pre');
+			preBlock.className = "code prettyprint";
+			preBlock.innerHTML = entry.innerHTML;
+			entry.parentElement.insertBefore(preBlock, entry);
+			entry.parentElement.removeChild(entry);
+		}
+	}
 
-function sleep(millis) {
-	var date = new Date();
-	var curDate = null;
-	do {
-		curDate = new Date();
-	} while (curDate - date < millis);
 }
 
 (function() {
