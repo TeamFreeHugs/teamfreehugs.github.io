@@ -5,18 +5,7 @@
 <title>Markdown Magic</title>
 <link rel="stylesheet" type="text/css"
 	href="http://teamfreehugs.github.io/styles/styles.css"></link>
-<link rel="stylesheet" type="text/css"
-	href="http://teamfreehugs.github.io/styles/markdown-styles.css"></link>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script
-	src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-<script
-	src="https://github.com/google/code-prettify/blob/master/src/lang-lua.js"></script>
-<script
-	src="https://github.com/google/code-prettify/blob/master/src/lang-css.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/google/code-prettify/master/styles/sons-of-obsidian.css"></link>
-<script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
+<script src="http://teamfreehugs.github.io/js/markdown.js"></script>
 <script>
 	function flip(id) {
 		var e = document.getElementById(id + "-code");
@@ -54,27 +43,27 @@
 	};
 </script>
 </head>
-<body>
+<body onload="load(); addNotify();">
 	<div class="round bottom shadow" style="width: auto;">
 		<p>
 			<a href=".">Parent Directory</a>
 		</p>
 		<div style="width: 400px;">
 			<h3>Markdown CSS:</h3>
-			<hr>
+			<hr exclude="1">
 			<div id="quote">
 				<h4 id="quote-title" onmouseenter="infoQuote();"
 					onmouseout="hide();">Quote</h4>
-				<hr>
-				<blockquote class="quote">Hey! I'm a quote!</blockquote>
+				<hr exclude="1">
+				<quote>Hey! I'm a quote!</quote>
 			</div>
 			<div id="line">
 				<h4 id="line-title" onmouseenter="infoLine();" onmouseout="hide();">Lines
 					And The &#60;hr&#62; Tag</h4>
-				<hr>
+				<hr exclude="1">
 				<span>^^ Yes, thats the &#60;hr&#62; tag.</span> <span>Here's
 					a nicer version:</span>
-				<hr class="markdown-line"></hr>
+				<hr></hr>
 			</div>
 			<div id="code">
 				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code
@@ -82,10 +71,13 @@
 				<hr>
 				<h5 id="java" onclick="flip('java')">Java Code:&#9660;</h5>
 				<div id="java-code">
-					<pre class="code prettyprint">
-public static void main(String[] args) {//Main Method, This is a verrrrrrrrrry lonnnnnnnng String
-  System.out.println("Hello!");
-}</pre>
+					<code>
+					public static void main(String[] args) {//Main Method, This is a
+					verrrrrrrrrry lonnnnnnnng Stringggg!
+					<br>
+					  System.out.println("Hello!");<br> 
+					}
+					</code>
 				</div>
 				<h5 id="javascript" onclick="flip('javascript')">Javascript
 					code:&#9660;</h5>
