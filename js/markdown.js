@@ -44,19 +44,23 @@ function sleep(millis) {
 	var lua = document.createElement('script');
 	var css = document.createElement('script');
 	var code_style = document.createElement('link');
-	var notify = document.createElement('script');
 	codeHighlighter.src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js";
 	lua.src = "https://github.com/google/code-prettify/blob/master/src/lang-lua.js";
 	css.src = "https://github.com/google/code-prettify/blob/master/src/lang-css.js";
 	code_style.rel = "stylesheet";
 	code_style.href = "https://cdn.rawgit.com/google/code-prettify/master/styles/sons-of-obsidian.css";
 	code_style.type = "text/css";
-	notify.src = "http://notifyjs.com/dist/notify-combined.js";
 	head.appendChild(markdownCSS);
 	head.appendChild(codeHighlighter);
 	head.appendChild(lua);
 	head.appendChild(css);
 	head.appendChild(code_style);
-	sleep(1000);
-	head.appendChild(notify);
 })();
+
+function addNotify() {
+	var head = document.getElementsByTagName('head')[0];
+	var notify = document.createElement('script');
+	notify.src = "http://notifyjs.com/dist/notify-combined.js";
+	head.appendChild(notify);
+
+}
