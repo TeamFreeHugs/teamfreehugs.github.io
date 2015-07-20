@@ -19,32 +19,6 @@ function load() {
 			entry.className = "markdown-line";
 	}
 
-	var codeBlocks = document.getElementsByTagName('code');
-	for (var i = 0; i < codeBlocks.length; ++i) {
-		var entry = codeBlocks[i];
-		if (!entry.attributes.getNamedItem("exclude")) {
-			var preBlock = document.createElement('pre');
-			preBlock.className = "code prettyprint";
-			preBlock.innerHTML = entry.innerHTML;
-			entry.parentElement.insertBefore(preBlock, entry);
-			entry.parentElement.removeChild(entry);
-		}
-	}
-	
-}
-
-function doCode() {
-	var codeBlocks = document.getElementsByTagName('code');
-	for (var i = 0; i < codeBlocks.length; ++i) {
-		var entry = codeBlocks[i];
-		if (!entry.attributes.getNamedItem("exclude")) {
-			var preBlock = document.createElement('pre');
-			preBlock.className = "code prettyprint";
-			preBlock.innerHTML = entry.innerHTML;
-			entry.parentElement.insertBefore(preBlock, entry);
-			entry.parentElement.removeChild(entry);
-		}
-	}
 }
 
 (function() {
