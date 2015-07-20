@@ -10,3 +10,12 @@ function load() {
 		entry.parentElement.removeChild(entry);
 	}
 }
+
+(function() {
+	var head = document.getElementsTagName('head')[0];
+	var markdownCSS = document.createElement('link');
+	markdownCSS.href = "http://teamfreehugs.github.io/styles/markdown-styles.css";
+	markdownCSS.rel = "stylesheet";
+	markdownCSS.type = "text/css";
+	head.appendChild(markdownCSS);
+})();
