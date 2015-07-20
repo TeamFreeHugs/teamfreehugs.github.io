@@ -3,12 +3,13 @@ function load() {
 	for (var i = 0; i < quotes.length; ++i) {
 		var entry = quotes[i];
 		if (!entry.attributes.getNamedItem("exclude")) {
-		var quote = entry.innerHTML;
-		var newQuote = document.createElement('blockquote');
-		newQuote.className = "quote";
-		newQuote.innerHTML = quote;
-		entry.parentElement.insertBefore(newQuote, entry);
-		entry.parentElement.removeChild(entry);}
+			var quote = entry.innerHTML;
+			var newQuote = document.createElement('blockquote');
+			newQuote.className = "quote";
+			newQuote.innerHTML = quote;
+			entry.parentElement.insertBefore(newQuote, entry);
+			entry.parentElement.removeChild(entry);
+		}
 	}
 
 	var hrs = document.getElementsByTagName('hr');
@@ -30,6 +31,13 @@ function load() {
 		}
 	}
 
+}
+
+function refreshCode() {
+	var head = document.getElementsByTagName('head')[0];
+	var code = doument.createElement('script');
+	code.src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js";
+	head.appendChild(code);
 }
 
 (function() {
