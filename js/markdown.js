@@ -2,7 +2,7 @@ function load() {
 	var quotes = document.getElementsByTagName('quote');
 	for (var i = 0; i < quotes.length; ++i) {
 		var entry = quotes[i];
-		if (entry.exclude != "") {
+		if (entry.exclude != "false") {
 		var quote = entry.innerHTML;
 		var newQuote = document.createElement('blockquote');
 		newQuote.className = "quote";
@@ -14,14 +14,14 @@ function load() {
 	var hrs = document.getElementsByTagName('hr');
 	for (var i = 0; i < hrs.length; ++i) {
 		var entry = hrs[i];
-		if (entry.exclude != "")
+		if (entry.exclude != "false")
 			entry.className = "markdown-line";
 	}
 
 	var codeBlocks = document.getElementsByTagName('code');
 	for (var i = 0; i < codeBlocks.length; ++i) {
 		var entry = hrs[i];
-		if (entry.exclude != "") {
+		if (entry.exclude != "false") {
 			var preBlock = document.createElement('pre');
 			preBlock.className = "code prettyprint";
 			preBlock.innerHTML = entry.innerHTML;
