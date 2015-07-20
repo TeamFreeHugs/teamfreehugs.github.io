@@ -42,20 +42,9 @@ function load() {
 	markdownCSS.rel = "stylesheet";
 	markdownCSS.type = "text/css";
 	var codeHighlighter = document.createElement('script');
-	var lua = document.createElement('script');
-	var css = document.createElement('script');
-	var code_style = document.createElement('link');
 	codeHighlighter.src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js";
-	lua.src = "https://github.com/google/code-prettify/blob/master/src/lang-lua.js";
-	css.src = "https://github.com/google/code-prettify/blob/master/src/lang-css.js";
-	code_style.rel = "stylesheet";
-	code_style.href = "https://cdn.rawgit.com/google/code-prettify/master/styles/sons-of-obsidian.css";
-	code_style.type = "text/css";
 	head.appendChild(markdownCSS);
 	head.appendChild(codeHighlighter);
-	head.appendChild(lua);
-	head.appendChild(css);
-	head.appendChild(code_style);
 })();
 
 function addNotify() {
