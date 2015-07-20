@@ -20,7 +20,7 @@ function load() {
 
 	var codeBlocks = document.getElementsByTagName('code');
 	for (var i = 0; i < codeBlocks.length; ++i) {
-		var entry = hrs[i];
+		var entry = codeBlocks[i];
 		if (!entry.attributes.getNamedItem("exclude")) {
 			var preBlock = document.createElement('pre');
 			preBlock.className = "code prettyprint prettyprinted";
