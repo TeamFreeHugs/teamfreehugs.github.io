@@ -24,20 +24,27 @@ function load() {
 		var entry = codeBlocks[i];
 		if (!entry.attributes.getNamedItem("exclude")) {
 			var preBlock = document.createElement('pre');
-			preBlock.className = "code prettyprint prettyprinted";
+			preBlock.className = "code prettyprint";
 			preBlock.innerHTML = entry.innerHTML;
 			entry.parentElement.insertBefore(preBlock, entry);
 			entry.parentElement.removeChild(entry);
 		}
 	}
-
+	
 }
 
-function refreshCode() {
-	var head = document.getElementsByTagName('head')[0];
-	var code = document.createElement('script');
-	code.src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js";
-	head.appendChild(code);
+function doCode() {
+	var codeBlocks = document.getElementsByTagName('code');
+	for (var i = 0; i < codeBlocks.length; ++i) {
+		var entry = codeBlocks[i];
+		if (!entry.attributes.getNamedItem("exclude")) {
+			var preBlock = document.createElement('pre');
+			preBlock.className = "code prettyprint";
+			preBlock.innerHTML = entry.innerHTML;
+			entry.parentElement.insertBefore(preBlock, entry);
+			entry.parentElement.removeChild(entry);
+		}
+	}
 }
 
 (function() {
