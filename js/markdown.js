@@ -11,8 +11,8 @@ function load() {
 	}
 
 	var hrs = document.getElementsByTagName('hr');
-	for (var i = 0; i < hr.length; ++i) {
-		var entry = hr[i];
+	for (var i = 0; i < hrs.length; ++i) {
+		var entry = hrs[i];
 		var hr = entry.innerHTML;
 		var newHR = document.createElement('blockquote');
 		newHR.className = "markdown-line";
@@ -21,6 +21,14 @@ function load() {
 		entry.parentElement.removeChild(entry);
 	}
 
+}
+
+function sleep(millis) {
+	var date = new Date();
+	var curDate = null;
+	do {
+		curDate = new Date();
+	} while (curDate - date < millis);
 }
 
 (function() {
@@ -49,5 +57,6 @@ function load() {
 	head.appendChild(lua);
 	head.appendChild(css);
 	head.appendChild(code_style);
+	sleep(3000);
 	head.appendChild(notify);
 })();
