@@ -35,7 +35,7 @@ function load() {
 
 function refreshCode() {
 	var head = document.getElementsByTagName('head')[0];
-	var code = doument.createElement('script');
+	var code = document.createElement('script');
 	code.src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js";
 	head.appendChild(code);
 }
