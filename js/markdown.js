@@ -2,25 +2,26 @@ function load() {
 	var quotes = document.getElementsByTagName('quote');
 	for (var i = 0; i < quotes.length; ++i) {
 		var entry = quotes[i];
+		if (entry.exclude != "") {
 		var quote = entry.innerHTML;
 		var newQuote = document.createElement('blockquote');
 		newQuote.className = "quote";
 		newQuote.innerHTML = quote;
 		entry.parentElement.insertBefore(newQuote, entry);
-		entry.parentElement.removeChild(entry);
+		entry.parentElement.removeChild(entry);}
 	}
 
 	var hrs = document.getElementsByTagName('hr');
 	for (var i = 0; i < hrs.length; ++i) {
 		var entry = hrs[i];
-		if (entry.exclude != undefined)
+		if (entry.exclude != "")
 			entry.className = "markdown-line";
 	}
 
 	var codeBlocks = document.getElementsByTagName('code');
 	for (var i = 0; i < codeBlocks.length; ++i) {
 		var entry = hrs[i];
-		if (entry.exclude != undefined) {
+		if (entry.exclude != "") {
 			var preBlock = document.createElement('pre');
 			preBlock.className = "code prettyprint";
 			preBlock.innerHTML = entry.innerHTML;
