@@ -12,7 +12,7 @@ function load() {
 }
 
 (function() {
-	var head = document.getElementsTagName('head')[0];
+	var head = document.getElementsByTagName('head')[0];
 	var markdownCSS = document.createElement('link');
 	markdownCSS.href = "http://teamfreehugs.github.io/styles/markdown-styles.css";
 	markdownCSS.rel = "stylesheet";
