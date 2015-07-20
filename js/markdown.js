@@ -7,6 +7,6 @@ function load() {
 		newQuote.className = "quote";
 		newQuote.innerHTML = quote;
 		entry.parentElement.appendChild(newQuote);
-		entry.parentElement.removeChild(quote);
+		entry.parentElement.removeChild(entry);
 	}
 }
