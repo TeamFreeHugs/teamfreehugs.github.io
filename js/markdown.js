@@ -58,5 +58,6 @@ function sleep(millis) {
 	head.appendChild(css);
 	head.appendChild(code_style);
 	sleep(3000);
+	console.log('Adding notify...');
 	head.appendChild(notify);
 })();
