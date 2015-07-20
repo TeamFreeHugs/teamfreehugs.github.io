@@ -23,7 +23,7 @@ function load() {
 		var entry = hrs[i];
 		if (!entry.attributes.getNamedItem("exclude")) {
 			var preBlock = document.createElement('pre');
-			preBlock.className = "code prettyprint";
+			preBlock.className = "code prettyprint prettyprinted";
 			preBlock.innerHTML = entry.innerHTML;
 			entry.parentElement.insertBefore(preBlock, entry);
 			entry.parentElement.removeChild(entry);
