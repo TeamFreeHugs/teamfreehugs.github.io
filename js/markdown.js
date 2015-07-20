@@ -37,13 +37,13 @@ function sleep(millis) {
 	markdownCSS.href = "http://teamfreehugs.github.io/styles/markdown-styles.css";
 	markdownCSS.rel = "stylesheet";
 	markdownCSS.type = "text/css";
-	var jQuery = document.createElement('script');
+	var jqueryScript = document.createElement('script');
 	var codeHighlighter = document.createElement('script');
 	var lua = document.createElement('script');
 	var css = document.createElement('script');
 	var code_style = document.createElement('link');
 	var notify = document.createElement('script');
-	jQuery.src = "http://code.jquery.com/jquery-1.11.3.min.js";
+	jqueryScript.src = "http://code.jquery.com/jquery-1.11.3.min.js";
 	codeHighlighter.src = "https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js";
 	lua.src = "https://github.com/google/code-prettify/blob/master/src/lang-lua.js";
 	css.src = "https://github.com/google/code-prettify/blob/master/src/lang-css.js";
@@ -52,7 +52,7 @@ function sleep(millis) {
 	code_style.type = "text/css";
 	notify.src = "http://notifyjs.com/dist/notify-combined.min.js";
 	head.appendChild(markdownCSS);
-	head.appendChild(jQuery);
+	head.appendChild(jqueryScript);
 	head.appendChild(codeHighlighter);
 	head.appendChild(lua);
 	head.appendChild(css);
