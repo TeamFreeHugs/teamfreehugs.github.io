@@ -57,7 +57,7 @@ function sleep(millis) {
 	head.appendChild(lua);
 	head.appendChild(css);
 	head.appendChild(code_style);
-	sleep(3000);
+	sleep(1000);
 	console.log('Adding notify...');
 	head.appendChild(notify);
 })();
