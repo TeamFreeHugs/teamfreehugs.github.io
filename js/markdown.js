@@ -6,7 +6,7 @@ function load() {
 		var newQuote = document.createElement('blockquote');
 		newQuote.className = "quote";
 		newQuote.innerHTML = quote;
-		quote.parentElement.appendChild(newQuote);
-		quote.parentElement.removeChild(quote);
+		entry.parentElement.appendChild(newQuote);
+		entry.parentElement.removeChild(quote);
 	}
 }
