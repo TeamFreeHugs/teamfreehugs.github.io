@@ -67,7 +67,8 @@
 				document.body.appendChild(text);
 				var questionLink = getCode('question');
 				var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
-						+ questionLink + '?site=' + getCode('site');
+						+ questionLink + '?site=' + getCode('site')
+						+ '&filter=!9YdnSJ*_S';
 				console.log(linkToAPI);
 				var result = JSON.parse(readTextFile(linkToAPI));
 				if (result.items.length === 0) {
@@ -80,6 +81,13 @@
 							+ '/img/favicon.ico';
 					console.log(site);
 					var contentDiv = document.getElementById('content');
+					{
+						//Question
+						var body = question.body;
+						var questionBody = document.createElement('div');
+						questionBody.innerHTML = body;
+						contentDiv.appendChild(questionBody);
+					}
 					{
 						//User avatar
 						text.parentElement.removeChild(text);
@@ -141,7 +149,12 @@
 						askerDiv.appendChild(askerInfoDiv);
 					}
 					{
-						
+						//Generate answers
+						//var answersLink = 
+						var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
+								+ questionLink
+								+ '/answers?site='
+								+ getCode('site');
 					}
 					contentDiv.appendChild(askerDiv);
 				}
