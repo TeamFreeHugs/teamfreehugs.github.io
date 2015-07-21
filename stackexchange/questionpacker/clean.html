@@ -159,20 +159,35 @@
 						//Question
 						var body = question.body;
 						var questionBody = document.createElement('div');
+						var tags = document.createElement('div');
 						questionBody.innerHTML = body;
 						questionBody.className = "postContent";
 
 						var scoreSpan = document.createElement('span');
 						var details = document.createElement('div');
 
+						console
+								.log('Site: '
+										+ new URI(question.link).authority);
+						for (var i = 0; i < question.tags.length; ++i) {
+							var tag = question.tags[i];
+							var tagElement = document.createElement('a');
+							tagElement.innerHTML = tag;
+							tagElement.href = new URI(question.link).authority
+									+ '/questions/tagged/' + tag;
+							tagElement.className = "post-tag";
+							tags.appendChild(tagElement);
+						}
+
 						var score = question.score;
 
 						scoreSpan.innerHTML = 'Score: ' + score;
 						scoreSpan.className = "postDetails niceText";
 						details.appendChild(scoreSpan);
+
 						contentDiv.appendChild(details);
-						contentDiv.appendChild(document.createElement('hr'));
 						contentDiv.appendChild(questionBody);
+						contentDiv.appendChild(tags);
 					}
 					{
 						//Avatar
@@ -184,7 +199,8 @@
 						var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
 								+ questionLink
 								+ '/answers?site='
-								+ getCode('site') + '&filter=!b0OfNR*h33*3.3&key=JPRwkkqAelchw)6d9S8wcw((';
+								+ getCode('site')
+								+ '&filter=!b0OfNR*h33*3.3&key=JPRwkkqAelchw)6d9S8wcw((';
 						var result = JSON.parse(readTextFile(linkToAPI));
 						var answers = result.items;
 						var answerCount = document.createElement('h4');
