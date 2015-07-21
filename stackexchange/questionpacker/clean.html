@@ -37,7 +37,7 @@
 				var text = document.createElement('h2');
 				text.innerHTML = "Sorry, there is no question specified";
 				var text2 = document.createElement('p');
-				text2.innerHTML = "Please specify one by using '<code>question=</code> in the URL";
+				text2.innerHTML = "Please specify one by using <code>question=</code> in the URL";
 				text.id = "load";
 				document.body.appendChild(text);
 				document.body.appendChild(text2);
@@ -45,7 +45,7 @@
 				var text = document.createElement('h2');
 				text.innerHTML = "Sorry, there is no site specified";
 				var text2 = document.createElement('p');
-				text2.innerHTML = "Please specify one by using '<code>site=</code> in the URL";
+				text2.innerHTML = "Please specify one by using <code>site=</code> in the URL";
 				text.id = "load";
 				document.body.appendChild(text);
 				document.body.appendChild(text2);
@@ -84,7 +84,6 @@
 					} else {
 						askerDiv.className = "userDivUnregistered";
 					}
-					var askerImgDiv = document.createElement('div');
 					var askerImg = document.createElement('img');
 					
 					var askerNameDiv = document.createElement('div');
@@ -92,21 +91,30 @@
 					
 					var askerRepDiv = document.createElement('div');
 					var askerRep = document.createElement('span');
+
+					var askerInfoDiv = document.createElement('div');
 					
+					askerInfoDiv.className = "inline";
+
 					askerImg.src = question.owner.profile_image;
 					askerImg.className = "userImage";
-					askerImgDiv.appendChild(askerImg);
-					askerImgDiv.className = "inline";
 					
 					askerName.innerHTML = question.owner.display_name;
-					askerRep.innerHTML = question.owner.reputation;
-					askerNameDiv.className = "inline";
-					//askerRepDiv.className = "inline";
-					askerDiv.appendChild(askerImgDiv);
 					askerNameDiv.appendChild(askerName);
+					askerNameDiv.className = "inline";
+
+					askerRep.innerHTML = question.owner.reputation;
 					askerRepDiv.appendChild(askerRep);
-					askerDiv.appendChild(askerNameDiv);
-					askerDiv.appendChild(askerRepDiv);
+					askerRepDiv.className = "inline";
+
+					askerDiv.appendChild(askerImg);
+					
+					askerInfoDiv.appendChild(askerNameDiv);
+					askerInfoDiv.appendChild(document.createElement('br'));
+					askerInfoDiv.appendChild(askerRepDiv);
+					
+					askerDiv.appendChild(askerInfoDiv);
+					
 					contentDiv.appendChild(askerDiv);
 				}
 			}

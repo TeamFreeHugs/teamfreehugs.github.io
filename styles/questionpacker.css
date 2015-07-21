@@ -23,5 +23,6 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .inline {
-	display: inline;
+	display: inline-block;
+	white-space: nowrap;
 }
