@@ -85,36 +85,40 @@
 						askerDiv.className = "userDivUnregistered";
 					}
 					var askerImg = document.createElement('img');
-					
+
 					var askerNameDiv = document.createElement('div');
-					var askerName = document.createElement('span');
-					
+					var askerName = document.createElement('a');
+
 					var askerRepDiv = document.createElement('div');
 					var askerRep = document.createElement('span');
 
 					var askerInfoDiv = document.createElement('div');
-					
+
 					askerInfoDiv.className = "inline";
 
 					askerImg.src = question.owner.profile_image;
 					askerImg.className = "userImage";
-					
+
 					askerName.innerHTML = question.owner.display_name;
+					askerName.href = question.owner.link;
+					askerName.target = "_blank";
+					askerName.className = "niceText";
 					askerNameDiv.appendChild(askerName);
-					askerNameDiv.className = "inline";
+					askerNameDiv.className = "inline userInfo";
 
 					askerRep.innerHTML = question.owner.reputation;
+					askerRep.className = "niceText";
 					askerRepDiv.appendChild(askerRep);
-					askerRepDiv.className = "inline";
+					askerRepDiv.className = "inline userInfo";
 
 					askerDiv.appendChild(askerImg);
-					
+
 					askerInfoDiv.appendChild(askerNameDiv);
 					askerInfoDiv.appendChild(document.createElement('br'));
 					askerInfoDiv.appendChild(askerRepDiv);
-					
+
 					askerDiv.appendChild(askerInfoDiv);
-					
+
 					contentDiv.appendChild(askerDiv);
 				}
 			}

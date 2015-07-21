@@ -26,6 +26,10 @@ a:hover, a:visited, a:link, a:active {
 	width: 64px;
 }
 
+.userInfo {
+	padding: 2px;
+}
+
 .inline {
 	display: inline-block;
 	white-space: nowrap;
