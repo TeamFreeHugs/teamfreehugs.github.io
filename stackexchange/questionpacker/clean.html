@@ -126,9 +126,12 @@
 				var questionLink = getCode('question');
 				var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
 						+ questionLink + '?site=' + getCode('site')
-						+ '&filter=!9YdnSJ*_S';
+						+ '&filter=!9YdnSJ*_S&key=JPRwkkqAelchw)6d9S8wcw((';
 				console.log(linkToAPI);
 				var result = JSON.parse(readTextFile(linkToAPI));
+				if (result.items == undefined) {
+					document.getElementById('load').innerHTML = "Whoops, you s";
+				}
 				if (result.items.length === 0) {
 					document.getElementById('load').innerHTML = "Sorry, that's an invalid question";
 				} else {
@@ -181,7 +184,7 @@
 						var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
 								+ questionLink
 								+ '/answers?site='
-								+ getCode('site') + '&filter=!b0OfNR*h33*3.3';
+								+ getCode('site') + '&filter=!b0OfNR*h33*3.3&key=JPRwkkqAelchw)6d9S8wcw((';
 						var result = JSON.parse(readTextFile(linkToAPI));
 						var answers = result.items;
 						var answerCount = document.createElement('h4');
