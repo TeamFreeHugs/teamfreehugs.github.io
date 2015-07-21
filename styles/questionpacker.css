@@ -64,6 +64,6 @@ a:hover, a:visited, a:link, a:active {
 	background-image:
 		url('http://meta.stackexchange.com/content/stackoverflowmeta/img/sprites.png');
 	background-position: -40px -270px;
-	width: 50px;
-	height: 100px;
+	width: 200px;
+	height: 200px;
 }
