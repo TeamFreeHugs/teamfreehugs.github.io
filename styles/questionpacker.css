@@ -59,3 +59,9 @@ a:hover, a:visited, a:link, a:active {
 	color: green;
 	bold: true;
 }
+
+.acceptedIcon {
+	background-image:
+		url('http://meta.stackexchange.com/content/stackoverflowmeta/img/sprites.png');
+	background-position: -40px -270px;
+}
