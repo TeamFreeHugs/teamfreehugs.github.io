@@ -148,7 +148,6 @@
 						titleWrap.appendChild(title);
 						contentDiv.appendChild(titleWrap);
 						contentDiv.appendChild(document.createElement('hr'));
-						load();
 					}
 					{
 						//Question
@@ -156,6 +155,17 @@
 						var questionBody = document.createElement('div');
 						questionBody.innerHTML = body;
 						questionBody.className = "postContent";
+
+						var scoreSpan = document.createElement('span');
+						var details = document.createElement('div');
+
+						var score = question.score;
+
+						scoreSpan.innerHTML = 'Score: ' + score;
+						scoreSpan.className = "postDetails niceText";
+						details.appendChild(scoreSpan);
+						contentDiv.appendChild(details);
+						contentDiv.appendChild(document.createElement('hr'));
 						contentDiv.appendChild(questionBody);
 					}
 					{
@@ -171,6 +181,15 @@
 								+ getCode('site') + '&filter=!b0OfNR*h33*3.3';
 						var result = JSON.parse(readTextFile(linkToAPI));
 						var answers = result.items;
+						var answerCount = document.createElement('h4');
+						answerCount.innerHTML = 'There are ' + answers.length
+								+ ' answers';
+						answerCount.className = "postDetails niceText";
+
+						contentDiv.appendChild(document.createElement('hr'));
+
+						contentDiv.appendChild(answerCount);
+
 						for (var i = 0; i < answers.length; ++i) {
 							var answer = answers[i];
 							var avatar = generateAvatar(answer.owner);
@@ -187,10 +206,12 @@
 							var scoreSpan = document.createElement('span');
 							var acceptedSpan = document.createElement('span');
 
-							var accepted = answer.is_acceped;
+							var accepted = answer.is_accepted;
 							var score = answer.score;
 							var body = answer.body;
 
+							console.log(accepted);
+							
 							content.innerHTML = body;
 							content.className = "postContent";
 
@@ -200,14 +221,16 @@
 							link.className = "niceText";
 							links.appendChild(link);
 
-							scoreSpan.innerHTML = score;
-							scoreSpan.className = "postDetails";
+							scoreSpan.innerHTML = 'Score: ' + score;
+							scoreSpan.className = "postDetails niceText";
 							details.appendChild(scoreSpan);
 
 							if (accepted) {
 								acceptedSpan.innerHTML = " | Accepted";
+								var acceptedIcon = document
+										.createElement('img');
+								acceptedIcon.src = "";
 								details.appendChild(acceptdSpan);
-
 							}
 
 							answerDiv.appendChild(details);
@@ -218,15 +241,6 @@
 						}
 					}
 
-					var preCodes = document.getElementsByTagName('pre');
-					for (var i = 0; i < preCodes.length; ++i) {
-						var entry = preCodes[i];
-						var innerHTML = entry.innerHTML.substring(6,
-								entry.innerHTML.length - 7);
-						entry.innerHTML = innerHTML;
-						entry.className = "prettyprint code";
-						entry.style = "width: 700px;";
-					}
 					var preCodes = document.getElementsByTagName('pre');
 					for (var i = 0; i < preCodes.length; ++i) {
 						var entry = preCodes[i];
