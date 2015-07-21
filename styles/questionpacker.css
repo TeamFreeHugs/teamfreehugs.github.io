@@ -45,3 +45,7 @@ a:hover, a:visited, a:link, a:active {
 .postContent {
 	font-family: "Arial", Helvetica, sans-serif;
 }
+
+.avatarText {
+	line-height: 90%;
+}
