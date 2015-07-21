@@ -210,8 +210,6 @@
 							var score = answer.score;
 							var body = answer.body;
 
-							console.log(accepted);
-							
 							content.innerHTML = body;
 							content.className = "postContent";
 
@@ -227,10 +225,11 @@
 
 							if (accepted) {
 								acceptedSpan.innerHTML = " | Accepted";
+								acceptedSpan.className = "postDetails niceText accepted";
 								var acceptedIcon = document
 										.createElement('img');
 								acceptedIcon.src = "";
-								details.appendChild(acceptdSpan);
+								details.appendChild(acceptedSpan);
 							}
 
 							answerDiv.appendChild(details);

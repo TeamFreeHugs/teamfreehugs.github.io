@@ -54,3 +54,7 @@ a:hover, a:visited, a:link, a:active {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 	color: grey;
 }
+
+. accepted {
+	color: green;
+}
