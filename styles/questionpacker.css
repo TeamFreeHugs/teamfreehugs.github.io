@@ -39,5 +39,5 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .content {
-	float: left;
+	width: 1000px;
 }
