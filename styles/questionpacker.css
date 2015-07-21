@@ -13,14 +13,14 @@ a:hover, a:visited, a:link, a:active {
 	background-color: #DED78E;
 	height: auto;
 	padding: 5px;
-	float: left;
+	width: 100px;
 }
 
 .userDivUnregistered {
 	background-color: #888;
 	height: auto;
 	padding: 5px;
-	float: left;
+	width: 100px;
 }
 
 .userImage {

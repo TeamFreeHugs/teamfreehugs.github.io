@@ -80,64 +80,69 @@
 							+ '/img/favicon.ico';
 					console.log(site);
 					var contentDiv = document.getElementById('content');
-					text.parentElement.removeChild(text);
-					var title = document.createElement('a');
-					var titleWrap = document.createElement('h3');
-					title.innerHTML = question.title;
-					title.href = question.link;
-					title.target = "_blank";
-					title.className = "niceText";
-					titleWrap.appendChild(title);
-					contentDiv.appendChild(titleWrap);
-					var askerDiv = document.createElement('div');
-					if (question.owner.user_type == "registered") {
-						askerDiv.className = "userDivRegistered";
-					} else {
-						askerDiv.className = "userDivUnregistered";
+					{
+						//User avatar
+						text.parentElement.removeChild(text);
+						var title = document.createElement('a');
+						var titleWrap = document.createElement('h3');
+						title.innerHTML = question.title;
+						title.href = question.link;
+						title.target = "_blank";
+						title.className = "niceText";
+						titleWrap.appendChild(title);
+						contentDiv.appendChild(titleWrap);
+						var askerDiv = document.createElement('div');
+						if (question.owner.user_type == "registered") {
+							askerDiv.className = "userDivRegistered";
+						} else {
+							askerDiv.className = "userDivUnregistered";
+						}
+						var askerImg = document.createElement('img');
+
+						var askerNameDiv = document.createElement('div');
+						var askerName = document.createElement('a');
+
+						var askerRepDiv = document.createElement('div');
+						var askerRep = document.createElement('span');
+
+						var askerInfoDiv = document.createElement('div');
+
+						askerInfoDiv.className = "inline";
+
+						if (question.owner.profile_image != undefined) {
+							askerImg.src = question.owner.profile_image;
+						} else {
+							askerImg.src = "http://imgur.com/UoyazgJ.png";
+						}
+						askerImg.className = "userImage";
+
+						askerName.innerHTML = question.owner.display_name;
+						askerName.href = question.owner.link;
+						askerName.target = "_blank";
+						askerName.className = "niceText";
+						askerNameDiv.appendChild(askerName);
+						askerNameDiv.className = "inline userInfo";
+
+						if (question.owner.reputation != undefined) {
+							askerRep.innerHTML = question.owner.reputation;
+						} else {
+							askerRep.innerHTML = "0";
+						}
+						askerRep.className = "niceText";
+						askerRepDiv.appendChild(askerRep);
+						askerRepDiv.className = "inline userInfo";
+
+						askerDiv.appendChild(askerImg);
+
+						askerInfoDiv.appendChild(askerNameDiv);
+						askerInfoDiv.appendChild(document.createElement('br'));
+						askerInfoDiv.appendChild(askerRepDiv);
+
+						askerDiv.appendChild(askerInfoDiv);
 					}
-					var askerImg = document.createElement('img');
-
-					var askerNameDiv = document.createElement('div');
-					var askerName = document.createElement('a');
-
-					var askerRepDiv = document.createElement('div');
-					var askerRep = document.createElement('span');
-
-					var askerInfoDiv = document.createElement('div');
-
-					askerInfoDiv.className = "inline";
-
-					if (question.owner.profile_image != undefined) {
-						askerImg.src = question.owner.profile_image;
-					} else {
-						askerImg.src = "http://imgur.com/UoyazgJ.png";
+					{
+						
 					}
-					askerImg.className = "userImage";
-
-					askerName.innerHTML = question.owner.display_name;
-					askerName.href = question.owner.link;
-					askerName.target = "_blank";
-					askerName.className = "niceText";
-					askerNameDiv.appendChild(askerName);
-					askerNameDiv.className = "inline userInfo";
-
-					if (question.owner.reputation != undefined) {
-						askerRep.innerHTML = question.owner.reputation;
-					} else {
-						askerRep.innerHTML = "0";
-					}
-					askerRep.className = "niceText";
-					askerRepDiv.appendChild(askerRep);
-					askerRepDiv.className = "inline userInfo";
-
-					askerDiv.appendChild(askerImg);
-
-					askerInfoDiv.appendChild(askerNameDiv);
-					askerInfoDiv.appendChild(document.createElement('br'));
-					askerInfoDiv.appendChild(askerRepDiv);
-
-					askerDiv.appendChild(askerInfoDiv);
-
 					contentDiv.appendChild(askerDiv);
 				}
 			}
