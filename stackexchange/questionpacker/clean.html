@@ -154,6 +154,15 @@
 						questionBody.innerHTML = body;
 						questionBody.className = "postContent";
 						contentDiv.appendChild(questionBody);
+						var preCodes = document.getElementsByTagName('pre');
+						for (var i = 0; i < preCodes.length; ++i) {
+							var entry = preCodes[i];
+							var innerHTML = entry.innerHTML.substring(6,entry.innerHTML.length - 7);
+							entry.innerHTML = innerHTML;
+							entry.className = "prettyprint code";
+							entry.style = "width: 700px;";
+							console.log(innerHTML);
+						}
 					}
 					{
 						//Avatar
