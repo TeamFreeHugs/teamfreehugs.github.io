@@ -8,3 +8,11 @@ a:hover, a:visited, a:link, a:active {
 .niceText {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
+
+.userDivRegistered {
+	background-color: #DED78E;
+}
+
+.userDivUnregistered {
+	background-color: #888;
+}

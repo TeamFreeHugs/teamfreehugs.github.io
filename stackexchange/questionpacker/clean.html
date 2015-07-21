@@ -36,13 +36,19 @@
 			if (getCode('question') == "") {
 				var text = document.createElement('h2');
 				text.innerHTML = "Sorry, there is no question specified";
+				var text2 = document.createElement('p');
+				text2.innerHTML = "Please specify one by using '<code>question=</code> in the URL";
 				text.id = "load";
 				document.body.appendChild(text);
+				document.body.appendChild(text2);
 			} else if (getCode('site') == "") {
 				var text = document.createElement('h2');
 				text.innerHTML = "Sorry, there is no site specified";
+				var text2 = document.createElement('p');
+				text2.innerHTML = "Please specify one by using '<code>site=</code> in the URL";
 				text.id = "load";
 				document.body.appendChild(text);
+				document.body.appendChild(text2);
 			} else {
 				var text = document.createElement('h2');
 				text.innerHTML = "Loading...";
@@ -68,9 +74,14 @@
 					var titleWrap = document.createElement('h3');
 					title.innerHTML = question.title;
 					title.href = question.link;
+					title.target = "_blank";
 					title.className = "niceText";
 					titleWrap.appendChild(title);
 					contentDiv.appendChild(titleWrap);
+					var askerDiv = document.createElement('div');
+					if (question.owner.user_type == "registered") {
+						askerDiv.className = "userDivRegistered";
+					}
 				}
 			}
 		}
