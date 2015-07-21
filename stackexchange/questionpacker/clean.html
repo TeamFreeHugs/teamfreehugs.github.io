@@ -224,11 +224,15 @@
 							details.appendChild(scoreSpan);
 
 							if (accepted) {
-								acceptedSpan.innerHTML = " | Accepted";
+								var line = document
+										.createElement('span');
+								line.innerHTML = " | ";
+								acceptedSpan.innerHTML = "Accepted";
 								acceptedSpan.className = "postDetails niceText accepted";
 								var acceptedIcon = document
 										.createElement('img');
 								acceptedIcon.src = "";
+								details.appendChild(line);
 								details.appendChild(acceptedSpan);
 							}
 
