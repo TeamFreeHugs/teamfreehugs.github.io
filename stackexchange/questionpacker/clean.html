@@ -84,6 +84,18 @@
 					} else {
 						askerDiv.className = "userDivUnregistered";
 					}
+					var askerImg = document.createElement('img');
+					askerImg.src = question.owner.profile_image;
+					askerImg.className = "userImage";
+					var askerName = document.createElement('span');
+					askerName.innerHTML = question.owner.display_name;
+					var askerRep = document.createElement('p');
+					askerRep.innerHTML = question.owner.reputation;
+					askerDiv.appendChild(askerImg);
+					askerDiv.appendChild(askerName);
+					askerDiv.appendChild(askerRep);
+					askerDiv.style.width = "auto";
+					contentDiv.appendChild(askerDiv);
 				}
 			}
 		}

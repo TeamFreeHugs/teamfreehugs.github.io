@@ -16,3 +16,8 @@ a:hover, a:visited, a:link, a:active {
 .userDivUnregistered {
 	background-color: #888;
 }
+
+.userImage {
+	height: 32;
+	width: 32;
+}
