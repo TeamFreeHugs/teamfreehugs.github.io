@@ -11,10 +11,14 @@ a:hover, a:visited, a:link, a:active {
 
 .userDivRegistered {
 	background-color: #DED78E;
+	height: auto;
+	padding: 5px;
 }
 
 .userDivUnregistered {
 	background-color: #888;
+	height: auto;
+	padding: 5px;
 }
 
 .userImage {
@@ -25,4 +29,5 @@ a:hover, a:visited, a:link, a:active {
 .inline {
 	display: inline-block;
 	white-space: nowrap;
+	vertical-align: top;
 }
