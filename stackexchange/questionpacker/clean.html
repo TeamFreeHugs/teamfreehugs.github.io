@@ -87,7 +87,6 @@
 			askerRepDiv.appendChild(askerRep);
 			askerRepDiv.className = "inline userInfo";
 
-			
 			askerDiv.appendChild(askerImg);
 
 			askerInfoDiv.appendChild(askerNameDiv);
@@ -158,16 +157,6 @@
 						questionBody.innerHTML = body;
 						questionBody.className = "postContent";
 						contentDiv.appendChild(questionBody);
-						var preCodes = document.getElementsByTagName('pre');
-						for (var i = 0; i < preCodes.length; ++i) {
-							var entry = preCodes[i];
-							var innerHTML = entry.innerHTML.substring(6,
-									entry.innerHTML.length - 7);
-							entry.innerHTML = innerHTML;
-							entry.className = "prettyprint code";
-							entry.style = "width: 700px;";
-							console.log(innerHTML);
-						}
 					}
 					{
 						//Avatar
@@ -176,12 +165,79 @@
 					}
 					{
 						//Generate answers
-						//var answersLink = 
 						var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
 								+ questionLink
 								+ '/answers?site='
-								+ getCode('site');
+								+ getCode('site') + '&filter=!b0OfNR*h33*3.3';
+						var result = JSON.parse(readTextFile(linkToAPI));
+						var answers = result.items;
+						for (var i = 0; i < answers.length; ++i) {
+							var answer = answers[i];
+							var avatar = generateAvatar(answer.owner);
+							contentDiv
+									.appendChild(document.createElement('hr'));
+
+							var answerDiv = document.createElement('div');
+							var details = document.createElement('div');
+							var content = document.createElement('div');
+
+							var links = document.createElement('div');
+							var link = document.createElement('a');
+
+							var scoreSpan = document.createElement('span');
+							var acceptedSpan = document.createElement('span');
+
+							var accepted = answer.is_acceped;
+							var score = answer.score;
+							var body = answer.body;
+
+							content.innerHTML = body;
+							content.className = "postContent";
+
+							link.innerHTML = "link";
+							link.href = answer.link;
+							link.target = "_blank";
+							link.className = "niceText";
+							links.appendChild(link);
+
+							scoreSpan.innerHTML = score;
+							scoreSpan.className = "postDetails";
+							details.appendChild(scoreSpan);
+
+							if (accepted) {
+								acceptedSpan.innerHTML = " | Accepted";
+								details.appendChild(acceptdSpan);
+
+							}
+
+							answerDiv.appendChild(details);
+							answerDiv.appendChild(content);
+							answerDiv.appendChild(links);
+							answerDiv.appendChild(avatar);
+							contentDiv.appendChild(answerDiv);
+						}
 					}
+
+					var preCodes = document.getElementsByTagName('pre');
+					for (var i = 0; i < preCodes.length; ++i) {
+						var entry = preCodes[i];
+						var innerHTML = entry.innerHTML.substring(6,
+								entry.innerHTML.length - 7);
+						entry.innerHTML = innerHTML;
+						entry.className = "prettyprint code";
+						entry.style = "width: 700px;";
+					}
+					var preCodes = document.getElementsByTagName('pre');
+					for (var i = 0; i < preCodes.length; ++i) {
+						var entry = preCodes[i];
+						var innerHTML = entry.innerHTML.substring(6,
+								entry.innerHTML.length - 7);
+						entry.innerHTML = innerHTML;
+						entry.className = "prettyprint code";
+						entry.style = "width: 700px;";
+					}
+					load();
+					console.log('Done!');
 					contentDiv.className = "content";
 				}
 			}

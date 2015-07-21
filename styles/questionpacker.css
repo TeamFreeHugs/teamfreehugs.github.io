@@ -49,3 +49,8 @@ a:hover, a:visited, a:link, a:active {
 .avatarText {
 	line-height: 80%;
 }
+
+.postDetails {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	color: grey;
+}
