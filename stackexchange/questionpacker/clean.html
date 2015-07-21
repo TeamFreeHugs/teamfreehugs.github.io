@@ -224,16 +224,19 @@
 							details.appendChild(scoreSpan);
 
 							if (accepted) {
-								var line = document
-										.createElement('span');
+								var line = document.createElement('span');
 								line.innerHTML = " | ";
 								acceptedSpan.innerHTML = "Accepted";
 								acceptedSpan.className = "postDetails niceText accepted";
+								line.className = "postDetails niceText";
 								var acceptedIcon = document
-										.createElement('img');
-								acceptedIcon.src = "";
+										.createElement('span');
+								acceptedIcon.className = "acceptedIcon";
 								details.appendChild(line);
 								details.appendChild(acceptedSpan);
+								details.appendChild(document
+										.createElement('br'));
+								details.appendChild(acceptedIcon);
 							}
 
 							answerDiv.appendChild(details);
