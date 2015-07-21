@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>StackExchange Question Packer</title>
+<script src="http://teamfreehugs.github.io/js/markdown.js"></script>
+<script src="http://teamfreehugs.github.io/js/URI.js"></script>
+</head>
+<body onload="go()">
+	<script>
+		function getCode(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
+					.exec(location.search);
+			return results === null ? "" : decodeURIComponent(results[1]
+					.replace(/\+/g, " "));
+		}
+
+		function readTextFile(file) {
+			var rawFile = new XMLHttpRequest();
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function() {
+				if (rawFile.readyState === 4) {
+					if (rawFile.status === 200 || rawFile.status == 0) {
+						return rawFile.responseText;
+					}
+				}
+			}
+			rawFile.send(null);
+			return rawFile.responseText;
+		}
+
+		function go() {
+			if (getCode('question') == "") {
+				var text = document.createElement('h2');
+				text.innerHTML = "Sorry, there is no question specified";
+				text.id = "load";
+				document.body.appendChild(text);
+			} else if (getCode('site') == "") {
+				var text = document.createElement('h2');
+				text.innerHTML = "Sorry, there is no site specified";
+				text.id = "load";
+				document.body.appendChild(text);
+			} else {
+				var text = document.createElement('h2');
+				text.innerHTML = "Loading...";
+				text.id = "load";
+				document.body.appendChild(text);
+				var questionLink = getCode('question');
+				var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
+						+ questionLink + '?site=' + getCode('site');
+				console.log(linkToAPI);
+				var result = JSON.parse(readTextFile(linkToAPI));
+				if (result.items.length === 0) {
+					document.getElementById('load').innerHTML = "Sorry, that's an invalid question";
+				} else {
+					var question = result.items[0];
+					var site = new URI(question.link).authority.substring(0,
+							new URI(question.link).authority.length - 4);
+					var image = 'http://cdn.sstatic.net/' + site
+							+ '/img/favicon.ico';
+					console.log(site);
+					var contentDiv = document.getElementById('content');
+					text.parentElement.removeChild(text);
+					var title = document.createElement('a');
+					var titleWrap = document.createElement('h3');
+					title.innerHTML = question.title;
+					title.href = question.link;
+					titleWrap.appendChild(title);
+					contentDiv.appendChild(titleWrap);
+				}
+			}
+		}
+	</script>
+	<div id="content"></div>
+</body>
+</html>
