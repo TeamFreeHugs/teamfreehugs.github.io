@@ -6,7 +6,7 @@
 <script src="http://teamfreehugs.github.io/js/markdown.js"></script>
 <script src="http://teamfreehugs.github.io/js/URI.js"></script>
 <link rel="stylesheet"
-	href="http://teamfreehugs.github.io/styles/questionpacker.css"></link>
+	href="http://teamfreehugs.github.io/styles/questionpacker.css"></link><link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/bitcoin/all.css?v=cf772944b10f">
 </head>
 <body onload="go()">
 	<script>
@@ -171,11 +171,14 @@
 										+ new URI(question.link).authority);
 						for (var i = 0; i < question.tags.length; ++i) {
 							var tag = question.tags[i];
+							var tagElementSpan = document.createElement('span');
 							var tagElement = document.createElement('a');
 							tagElement.innerHTML = tag;
 							tagElement.href = new URI(question.link).authority
 									+ '/questions/tagged/' + tag;
-							tagElement.className = "post-tag";
+							tag.target = "_blank";
+							tagElement.className = "post-tag js-gps-track";
+							tagElementSpan.appendChild(tagElement);
 							tags.appendChild(tagElement);
 						}
 
