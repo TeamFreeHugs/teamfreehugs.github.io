@@ -41,3 +41,7 @@ a:hover, a:visited, a:link, a:active {
 .content {
 	width: 1000px;
 }
+
+.postContent {
+	font-family: "Arial", Helvetica, sans-serif;
+}
