@@ -32,6 +32,17 @@
 			return rawFile.responseText;
 		}
 
+		function imageExists(image_url) {
+
+			var http = new XMLHttpRequest();
+
+			http.open('HEAD', image_url, false);
+			http.send();
+
+			return http.status != 404;
+
+		}
+
 		function go() {
 			if (getCode('question') == "") {
 				var text = document.createElement('h2');
@@ -96,7 +107,11 @@
 
 					askerInfoDiv.className = "inline";
 
-					askerImg.src = question.owner.profile_image;
+					if (question.owner.profile_image != undefined) {
+						askerImg.src = question.owner.profile_image;
+					} else {
+						askerImg.src = "http://imgur.com/UoyazgJ.png";
+					}
 					askerImg.className = "userImage";
 
 					askerName.innerHTML = question.owner.display_name;
@@ -106,7 +121,11 @@
 					askerNameDiv.appendChild(askerName);
 					askerNameDiv.className = "inline userInfo";
 
-					askerRep.innerHTML = question.owner.reputation;
+					if (question.owner.reputation != undefined) {
+						askerRep.innerHTML = question.owner.reputation;
+					} else {
+						askerRep.innerHTML = "0";
+					}
 					askerRep.className = "niceText";
 					askerRepDiv.appendChild(askerRep);
 					askerRepDiv.className = "inline userInfo";
@@ -118,7 +137,7 @@
 					askerInfoDiv.appendChild(askerRepDiv);
 
 					askerDiv.appendChild(askerInfoDiv);
-					
+
 					contentDiv.appendChild(askerDiv);
 				}
 			}
