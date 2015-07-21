@@ -47,6 +47,9 @@
 			var askerDiv = document.createElement('div');
 			if (owner.user_type == "registered") {
 				askerDiv.className = "userDivRegistered";
+			} else if (owner.user_type == "moderator") {
+				owner.display_name += "\u2666";
+				askerDiv.className = "userDivRegistered";
 			} else {
 				askerDiv.className = "userDivUnregistered";
 			}
@@ -237,6 +240,8 @@
 								details.appendChild(document
 										.createElement('br'));
 								details.appendChild(acceptedIcon);
+								details.appendChild(document
+										.createElement('br'));
 							}
 
 							answerDiv.appendChild(details);
