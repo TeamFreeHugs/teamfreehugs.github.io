@@ -70,7 +70,9 @@
 			askerImg.className = "userImage";
 
 			askerName.innerHTML = owner.display_name;
-			askerName.href = owner.link;
+			if (owner.link != undefined) {
+				askerName.href = owner.link;
+			}
 			askerName.target = "_blank";
 			askerName.className = "niceText";
 			askerNameDiv.appendChild(askerName);
@@ -158,7 +160,8 @@
 						var preCodes = document.getElementsByTagName('pre');
 						for (var i = 0; i < preCodes.length; ++i) {
 							var entry = preCodes[i];
-							var innerHTML = entry.innerHTML.substring(6,entry.innerHTML.length - 7);
+							var innerHTML = entry.innerHTML.substring(6,
+									entry.innerHTML.length - 7);
 							entry.innerHTML = innerHTML;
 							entry.className = "prettyprint code";
 							entry.style = "width: 700px;";
