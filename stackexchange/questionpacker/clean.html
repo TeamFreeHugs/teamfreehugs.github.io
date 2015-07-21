@@ -72,9 +72,9 @@
 			askerName.innerHTML = owner.display_name;
 			if (owner.link != undefined) {
 				askerName.href = owner.link;
+				askerName.className = "niceText";
 			}
 			askerName.target = "_blank";
-			askerName.className = "niceText";
 			askerNameDiv.appendChild(askerName);
 			askerNameDiv.className = "inline userInfo";
 
@@ -87,6 +87,7 @@
 			askerRepDiv.appendChild(askerRep);
 			askerRepDiv.className = "inline userInfo";
 
+			
 			askerDiv.appendChild(askerImg);
 
 			askerInfoDiv.appendChild(askerNameDiv);
