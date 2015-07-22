@@ -8,7 +8,7 @@
 <script src="http://teamfreehugs.github.io/js/markdown.js"></script>
 </head>
 </head>
-<body onload="load(); addNotify(); addCodeHighlighter();">
+<body onload="load(); addNotify(); addCodeHighlighter(); load();">
 	<div class="round bottom shadow" style="height: auto;">
 		<p id="back">
 			<a href="..">Parent Directory</a>
@@ -41,15 +41,15 @@
 		<pre>http://stackoverflow.com/questions/4/when-setting-a-forms-opacity-should-i-use-a-decimal-or-double</pre>
 		<p>
 			Lets get some info: <br> Question ID:
-			<code>4</code><br>
-			Site:
+			<code>4</code>
+			<br> Site:
 			<code>Stackoverflow</code>
 		</p>
 		<h4>Step 2: Construct the URL</h4>
 		<p>So, we all start off with:</p>
 		<pre>teamfreehugs.github.io/stackexchange/questionpacker/clean.html</pre>
 		<p>And we are greeted by:</p>
-		<blockquote class="quote">Please specify one by using question= in the URL</blockquote>
+		<quote>Please specify one by using question= in the URL</quote>
 		<p>
 			So, how do we fix it? Simple! Add
 			<code>?question=ID</code>
@@ -57,7 +57,7 @@
 		</p>
 
 		<p>And now, we get:</p>
-		<blockquote class="quote">Please specify one by using site= in the URL</blockquote>
+		<quote>Please specify one by using site= in the URL</quote>
 		<p>
 			So, how do we fix it? Do this: Is the site
 			<code>*.stackexchange.com</code>
