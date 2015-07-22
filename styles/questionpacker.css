@@ -209,6 +209,7 @@ a.postTag-mod {
 	line-height: 1;
 	white-space: nowrap;
 	display: inline-block;
+	color: #3e6d8e;
 	font-size: 12px;
 	white-space: nowrap;
 	border-radius: 0;
@@ -220,7 +221,6 @@ a.postTag-mod {
 		ease;
 	-o-transition: color 0.15s ease, background 0.15s ease, border 0.15s
 		ease;
-	background: #ffecec;
 }
 
 .post-tag-mod:hover {
