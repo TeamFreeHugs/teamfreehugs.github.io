@@ -45,7 +45,9 @@ body {
 }
 
 .content {
-	width: 1000px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .postContent {
@@ -127,7 +129,6 @@ a.postTag {
 	border: 1px solid #dae6ef;
 }
 
-}
 .post-tag:first-child {
 	margin-left: 6px;
 }
@@ -141,4 +142,3 @@ span.post-tag {
 	opacity: .5;
 }
 
-.js-gps-track 
