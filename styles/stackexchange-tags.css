@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+.post-tag {
+	background-color: #f7fdff;
+	color: #566e76;
+	border: 1px solid #c0d4db;
+	padding: .4em .5em;
+	border-radius: 15px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 11px;
+	line-height: 1;
+	line-height: 14px;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	margin-top: 0 3px;
+	margin-bottom: 5px 0 !important;
+	margin: 6px 3px 0 3px;
+	margin-right: 6px;
+	font-size: 12px;
+	white-space: nowrap;
+	-webkit-transition: color 0.15s ease, background 0.15s ease, border
+		0.15s ease;
+	-moz-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+	-ms-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+	-o-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+}
+
+.post-tag:hover {
+	text-decoration: none;
+	color: #3e6d8e;
+	background-color: #dae6ef;
+	border: 1px solid #dae6ef;
+}
+
+a.post-tag {
+	cursor: default;
+	margin-right: 4px;
+}
