@@ -82,9 +82,9 @@
 			}
 			askerImg.className = "userImage";
 
-			askerNameLink.innerHTML = owner.display_name;
 			if (owner.link != undefined) {
 				var askerNameLink = document.createElement('a');
+				askerNameLink.innerHTML = owner.display_name;
 				askerNameLink.href = owner.link;
 				askerNameLink.className = "niceText";
 				askerName.appendChild(askerNameLink);
