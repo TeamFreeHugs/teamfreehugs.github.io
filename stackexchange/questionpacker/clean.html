@@ -192,7 +192,19 @@
 									+ new URI(question.link).authority
 									+ '/questions/tagged/' + tag;
 							tagElement.target = "_blank";
-							tagElement.className = "post-tag js-gps-track";
+							var tagItem = JSON
+									.parse(readTextFile('https://api.stackexchange.com/2.2/tags/'
+											+ tag
+											+ '/info?site='
+											+ site
+											+ '&key=JPRwkkqAelchw)6d9S8wcw((')).items[0];
+							if (tagItem.is_required) {
+								tagElement.className = "post-tag-required";
+							} else if (tagItem.is_moderator_only) {
+								tagElement.className = "post-tag-mod";
+							} else {
+								tagElement.className = "post-tag";
+							}
 							tagElementSpan.appendChild(tagElement);
 							tags.appendChild(tagElement);
 						}
@@ -278,8 +290,9 @@
 										.createElement('br'));
 								details.appendChild(acceptedIcon);
 								details.appendChild(document
-										.createElement('br'));                                                                details.appendChild(document
-                                                                                .createElement('br'));
+										.createElement('br'));
+								details.appendChild(document
+										.createElement('br'));
 
 							}
 
