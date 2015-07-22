@@ -82,7 +82,7 @@
 			}
 			askerImg.className = "userImage";
 
-			askerName.innerHTML = owner.display_name;
+			askerNameLink.innerHTML = owner.display_name;
 			if (owner.link != undefined) {
 				var askerNameLink = document.createElement('a');
 				askerNameLink.href = owner.link;
@@ -191,7 +191,7 @@
 							tagElement.href = 'http://'
 									+ new URI(question.link).authority
 									+ '/questions/tagged/' + tag;
-							tag.target = "_blank";
+							tagElement.target = "_blank";
 							tagElement.className = "post-tag js-gps-track";
 							tagElementSpan.appendChild(tagElement);
 							tags.appendChild(tagElement);
