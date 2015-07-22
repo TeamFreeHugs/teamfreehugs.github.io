@@ -9,6 +9,10 @@ a:hover, a:visited, a:link, a:active {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
+body {
+	float: left;
+}
+
 .userDivRegistered {
 	background-color: #DED78E;
 	height: auto;

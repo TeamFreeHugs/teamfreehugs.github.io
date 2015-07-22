@@ -6,7 +6,9 @@
 <script src="http://teamfreehugs.github.io/js/markdown.js"></script>
 <script src="http://teamfreehugs.github.io/js/URI.js"></script>
 <link rel="stylesheet"
-	href="http://teamfreehugs.github.io/styles/questionpacker.css"></link><link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/bitcoin/all.css?v=cf772944b10f">
+	href="http://teamfreehugs.github.io/styles/questionpacker.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="//cdn.sstatic.net/bitcoin/all.css?v=cf772944b10f">
 </head>
 <body onload="go()">
 	<script>
@@ -28,7 +30,15 @@
 					}
 				}
 			}
-			rawFile.send(null);
+
+			rawFile.onerror = function() {
+				console.log(rawFile.status);
+			}
+			try {
+				rawFile.send(null);
+			} catch (e) {
+				console.log('error');
+			}
 			return rawFile.responseText;
 		}
 
@@ -56,7 +66,7 @@
 			var askerImg = document.createElement('img');
 
 			var askerNameDiv = document.createElement('div');
-			var askerName = document.createElement('a');
+			var askerName = document.createElement('span');
 
 			var askerRepDiv = document.createElement('div');
 			var askerRep = document.createElement('span');
@@ -74,8 +84,10 @@
 
 			askerName.innerHTML = owner.display_name;
 			if (owner.link != undefined) {
-				askerName.href = owner.link;
-				askerName.className = "niceText";
+				var askerNameLink = document.createElement('a');
+				askerNameLink.href = owner.link;
+				askerNameLink.className = "niceText";
+				askerName.appendChild(askerName);
 			}
 			askerName.target = "_blank";
 			askerNameDiv.appendChild(askerName);
@@ -130,7 +142,9 @@
 				console.log(linkToAPI);
 				var result = JSON.parse(readTextFile(linkToAPI));
 				if (result.items == undefined) {
-					document.getElementById('load').innerHTML = "Whoops, you s";
+					document.getElementById('load').innerHTML = "Whoops, you seemed to get an error";
+					var text2 = document.createElement('p');
+					text2.innerHTML = "";
 				}
 				if (result.items.length === 0) {
 					document.getElementById('load').innerHTML = "Sorry, that's an invalid question";
@@ -174,7 +188,8 @@
 							var tagElementSpan = document.createElement('span');
 							var tagElement = document.createElement('a');
 							tagElement.innerHTML = tag;
-							tagElement.href = new URI(question.link).authority
+							tagElement.href = 'http:/'
+									+ new URI(question.link).authority
 									+ '/questions/tagged/' + tag;
 							tag.target = "_blank";
 							tagElement.className = "post-tag js-gps-track";
