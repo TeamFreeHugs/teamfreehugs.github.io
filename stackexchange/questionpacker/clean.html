@@ -55,11 +55,12 @@
 		}
 
 		function generateAvatar(owner) {
+			var userNameTooltip = "";
 			var askerDiv = document.createElement('div');
 			if (owner.user_type == "registered") {
 				askerDiv.className = "userDivRegistered";
 			} else if (owner.user_type == "moderator") {
-				owner.display_name += "\u2666";
+				userNameTooltip = "Moderator";
 				askerDiv.className = "userDivRegistered";
 			} else {
 				askerDiv.className = "userDivUnregistered";
@@ -86,6 +87,10 @@
 			if (owner.link != undefined) {
 				var askerNameLink = document.createElement('a');
 				askerNameLink.innerHTML = owner.display_name;
+				if (userNameTooltip != "") {
+					askerNameLink.innerHTML += "\u2666";
+					askerNameLink.title = userNameTooltip;
+				}
 				askerNameLink.href = owner.link;
 				askerNameLink.className = "niceText";
 				askerName.appendChild(askerNameLink);
