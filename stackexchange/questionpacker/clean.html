@@ -138,7 +138,7 @@
 				var questionLink = getCode('question');
 				var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
 						+ questionLink + '?site=' + getCode('site')
-						+ '&filter=!9YdnSJ*_S&key=JPRwkkqAelchw)6d9S8wcw((';
+						+ '&filter=!LcDowK8Qgve9uZLCQGryI_&key=JPRwkkqAelchw)6d9S8wcw((';
 				console.log(linkToAPI);
 				var result = JSON.parse(readTextFile(linkToAPI));
 				if (result.items == undefined) {
@@ -179,7 +179,15 @@
 
 						var scoreSpan = document.createElement('span');
 						var details = document.createElement('div');
-
+						var favDiv = document.createElement('div');
+						
+						var favSpan = document.createElement('span');
+						
+						favSpan.className = "favIcon";
+						favSpan.title = question.favourite_count + " user" + (question.favourite_count > 1 : "s" ? "") + " ha" + (question.favourite_count > 1 : "ve" ? "s") + "favourited this question.";
+						
+						favDiv.appendChild(favSpan);
+						
 						console
 								.log('Site: '
 										+ new URI(question.link).authority);
@@ -219,10 +227,18 @@
 						var score = question.score;
 
 						scoreSpan.innerHTML = 'Score: ' + score;
+						scoreSpan.onclick = function() {
+							var upvoteSpan = document.createElement('span');
+							var downvoteSpan = document.createElement('span');
+							var repEarnedSpan = document.createElement('span');
+							upvoteSpan.innerHTML = question.up_vote_count;
+							downvoteSpan.innerHTML = question.down_vote_count;
+						}
 						scoreSpan.className = "postDetails niceText";
 						details.appendChild(scoreSpan);
 
 						contentDiv.appendChild(details);
+						contentDiv.appendChild(favDiv);
 						contentDiv.appendChild(questionBody);
 						contentDiv.appendChild(tags);
 					}

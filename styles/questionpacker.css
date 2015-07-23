@@ -68,6 +68,30 @@ body {
 	bold: true;
 }
 
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+.favIcon {
+	background-image:
+		url('http://meta.stackexchange.com/content/stackoverflowmeta/img/sprites.png');
+	background-position:-40px -120px;
+	display: block;
+	margin: 0 auto;
+	text-indent: -999em;
+	width: 40px;
+	height: 40px;
+	margin-bottom: 2px;
+	text-indent: -9999em;
+	font-size: 1px;
+	position: absolute;
+	left: 0;
+}
+
 .acceptedIcon {
 	background-image:
 		url('http://meta.stackexchange.com/content/stackoverflowmeta/img/sprites.png');
