@@ -252,7 +252,9 @@
 
 							var upvoteSpan = document.createElement('span');
 							var downvoteSpan = document.createElement('span');
-							var repEarnedSpan = document.createElement('span');
+							var repEarnedSpan1 = document.createElement('span');
+							var repEarnedSpan2 = document.createElement('span');
+							var repSpan = document.createElement('span');
 							var bar = document.createElement('span');
 
 							bar.innerHTML = "&nbsp;|&nbsp;";
@@ -275,21 +277,31 @@
 							if (question.accepted_answer_id != undefined) {
 								repEarned += 2;
 							}
-							repEarnedSpan.innerHTML = "The OP has earned "
-									+ repEarned + " rep from this question.";
+							repEarnedSpan1.innerHTML = "The OP has earned ";
+							repSpan.innerHTML = repEarned;
+							repEarnedSpan2.innerHTML = " rep from this question.";
 							
+							if (repEarned > 0) {
+								repSpan.className = "green postDetails";
+							} else if (repEarned < 0) {
+								repSpan.className = "red postDetails";
+							}
+
 							bar.className = "postDetails";
-							
+
 							upvoteSpan.className = "postDetails";
 							downvoteSpan.className = "postDetails";
-							repEarnedSpan.className = "postDetails";
-							
+							repEarnedSpan1.className = "postDetails";
+							repEarnedSpan2.className = "postDetails";
+
 							details.appendChild(bar);
 							details.appendChild(upvoteSpan);
 							details.appendChild(bar);
 							details.appendChild(downvoteSpan);
 							details.appendChild(bar);
-							details.appendChild(repEarnedSpan);
+							details.appendChild(repEarnedSpan1);
+							details.appendChild(repSpan);
+							details.appendChild(repEarnedSpan2);
 							this.onclick = null;
 						}
 
