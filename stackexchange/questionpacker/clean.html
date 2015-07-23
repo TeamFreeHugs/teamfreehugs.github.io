@@ -137,7 +137,9 @@
 				document.body.appendChild(text);
 				var questionLink = getCode('question');
 				var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
-						+ questionLink + '?site=' + getCode('site')
+						+ questionLink
+						+ '?site='
+						+ getCode('site')
 						+ '&filter=!LcDowK8Qgve9uZLCQGryI_&key=JPRwkkqAelchw)6d9S8wcw((';
 				console.log(linkToAPI);
 				var result = JSON.parse(readTextFile(linkToAPI));
@@ -180,14 +182,26 @@
 						var scoreSpan = document.createElement('span');
 						var details = document.createElement('div');
 						var favDiv = document.createElement('div');
-						
+
 						var favSpan = document.createElement('span');
-						
+
+						details.id = 'questionDetails';
+
+						scoreSpan.id = 'scoreSpan';
+
 						favSpan.className = "favIcon";
-						favSpan.title = question.favourite_count + " user" + (question.favourite_count > 1 ? "s" : "") + " ha" + (question.favourite_count > 1 ? "ve" : "s") + " favourited this question.";
-						
+
+						console.log(question);
+
+						favSpan.title = question.favorite_count
+								+ " user"
+								+ (question.favorite_count_count > 1 ? "" : "s")
+								+ " ha"
+								+ (question.favorite_count_count > 1 ? "s"
+										: "ve") + " favourited this question.";
+
 						favDiv.appendChild(favSpan);
-						
+
 						console
 								.log('Site: '
 										+ new URI(question.link).authority);
@@ -227,20 +241,63 @@
 						var score = question.score;
 
 						scoreSpan.innerHTML = 'Score: ' + score;
-						scoreSpan.onclick = function() {
+						scoreSpan.className = "postDetails niceText grey";
+						details.appendChild(scoreSpan);
+
+						var clickFunction = function() {
+
+							var details = document
+									.getElementById('questionDetails');
+							console.log(details);
+
 							var upvoteSpan = document.createElement('span');
 							var downvoteSpan = document.createElement('span');
 							var repEarnedSpan = document.createElement('span');
-							upvoteSpan.innerHTML = question.up_vote_count;
-							downvoteSpan.innerHTML = question.down_vote_count;
+							var bar = document.createElement('span');
+
+							bar.innerHTML = "&nbsp;|&nbsp;";
+
+							upvoteSpan.innerHTML = '&nbsp;&nbsp;Upvotes: '
+									+ question.up_vote_count;
+							downvoteSpan.innerHTML = '&nbsp;&nbsp;Downvotes: '
+									+ question.down_vote_count;
+							upvoteSpan.className = "green";
+							downvoteSpan.className = "red";
+							var repEarned = 0;
+							for (var up = 0; up < question.up_vote_count; ++up) {
+								repEarned += 5;
+							}
+
+							for (var down = 0; down < question.down_vote_count; ++down) {
+								repEarned -= 2;
+							}
+
+							if (question.accepted_answer_id != undefined) {
+								repEarned += 2;
+							}
+							repEarnedSpan.innerHTML = "The OP has earned "
+									+ repEarned + " rep from this question.";
+							
+							bar.className = "postDetails";
+							
+							upvoteSpan.className = "postDetails";
+							downvoteSpan.className = "postDetails";
+							repEarnedSpan.className = "postDetails";
+							
+							details.appendChild(bar);
+							details.appendChild(upvoteSpan);
+							details.appendChild(bar);
+							details.appendChild(downvoteSpan);
+							details.appendChild(bar);
+							details.appendChild(repEarnedSpan);
+							this.onclick = null;
 						}
-						scoreSpan.className = "postDetails niceText";
-						details.appendChild(scoreSpan);
+
+						scoreSpan.onclick = clickFunction;
 
 						contentDiv.appendChild(details);
 						contentDiv.appendChild(favDiv);
-						contentDiv.appendChild(document.createElement('br'););
-						contentDiv.appendChild(document.createElement('br'););
+						contentDiv.appendChild(document.createElement('br'));
 						contentDiv.appendChild(questionBody);
 						contentDiv.appendChild(tags);
 					}
