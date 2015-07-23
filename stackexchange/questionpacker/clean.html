@@ -7,7 +7,8 @@
 <script src="http://teamfreehugs.github.io/js/URI.js"></script>
 <link rel="stylesheet"
 	href="http://teamfreehugs.github.io/styles/questionpacker.css"></link>
-<link rel="stylesheet" href="file:///home/testusr/teamfreehugs.github.io/styles/stackexchange-tags.css"></link>
+<link rel="stylesheet"
+	href="file:///home/testusr/teamfreehugs.github.io/styles/stackexchange-tags.css"></link>
 <link rel="stylesheet" type="text/css"
 	href="//cdn.sstatic.net/bitcoin/all.css?v=cf772944b10f">
 </head>
@@ -186,7 +187,6 @@
 										+ new URI(question.link).authority);
 						for (var i = 0; i < question.tags.length; ++i) {
 							var tag = question.tags[i];
-							var tagElementSpan = document.createElement('span');
 							var tagElement = document.createElement('a');
 							tagElement.innerHTML = tag;
 							tagElement.href = 'http://'
@@ -206,15 +206,15 @@
 								console.log('Req');
 							} else if (tagItem.is_moderator_only) {
 								tagElement.className = "post-tag-mod";
+
 								console.log('Mod');
 							} else {
-								tagElement.className = "post-tag";
+								tagElement.className = "post-tag post-tag-default";
 								console.log('Tag');
 							}
-							tagElementSpan.appendChild(tagElement);
 							tags.appendChild(tagElement);
 						}
-						
+
 						tags.appendChild(document.createElement('br'));
 						tags.appendChild(document.createElement('br'));
 

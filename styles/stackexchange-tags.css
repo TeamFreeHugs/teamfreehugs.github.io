@@ -15,8 +15,8 @@
 	padding-bottom: .3em;
 	margin-top: 0 3px;
 	margin-bottom: 5px 0 !important;
-	margin: 6px 3px 0 3px;
 	margin-right: 6px;
+	margin: 6px 3px 0 3px;
 	font-size: 12px;
 	white-space: nowrap;
 	-webkit-transition: color 0.15s ease, background 0.15s ease, border
@@ -29,14 +29,75 @@
 		ease;
 }
 
-.post-tag:hover {
+.post-tag-required {
+	color: #555;
+	background: #ececec;
+	border: 1px solid #bbb;
+	padding: .4em .5em;
+	border-radius: 15px;
 	text-decoration: none;
-	color: #3e6d8e;
-	background-color: #dae6ef;
-	border: 1px solid #dae6ef;
+	text-align: center;
+	font-size: 11px;
+	line-height: 1;
+	line-height: 14px;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	margin-top: 0 3px;
+	margin-bottom: 5px 0 !important;
+	margin-right: 6px;
+	margin: 6px 3px 0 3px;
+	font-size: 12px;
+	white-space: nowrap;
+	-webkit-transition: color 0.15s ease, background 0.15s ease, border
+		0.15s ease;
+	-moz-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+	-ms-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+	-o-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
 }
 
-a.post-tag {
-	cursor: default;
-	margin-right: 4px;
+.post-tag-mod {
+	color: #af3235;
+	background: #ffecec;
+	border: 1px solid #eccdce;
+	padding: .4em .5em;
+	border-radius: 15px;
+	text-decoration: none;
+	text-align: center;
+	font-size: 11px;
+	line-height: 1;
+	line-height: 14px;
+	padding-top: .3em;
+	padding-bottom: .3em;
+	margin-top: 0 3px;
+	margin-bottom: 5px 0 !important;
+	margin-right: 6px;
+	margin: 6px 3px 0 3px;
+	font-size: 12px;
+	white-space: nowrap;
+	-webkit-transition: color 0.15s ease, background 0.15s ease, border
+		0.15s ease;
+	-moz-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+	-ms-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+	-o-transition: color 0.15s ease, background 0.15s ease, border 0.15s
+		ease;
+}
+
+.post-tag-mod:hover {
+	color: #ac6567;
+	background: #f5dbdb
+}
+
+.post-tag-default:hover {
+	text-decoration: none;
+	color: #dae6ef;
+}
+
+.post-tag-required:hover {
+	text-decoration: none;
+	color: #3e6d8e;
 }
