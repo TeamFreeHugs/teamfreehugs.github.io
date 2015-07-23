@@ -184,7 +184,7 @@
 						var favSpan = document.createElement('span');
 						
 						favSpan.className = "favIcon";
-						favSpan.title = question.favourite_count + " user" + (question.favourite_count > 1 ? "s" : "") + " ha" + (question.favourite_count > 1 ? "ve" : "s") + "favourited this question.";
+						favSpan.title = question.favourite_count + " user" + (question.favourite_count > 1 ? "s" : "") + " ha" + (question.favourite_count > 1 ? "ve" : "s") + " favourited this question.";
 						
 						favDiv.appendChild(favSpan);
 						
@@ -239,6 +239,8 @@
 
 						contentDiv.appendChild(details);
 						contentDiv.appendChild(favDiv);
+						contentDiv.appendChild(document.createElement('br'););
+						contentDiv.appendChild(document.createElement('br'););
 						contentDiv.appendChild(questionBody);
 						contentDiv.appendChild(tags);
 					}
