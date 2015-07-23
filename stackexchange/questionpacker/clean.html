@@ -113,6 +113,7 @@
 			askerDiv.appendChild(askerInfoDiv);
 			return askerDiv;
 		}
+
 		function go() {
 			if (getCode('question') == "") {
 				var text = document.createElement('h2');
@@ -245,7 +246,6 @@
 						details.appendChild(scoreSpan);
 
 						var clickFunction = function() {
-
 							var details = document
 									.getElementById('questionDetails');
 							console.log(details);
@@ -280,7 +280,7 @@
 							repEarnedSpan1.innerHTML = "The OP has earned ";
 							repSpan.innerHTML = repEarned;
 							repEarnedSpan2.innerHTML = " rep from this question.";
-							
+
 							if (repEarned > 0) {
 								repSpan.className = "green postDetails";
 							} else if (repEarned < 0) {
@@ -356,6 +356,8 @@
 							var score = answer.score;
 							var body = answer.body;
 
+							details.id = "answer" + i;
+
 							content.innerHTML = body;
 							content.className = "postContent";
 
@@ -366,7 +368,7 @@
 							links.appendChild(link);
 
 							scoreSpan.innerHTML = 'Score: ' + score;
-							scoreSpan.className = "postDetails niceText";
+							scoreSpan.className = "postDetails niceText grey";
 							details.appendChild(scoreSpan);
 
 							if (accepted) {
