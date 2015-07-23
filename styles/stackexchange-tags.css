@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.post-tag {
+a.post-tag {
 	background-color: #f7fdff;
 	color: #566e76;
 	border: 1px solid #c0d4db;
@@ -29,7 +29,7 @@
 		ease;
 }
 
-.post-tag-required {
+a.post-tag-required {
 	color: #555;
 	background: #ececec;
 	border: 1px solid #bbb;
@@ -58,7 +58,7 @@
 		ease;
 }
 
-.post-tag-mod {
+a.post-tag-mod {
 	color: #af3235;
 	background: #ffecec;
 	border: 1px solid #eccdce;
@@ -87,17 +87,17 @@
 		ease;
 }
 
-.post-tag-mod:hover {
+a.post-tag-mod:hover {
 	color: #ac6567;
 	background: #f5dbdb
 }
 
-.post-tag-default:hover {
+a.post-tag-default:hover {
 	text-decoration: none;
 	color: #3e6d8e;
 }
 
-.post-tag-required:hover {
+a.post-tag-required:hover {
 	text-decoration: none;
 	color: #3e6d8e;
 }
