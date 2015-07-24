@@ -335,8 +335,8 @@
 						var result = JSON.parse(readTextFile(linkToAPI));
 						var answers = result.items;
 						var answerCount = document.createElement('h4');
-						answerCount.innerHTML = 'There are ' + answers.length
-								+ ' answers';
+						answerCount.innerHTML = 'There ' + (answers.length > 0 && answers.length < 2 ? "is " : "are ") + answers.length
+								+ ' answer' + (answers.length > 0 && answers.length < 2 ? "" : "s");
 						answerCount.className = "postDetails niceText";
 
 						contentDiv.appendChild(document.createElement('hr'));
@@ -415,6 +415,11 @@
 						entry.innerHTML = innerHTML;
 						entry.className = "prettyprint code";
 						entry.style = "width: 700px;";
+					}
+
+					var aTags = document.getElementsByTagName('a');
+					for (var i = 0; i < aTags.length; ++i) {
+						aTags[i].target = "_blank";
 					}
 					load();
 					console.log('Done!');
