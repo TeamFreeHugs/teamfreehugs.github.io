@@ -56,7 +56,7 @@ function StackAPI(credentials) {
 		this.authURL = 'https://stackexchange.com/oauth/dialog?client_id=';
 		this.authURL += this.clientID;
 		if (this.scope != undefined) {
-			this.authURL + '&scope=';
+			this.authURL += '&scope=';
 			for ( var pos = 0; pos < this.scope.length; ++pos) {
 				this.authURL += this.scope[pos] + '';
 				if (pos != this.scope.length)
