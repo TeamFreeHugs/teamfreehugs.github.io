@@ -71,11 +71,11 @@ function StackAPI(credentials) {
 		if (credentials.state != undefined) {
 			this.authURL += '&state=' + this.credentials.state;
 		}
-		if (getCode('access_token') == "") {
+		if (getHash() == "") {
 			window.location = this.authURL;
 			return "Not yet set";
 		} else {
-			return getCode('access_token');
+			return getHash();
 		}
 	}
 }
