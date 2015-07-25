@@ -59,11 +59,14 @@
 			var askerDiv = document.createElement('div');
 			if (owner.user_type == "registered") {
 				askerDiv.className = "userDivRegistered";
+				userNameTooltip = "Registered User. This user is a regular user.";
 			} else if (owner.user_type == "moderator") {
-				userNameTooltip = "Moderator";
+				userNameTooltip = "Moderator. This user is a moderator.";
 				askerDiv.className = "userDivRegistered";
 			} else {
 				askerDiv.className = "userDivUnregistered";
+				userNameTooltip = "Unregistered User. This user has not associated any OpenIDS with their account.";
+
 			}
 			var askerImg = document.createElement('img');
 
@@ -87,10 +90,11 @@
 			if (owner.link != undefined) {
 				var askerNameLink = document.createElement('a');
 				askerNameLink.innerHTML = owner.display_name;
-				if (userNameTooltip != "") {
+				if (owner.user_type == "moderator") {
 					askerNameLink.innerHTML += "\u2666";
-					askerNameLink.title = userNameTooltip;
 				}
+				askerNameLink.title = userNameTooltip;
+
 				askerNameLink.href = owner.link;
 				askerNameLink.className = "niceText";
 				askerName.appendChild(askerNameLink);
@@ -199,12 +203,11 @@
 
 						console.log(question);
 
-						favSpan.title = question.favorite_count
-								+ " user"
-								+ (question.favorite_count_count > 1 ? "" : "s")
+						favSpan.title = question.favorite_count + " user"
+								+ (question.favorite_count == 1 ? "" : "s")
 								+ " ha"
-								+ (question.favorite_count_count > 1 ? "s"
-										: "ve") + " favourited this question.";
+								+ (question.favorite_count == 1 ? "s" : "ve")
+								+ " favourited this question.";
 
 						favDiv.appendChild(favSpan);
 
@@ -247,7 +250,13 @@
 						var score = question.score;
 
 						scoreSpan.innerHTML = 'Score: ' + score;
-						scoreSpan.className = "postDetails niceText grey";
+						if (score > 0) {
+							scoreSpan.className = "postDetails niceText green";
+						} else if (score < 0) {
+							scoreSpan.className = "postDetails niceText red";
+						} else {
+							scoreSpan.className = "postDetails niceText grey";
+						}
 						details.appendChild(scoreSpan);
 
 						var clickFunction = function() {
@@ -272,7 +281,7 @@
 							downvoteSpan.className = "red";
 							var repEarned = 0;
 							for (var up = 0; up < question.up_vote_count; ++up) {
-								repEarned += 5;
+								repEarned += 10;
 							}
 
 							for (var down = 0; down < question.down_vote_count; ++down) {
@@ -335,8 +344,13 @@
 						var result = JSON.parse(readTextFile(linkToAPI));
 						var answers = result.items;
 						var answerCount = document.createElement('h4');
-						answerCount.innerHTML = 'There ' + (answers.length > 0 && answers.length < 2 ? "is " : "are ") + answers.length
-								+ ' answer' + (answers.length > 0 && answers.length < 2 ? "" : "s");
+						answerCount.innerHTML = 'There '
+								+ (answers.length > 0 && answers.length < 2 ? "is "
+										: "are ")
+								+ answers.length
+								+ ' answer'
+								+ (answers.length > 0 && answers.length < 2 ? ""
+										: "s");
 						answerCount.className = "postDetails niceText";
 
 						contentDiv.appendChild(document.createElement('hr'));
@@ -382,6 +396,7 @@
 								var line = document.createElement('span');
 								line.innerHTML = " | ";
 								acceptedSpan.innerHTML = "Accepted";
+								acceptedSpan.title = "This answer was accepted by the OP.";
 								acceptedSpan.className = "postDetails niceText accepted";
 								line.className = "postDetails niceText";
 								var acceptedIcon = document
@@ -396,9 +411,7 @@
 										.createElement('br'));
 								details.appendChild(document
 										.createElement('br'));
-
 							}
-
 							answerDiv.appendChild(details);
 							answerDiv.appendChild(content);
 							answerDiv.appendChild(links);
