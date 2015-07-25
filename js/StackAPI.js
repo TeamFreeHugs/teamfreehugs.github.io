@@ -15,24 +15,25 @@ function StackAPI(credentials) {
 		}
 	}
 
-	this.authenticate = function() {
-		var authURL = 'https://stackexchange.com/oauth/dialog?client_id' = this.clientID
-				+ '&scope=';
-		for ( var pos = 0; pos < this.scope.length; ++pos) {
-			authURL += this.scope[pos] + '';
-			if (pos != this.scope.length)
-				authURL += ',';
-		}
-		authURL += '&redirect_uri=';
-		if (this.redirect_url != undefined) {
-			authURL += this.redirect_url;
-		} else {
-			authURL += window.location.toString();
-		}
-		if (credentials.state != undefined) {
-			authURL += '&state=' + credentials.state;
-		}
-		alert(authURL);
-	}
 	return this;
+}
+authenticate()
+{
+	var authURL = 'https://stackexchange.com/oauth/dialog?client_id' = this.clientID
+			+ '&scope=';
+	for ( var pos = 0; pos < this.scope.length; ++pos) {
+		authURL += this.scope[pos] + '';
+		if (pos != this.scope.length)
+			authURL += ',';
+	}
+	authURL += '&redirect_uri=';
+	if (this.redirect_url != undefined) {
+		authURL += this.redirect_url;
+	} else {
+		authURL += window.location.toString();
+	}
+	if (credentials.state != undefined) {
+		authURL += '&state=' + this.credentials.state;
+	}
+	alert(authURL);
 }
