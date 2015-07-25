@@ -285,10 +285,10 @@
 							downvoteSpan.className = "red";
 							var repEarned = 0;
 							for (var up = 0; up < question.up_vote_count; ++up) {
-								if (site == "meta.stackexchange") {
-									repEarned += 5;
-								} else {
+								if (site == "stackapps") {
 									repEarned += 10;
+								} else {
+									repEarned += 5;
 								}
 							}
 
