@@ -86,4 +86,8 @@ function StackAPI(credentials) {
 		return this.scope == undefined ? null : this.scope;
 	}
 
+	this.getKey = function() {
+		return this.key;
+	}
+
 }
