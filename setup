@@ -1,5 +1,9 @@
 git add .
 echo -n "Commit name: "
 read MESSAGE
-git commit -m "$MESSAGE"
+if [ "$MESSAGE" == "" ]; then
+  git commit -m "Update"
+else
+  git commit -m "$MESSAGE"
+fi
 git push
