@@ -2,18 +2,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="http://teamfreehugs.github.io/js/StackAPI.js"></script>
+<script src="file:///home/testusr/teamfreehugs.github.io/js/StackAPI.js"></script>
 <title>Testing</title>
 <script>
 	(function() {
-		var instance = new StackAPI({
-			clientID : 5239,
-			key : "JPRwkkqAelchw)6d9S8wcw((",
-			authNeeded : true,
-			redirect_url : "http://teamfreehugs.github.io/stackexchange/stackapi"
-		});
+		var instance = new StackAPI(
+				{
+					clientID : 5239,
+					key : "JPRwkkqAelchw)6d9S8wcw((",
+					authNeeded : true,
+					redirect_url : "http://teamfreehugs.github.io/stackexchange/stackapi",
+					scope : [ "read_inbox", "no_expiry" ]
+				});
 		var access_token = instance.authenticate();
-		alert(access_token);
+		alert('Your access token is ' + access_token);
 	})();
 </script>
 </head>

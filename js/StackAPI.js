@@ -6,11 +6,9 @@ function getCode(name) {
 			" "));
 }
 
-function getHash() {
-	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[#&]" + name + "=([^&#]*)"), result = regex.exec(name);
-	console.log(result);
-	return result === null ? "" : result.substring(1);
+function getHash(name) {
+	var matches = location.hash.match(new RegExp(name + '=([^&]*)'));
+	return matches ? matches[1] : "";
 }
 
 function readTextFile(file, error) {
@@ -74,11 +72,18 @@ function StackAPI(credentials) {
 		if (credentials.state != undefined) {
 			this.authURL += '&state=' + this.credentials.state;
 		}
-		if (getHash() == "") {
+		if (this.key != undefined) {
+			this.authURL += '&key=' + this.key
+		}
+		if (getHash('access_token') == "") {
 			window.location = this.authURL;
-			return "Not yet set";
+			return "";
 		} else {
-			return getHash();
+			return getHash('access_token');
 		}
 	}
+	this.getScope = function() {
+		return this.scope == undefined ? null : this.scope;
+	}
+
 }
