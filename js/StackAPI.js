@@ -7,7 +7,9 @@ function getCode(name) {
 }
 
 function getHash() {
-	return window.location.hash === null ? "" : window.location.hash;
+	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[#&]" + name), result = regex.exec(hash);
+	return result === null ? "" : result;
 }
 
 function readTextFile(file, error) {
