@@ -15,7 +15,9 @@
 					scope : [ "read_inbox", "no_expiry" ]
 				});
 		var access_token = instance.authenticate();
-		alert('Your access token is ' + access_token);
+		if (access_token != "") {
+			alert('Your access token is ' + access_token);
+		}
 	})();
 </script>
 </head>

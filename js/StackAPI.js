@@ -77,7 +77,7 @@ function StackAPI(credentials) {
 		}
 		if (getHash('access_token') == "") {
 			window.location = this.authURL;
-			return "";
+			return "Not Set!";
 		} else {
 			return getHash('access_token');
 		}
