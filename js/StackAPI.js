@@ -3,7 +3,7 @@ function StackAPI(credentials) {
 	if (credentials.key != undefined) {
 		this.key = credentials.key;
 	}
-	if (credentials.authNeeded == true) {
+	if (credentials.authNeeded != undefined && credentials.authNeeded == true) {
 		if (credentials.scope != undefined) {
 			this.scope = credentials.scope;
 		}
