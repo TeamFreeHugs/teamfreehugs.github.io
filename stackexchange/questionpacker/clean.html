@@ -269,9 +269,13 @@
 							var repEarnedSpan1 = document.createElement('span');
 							var repEarnedSpan2 = document.createElement('span');
 							var repSpan = document.createElement('span');
-							var bar = document.createElement('span');
+							var bar1 = document.createElement('span');
+							var bar2 = document.createElement('span');
+							var bar3 = document.createElement('span');
 
-							bar.innerHTML = "&nbsp;|&nbsp;";
+							bar1.innerHTML = "&nbsp;|&nbsp;";
+							bar2.innerHTML = "&nbsp;|&nbsp;";
+							bar3.innerHTML = "&nbsp;|&nbsp;";
 
 							upvoteSpan.innerHTML = '&nbsp;&nbsp;Upvotes: '
 									+ question.up_vote_count;
@@ -303,18 +307,20 @@
 								repSpan.className = "grey postDetails";
 							}
 
-							bar.className = "postDetails";
+							bar1.className = "postDetails";
+							bar2.className = "postDetails";
+							bar3.className = "postDetails";
 
 							upvoteSpan.className = "green postDetails";
 							downvoteSpan.className = "red postDetails";
 							repEarnedSpan1.className = "postDetails";
 							repEarnedSpan2.className = "postDetails";
 
-							details.appendChild(bar);
+							details.appendChild(bar1);
 							details.appendChild(upvoteSpan);
-							details.appendChild(bar);
+							details.appendChild(bar2);
 							details.appendChild(downvoteSpan);
-							details.appendChild(bar);
+							details.appendChild(bar3);
 							details.appendChild(repEarnedSpan1);
 							details.appendChild(repSpan);
 							details.appendChild(repEarnedSpan2);
