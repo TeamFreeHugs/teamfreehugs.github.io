@@ -9,6 +9,7 @@ function getCode(name) {
 function getHash() {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 	var regex = new RegExp("[#&]" + name + "=([^&#]*)"), result = regex.exec(name);
+	console.log(result);
 	return result === null ? "" : result.substring(1);
 }
 
