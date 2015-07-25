@@ -1,3 +1,5 @@
 git add .
-git commit -m "automated script commit"
+echo -n "Commit name: "
+read MESSAGE
+git commit -m $MESSAGE
 git push
