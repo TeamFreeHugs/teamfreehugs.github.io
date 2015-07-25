@@ -1,5 +1,5 @@
 git add .
 echo -n "Commit name: "
 read MESSAGE
-git commit -m $MESSAGE
+git commit -m '$MESSAGE'
 git push
