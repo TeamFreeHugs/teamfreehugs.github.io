@@ -8,8 +8,8 @@ function getCode(name) {
 
 function getHash() {
 	name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[#&]" + name), result = regex.exec(hash);
-	return result === null ? "" : result;
+	var regex = new RegExp("[#&]" + name + "=([^&#]*)"), result = regex.exec(hash);
+	return result === null ? "" : result.substring(1);
 }
 
 function readTextFile(file, error) {
