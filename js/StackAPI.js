@@ -6,6 +6,10 @@ function getCode(name) {
 			" "));
 }
 
+function getHash() {
+	return window.location.hash === null ? "" : window.location.hash;
+}
+
 function readTextFile(file, error) {
 	var rawFile = new XMLHttpRequest();
 	rawFile.open("GET", file, false);
@@ -69,9 +73,9 @@ function StackAPI(credentials) {
 		}
 		if (getCode('access_token') == "") {
 			window.location = this.authURL;
+			return "Not yet set";
 		} else {
 			return getCode('access_token');
 		}
-
 	}
 }
