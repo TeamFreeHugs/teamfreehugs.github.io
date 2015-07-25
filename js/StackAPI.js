@@ -48,8 +48,8 @@ function StackAPI(credentials) {
 		}
 		var onAuthError = credentials.authError;
 		var onAuthSuccess = credentials.onAuthSuccess;
-		if (credentials.redirect_url != undefined) {
-			this.redirect_url = credentials.redirect_url;
+		if (credentials.redirect_uri != undefined) {
+			this.redirect_uri = credentials.redirect_uri;
 		}
 	}
 	this.authenticate = function() {
@@ -64,8 +64,8 @@ function StackAPI(credentials) {
 			}
 		}
 		this.authURL += '&redirect_uri=';
-		if (this.redirect_url != undefined) {
-			this.authURL += this.redirect_url;
+		if (this.redirect_uri != undefined) {
+			this.authURL += this.redirect_uri;
 		} else {
 			this.authURL += window.location.toString();
 		}
