@@ -285,7 +285,11 @@
 							downvoteSpan.className = "red";
 							var repEarned = 0;
 							for (var up = 0; up < question.up_vote_count; ++up) {
-								repEarned += 10;
+								if (site == "meta.stackexchange") {
+									repEarned += 5;
+								} else {
+									repEarned += 10;
+								}
 							}
 
 							for (var down = 0; down < question.down_vote_count; ++down) {
