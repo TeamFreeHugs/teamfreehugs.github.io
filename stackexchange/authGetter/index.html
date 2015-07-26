@@ -43,13 +43,13 @@
 		setCookie('write', document.getElementById('write').checked, 2);
 		setCookie('info', document.getElementById('info').checked, 2);
 		var myscope = [
-				(document.getElementById('expiry').checked == true ? ""
+				(document.getElementById('expiry').checked != true ? ""
 						: "no_expiry"),
-				(document.getElementById('inbox').checked == true ? ""
+				(document.getElementById('inbox').checked != true ? ""
 						: "read_inbox"),
-				(document.getElementById('write').checked == true ? ""
+				(document.getElementById('write').checked != true ? ""
 						: "write_access"),
-				(document.getElementById('info').checked == true ? ""
+				(document.getElementById('info').checked != true ? ""
 						: "private_info") ];
 		var api = new StackAPI(
 				{
