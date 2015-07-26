@@ -14,14 +14,14 @@
 					redirect_uri : "http://teamfreehugs.github.io/stackexchange/stackapi",
 					scope : [ "read_inbox" ]
 				});
-		//var things = instance.authenticate();
-		/* if (things["access_token"] != "") {
+		var things = instance.authenticate();
+		 if (things["access_token"] != "") {
 			alert('Your access token is '
 					+ things["access_token"]
 					+ ". "
 					+ (things["expires"] == null ? "" : "It expires in "
 							+ things["expires"]));
-		} */
+		} 
 	})();
 </script>
 </head>
