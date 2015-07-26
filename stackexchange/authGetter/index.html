@@ -56,9 +56,8 @@
 					clientID : document.getElementById('clientID').value,
 					key : document.getElementById('key').value,
 					authNeeded : true,
-					redirect_uri : (document.getElementById('redirect_uri').value == "" ? document
-							.getElementById('redirect_uri').value
-							: "http://teamfreehugs.github.io/stackexchange/authGetter"),
+					redirect_uri : (document.getElementById('redirect_uri').value == "" ? "http://teamfreehugs.github.io/stackexchange/authGetter"
+							: document.getElementById('redirect_uri').value),
 					scope : myscope
 				});
 		api.authenticate();
