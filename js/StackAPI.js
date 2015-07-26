@@ -53,6 +53,7 @@ function StackAPI(credentials) {
 		}
 	}
 	this.authenticate = function() {
+
 		this.authURL = 'https://stackexchange.com/oauth/dialog?client_id=';
 		this.authURL += this.clientID;
 		if (this.scope != undefined) {
@@ -73,13 +74,17 @@ function StackAPI(credentials) {
 			this.authURL += '&state=' + this.credentials.state;
 		}
 		if (this.key != undefined) {
-			this.authURL += '&key=' + this.key
+			this.authURL += '&key=' + this.key;
 		}
 		if (getHash('access_token') == "") {
 			window.location = this.authURL;
 			return "";
 		} else {
-			return getHash('access_token');
+			var vals = [];
+			vals["access_token"] = this.access_token;
+			if (getHash('expires') != "")
+				vals["expires"] = getHash('expires');
+			return vals;
 		}
 	}
 	this.getScope = function() {
@@ -90,4 +95,14 @@ function StackAPI(credentials) {
 		return this.key;
 	}
 
+	this.getToken = function() {
+		return this.access_token;
+	}
+
+	this.access_tokens = new Object();
+
+	this.access_tokens.invalidateAccessToken = function() {
+		var apiLink = 'https://api.stackexchange.com/2.2/access-tokens/'
+				+ access_token + '/invalidate';
+	}
 }
