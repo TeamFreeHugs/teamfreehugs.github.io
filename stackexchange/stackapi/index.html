@@ -15,7 +15,6 @@
 					scope : [ "read_inbox" ]
 				});
 		var things = instance.authenticate();
-		console.log(things);
 		if (things["access_token"] != undefined) {
 			alert('Your access token is '
 					+ things["access_token"]

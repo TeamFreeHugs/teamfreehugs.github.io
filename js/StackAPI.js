@@ -46,8 +46,6 @@ function StackAPI(credentials) {
 		if (credentials.scope != undefined) {
 			this.scope = credentials.scope;
 		}
-		var onAuthError = credentials.authError;
-		var onAuthSuccess = credentials.onAuthSuccess;
 		if (credentials.redirect_uri != undefined) {
 			this.redirect_uri = credentials.redirect_uri;
 		}
@@ -58,7 +56,7 @@ function StackAPI(credentials) {
 		this.authURL += this.clientID;
 		if (this.scope != undefined) {
 			this.authURL += '&scope=';
-			for ( var pos = 0; pos < this.scope.length; ++pos) {
+			for ( pos = 0; pos < this.scope.length; ++pos) {
 				this.authURL += this.scope[pos] + '';
 				if (pos != this.scope.length)
 					this.authURL += ',';
