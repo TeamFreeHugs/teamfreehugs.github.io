@@ -81,7 +81,7 @@ function StackAPI(credentials) {
 			return "";
 		} else {
 			var vals = new Object();
-			vals.access_token = this.access_token;
+			vals.access_token = getHash('access_token');
 			if (getHash('expires') != "")
 				vals.expires = getHash('expires');
 			return vals;

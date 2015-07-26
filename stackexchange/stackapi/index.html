@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://teamfreehugs.github.io/js/StackAPI.js"></script>
+<script src="http://teamfreehugs.github.io/js/StackAPI.js"></script>
 <title>Testing</title>
 <script>
 	(function() {
@@ -15,13 +15,14 @@
 					scope : [ "read_inbox" ]
 				});
 		var things = instance.authenticate();
-		 if (things["access_token"] != "") {
+		console.log(things);
+		if (things["access_token"] != undefined) {
 			alert('Your access token is '
 					+ things["access_token"]
 					+ ". "
 					+ (things["expires"] == null ? "" : "It expires in "
 							+ things["expires"]));
-		} 
+		}
 	})();
 </script>
 </head>
