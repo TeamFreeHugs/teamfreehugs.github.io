@@ -56,23 +56,23 @@ function StackAPI(credentials) {
 		this.authURL += this.clientID;
 		if (this.scope != undefined) {
 			this.authURL += '&scope=';
-			for ( pos = 0; pos < this.scope.length; ++pos) {
+			for (pos = 0; pos < this.scope.length; ++pos) {
 				this.authURL += this.scope[pos] + '';
 				if (pos != this.scope.length)
 					this.authURL += ',';
 			}
-		}
-		this.authURL += '&redirect_uri=';
-		if (this.redirect_uri != undefined) {
-			this.authURL += this.redirect_uri;
-		} else {
-			this.authURL += window.location.toString();
 		}
 		if (credentials.state != undefined) {
 			this.authURL += '&state=' + this.credentials.state;
 		}
 		if (this.key != undefined) {
 			this.authURL += '&key=' + this.key;
+		}
+		this.authURL += '&redirect_uri=';
+		if (this.redirect_uri != undefined) {
+			this.authURL += this.redirect_uri;
+		} else {
+			this.authURL += window.location.toString();
 		}
 		if (getHash('access_token') == "") {
 			window.location = this.authURL;
