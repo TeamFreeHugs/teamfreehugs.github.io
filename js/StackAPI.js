@@ -80,7 +80,7 @@ function StackAPI(credentials) {
 			window.location = this.authURL;
 			return "";
 		} else {
-			var vals = [];
+			var vals = {};
 			vals["access_token"] = this.access_token;
 			if (getHash('expires') != "")
 				vals["expires"] = getHash('expires');
