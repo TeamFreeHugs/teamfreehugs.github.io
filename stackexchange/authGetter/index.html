@@ -61,28 +61,37 @@
 				});
 		api.authenticate();
 	}
-
-	document.onload = function() {
-		var expiry_selected = getCookie('no_expiry');
-		var inbox_selected = getCookie('inbox');
-		var write_selected = getCookie('write');
-		var info_selected = getCookie('info');
-		if (expiry_selected) {
-			document.getElementById('expiry').checked = "true";
-		}
-		if (inbox_selected) {
-			document.getElementById('inbox').checked = "true";
-		}
-		if (write_selected) {
-			document.getElementById('write').checked = "true";
-		}
-		if (info_selected) {
-			document.getElementById('info').checked = "true";
-		}
-	}
 </script>
 </head>
-<body>
+<body onload="load();">
+	<script>
+		function getHash(name) {
+			var matches = location.hash.match(new RegExp(name + '=([^&]*)'));
+			return matches ? matches[1] : "";
+		}
+		function load() {
+			var expiry_selected = getCookie('no_expiry');
+			var inbox_selected = getCookie('inbox');
+			var write_selected = getCookie('write');
+			var info_selected = getCookie('info');
+			if (expiry_selected) {
+				document.getElementById('expiry').checked = "true";
+			}
+			if (inbox_selected) {
+				document.getElementById('inbox').checked = "true";
+			}
+			if (write_selected) {
+				document.getElementById('write').checked = "true";
+			}
+			if (info_selected) {
+				document.getElementById('info').checked = "true";
+			}
+			console.log(getHash('access_token'));
+			if (getHash('access_token') != "") {
+				document.getElementById('access_token').value = getHash('access_token');
+			}
+		}
+	</script>
 	<div class="round bottom shadow">
 		<p>
 			Please enter the client ID: <input type="text" id="clientID"></input>
@@ -105,6 +114,11 @@
 		</p>
 		<p>
 			<button onclick="go();">Get Token!</button>
+		</p>
+		<hr>
+		<br> <br> <br>
+		<p>
+			Output: <input id="access_token"></input>
 		</p>
 	</div>
 </body>

@@ -94,7 +94,7 @@ function StackAPI(credentials) {
 	}
 
 	this.getToken = function() {
-		return this.access_token;
+		return this.getHash('access_token');
 	}
 
 	this.access_tokens = new Object();
