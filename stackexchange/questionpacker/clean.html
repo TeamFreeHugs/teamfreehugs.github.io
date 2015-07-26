@@ -97,9 +97,12 @@
 
 				askerNameLink.href = owner.link;
 				askerNameLink.className = "niceText";
+				askerNameLink.target = "_blank";
+
 				askerName.appendChild(askerNameLink);
+			} else {
+				askerName.innerHTML = owner.display_name;
 			}
-			askerName.target = "_blank";
 			askerNameDiv.appendChild(askerName);
 			askerNameDiv.className = "inline userInfo";
 
@@ -445,7 +448,8 @@
 						aTags[i].target = "_blank";
 					}
 
-					var blockquotes = document.getElementsByTagName('blockquote');
+					var blockquotes = document
+							.getElementsByTagName('blockquote');
 					for (var i = 0; i < blockquotes.length; ++i) {
 						blockquotes[i].className += "quote";
 					}
