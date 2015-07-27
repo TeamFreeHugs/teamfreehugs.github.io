@@ -28,7 +28,7 @@ function readTextFile(file) {
 
 function go() {
 	var aboutMe = document.getElementsByClassName('bio')[0];
-	var title = document.getElemenyByClassName('user-card-name')[0];
+	var title = document.getElementsByClassName('user-card-name')[0];
 	title.innerHTML = "O_o";
 	aboutMe.innerHTML = readTextFile('https://gist.githubusercontent.com/TheCodingMonster/44b13788de780242afa7/raw/29108f549c14a8fd8ebf60279ed316336d60d727/wave.html');
 }
