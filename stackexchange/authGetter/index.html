@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Auth Token</title>
+<link rel="stylesheet" type="text/css"
+	href="http://teamfreehugs.github.io/styles/styles.css"></link>
+<script src="http://teamfreehugs.github.io/js/StackAPI.js"></script>
+
+<script>
+	function setCookie(cname, cvalue, exdays) {
+		var d = new Date();
+		d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+		var expires = "expires=" + d.toUTCString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;
+	}
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ')
+				c = c.substring(1);
+			if (c.indexOf(name) == 0)
+				return c.substring(name.length, c.length);
+		}
+		return "";
+	}
+	function checkCookie() {
+		var user = getCookie("username");
+		if (user != "") {
+			alert("Welcome again " + user);
+		} else {
+			user = prompt("Please enter your name:", "");
+			if (user != "" && user != null) {
+				setCookie("username", user, 365);
+			}
+		}
+	}
+	function go() {
+		setCookie('expiry', document.getElementById('expiry').checked, 2);
+		setCookie('inbox', document.getElementById('inbox').checked, 2);
+		setCookie('write', document.getElementById('write').checked, 2);
+		setCookie('info', document.getElementById('info').checked, 2);
+		var myscope = [
+				(document.getElementById('expiry').checked != true ? ""
+						: "no_expiry"),
+				(document.getElementById('inbox').checked != true ? ""
+						: "read_inbox"),
+				(document.getElementById('write').checked != true ? ""
+						: "write_access"),
+				(document.getElementById('info').checked != true ? ""
+						: "private_info") ];
+		var api = new StackAPI(
+				{
+					clientID : document.getElementById('clientID').value,
+					key : document.getElementById('key').value,
+					authNeeded : true,
+					redirect_uri : "http://teamfreehugs.github.io/stackexchange/authGetter",
+					scope : myscope
+				});
+		api.authenticate();
+	}
+</script>
+</head>
+<body onload="load();">
+	<script>
+		function getHash(name) {
+			var matches = location.hash.match(new RegExp(name + '=([^&]*)'));
+			return matches ? matches[1] : "";
+		}
+		function load() {
+			var expiry_selected = getCookie('no_expiry');
+			var inbox_selected = getCookie('inbox');
+			var write_selected = getCookie('write');
+			var info_selected = getCookie('info');
+			if (expiry_selected) {
+				document.getElementById('expiry').checked = "true";
+			}
+			if (inbox_selected) {
+				document.getElementById('inbox').checked = "true";
+			}
+			if (write_selected) {
+				document.getElementById('write').checked = "true";
+			}
+			if (info_selected) {
+				document.getElementById('info').checked = "true";
+			}
+			console.log(getHash('access_token'));
+			if (getHash('access_token') != "") {
+				document.getElementById('access_token').value = getHash('access_token');
+			}
+		}
+	</script>
+	<div class="round bottom shadow">
+		<p>
+			Please enter the client ID: <input type="text" id="clientID" value="5267"></input>
+		</p>
+		<p title="Optional">
+			Please enter the
+			key:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input
+				id="key" type="text" value=" at95g2FWCp0s8irJjUu8dw(("></input>
+		</p>
+		<p>
+			Please enter the scope:<br>
+			<nothingtag> <nothingtag> <nothingtag>
+			<input type="checkbox" id="expiry" checked="false">Doesn't
+			Expire<br>
+			<input type="checkbox" id="inbox" checked="false">Read Inbox<br>
+			<input type="checkbox" id="write" checked="false">Write
+			Access <br>
+			<input type="checkbox" id="info" checked="false">Get Private
+			Info <br>
+		</p>
+		<p>
+			<button onclick="go();">Get Token!</button>
+		</p>
+		<hr>
+		<br> <br> <br>
+		<p>
+			Output: <input id="access_token"></input>
+		</p>
+	</div>
+</body>
+</html>

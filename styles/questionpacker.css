@@ -1,0 +1,126 @@
+@CHARSET "ISO-8859-1";
+
+a:hover, a:visited, a:link, a:active {
+	text-decoration: none;
+	color: #329EC9;
+}
+
+.niceText {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+body {
+	float: left;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.userDivRegistered {
+	background-color: #DED78E;
+	height: auto;
+	padding: 5px;
+	width: 300px;
+}
+
+.userDivUnregistered {
+	background-color: #888;
+	height: auto;
+	padding: 5px;
+	width: 300px;
+}
+
+.userImage {
+	height: 32px;
+	width: 32px;
+}
+
+.userInfo {
+	padding: 2px;
+}
+
+.inline {
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: top;
+}
+
+.content {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.postContent {
+	font-family: "Arial", Helvetica, sans-serif;
+}
+
+.avatarText {
+	line-height: 80%;
+}
+
+.postDetails {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.grey {
+	color: grey;
+}
+
+.accepted {
+	color: green;
+	bold: true;
+}
+
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
+.favIcon {
+	background-image:
+		url('http://meta.stackexchange.com/content/stackoverflowmeta/img/sprites.png');
+	background-position: -40px -120px;
+	display: block;
+	margin: 0 auto;
+	text-indent: -999em;
+	width: 40px;
+	height: 40px;
+	margin-bottom: 2px;
+	text-indent: -9999em;
+	font-size: 1px;
+	position: absolute;
+	left: 0;
+}
+
+.acceptedIcon {
+	background-image:
+		url('http://meta.stackexchange.com/content/stackoverflowmeta/img/sprites.png');
+	background-position: -40px -270px;
+	display: block;
+	margin: 0 auto;
+	text-indent: -999em;
+	width: 40px;
+	height: 40px;
+	margin-bottom: 2px;
+	text-indent: -9999em;
+	font-size: 1px;
+	position: absolute;
+	left: 0;
+}
+
+code {
+	background-color: #EEEEEE;
+	font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+		DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
+	font-size: 90%;
+}
+
+.prettyprint {
+	background-color: #EEEEEE;
+	font-family: Consolas, Monaco, Lucida Console, Liberation Mono,
+		DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New;
+	font-size: 90%;
+}

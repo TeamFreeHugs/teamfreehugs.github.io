@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="http://teamfreehugs.github.io/js/StackAPI.js"></script>
+<title>Testing</title>
+<script>
+	(function() {
+		var instance = new StackAPI(
+				{
+					clientID : 5239,
+					key : "JPRwkkqAelchw)6d9S8wcw((",
+					authNeeded : true,
+					redirect_uri : "http://teamfreehugs.github.io/stackexchange/stackapi",
+					scope : [ "read_inbox" ]
+				});
+		var things = instance.authenticate();
+		if (things["access_token"] != undefined) {
+			alert('Your access token is '
+					+ things["access_token"]
+					+ ". "
+					+ (things["expires"] == null ? "" : "It expires in "
+							+ things["expires"] + " seconds. (IRK, weird.)"));
+		}
+	})();
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FREE HUGS!!!</title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="http://teamfreehugs.github.io/styles/styles.css"></link>
+<style>
+.type1 {
+	color: red;
+}
+
+.type2 {
+	color: orange;
+}
+
+.type3 {
+	color: yellow;
+}
+
+.type4 {
+	color: green;
+}
+
+.type5 {
+	color: blue;
+}
+
+.type6 {
+	color: purple;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script><script>
+	function go() {
+		var text = document.getElementById('text');
+		var type = parseInt(text.className.substring(4, 5));
+		if (type == 6) {
+			type = 1;
+		} else {
+			++type;
+		}
+		text.className = "type" + type;
+	}
+
+	window.setInterval(go, 500);
+
+	function setFontSize() {
+		var txt = $('#text');
+		txt.css("font-size", $('#box').width() / 6.7);
+	}
+</script>
+</head>
+<body onload="setFontSize();">
+	<div class="round bottom shadow" style="height: auto; width: auto;"
+		id="box">
+		<p id="back">
+			<a href="..">Parent Directory</a>
+		</p>
+		<p align="center">
+			<span class="type1" id="text">FREE HUGS!!</span>
+		</p>
+	</div>
+</body>
+</html>

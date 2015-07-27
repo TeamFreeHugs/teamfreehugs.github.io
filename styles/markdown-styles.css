@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+
+.quote {
+	border-left: 5px solid #EBC17A;
+	background-color: #F7E5C6;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+
+.code {
+	background-color: #E0E0E0;
+	overflow: auto;
+	height: auto;
+}
+
+.markdown-line {
+	height: 1px;
+	border: none;
+	background-color: #D9D9D9;
+	color: #D9D9D9;
+}

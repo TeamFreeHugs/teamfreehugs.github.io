@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Markdown Magic</title>
+<link rel="stylesheet" type="text/css"
+	href="http://teamfreehugs.github.io/styles/styles.css"></link>
+<script src="http://teamfreehugs.github.io/js/markdown.js"></script>
+<script>
+	function flip(id) {
+		var e = document.getElementById(id + "-code");
+		var t = document.getElementById(id);
+		if (e.style.display == "none") {
+			e.style.display = "block";
+			t.innerHTML = t.innerHTML.substring(0, t.innerHTML.length - 1)
+					+ '&#9660;';
+		} else {
+			e.style.display = "none";
+			t.innerHTML = t.innerHTML.substring(0, t.innerHTML.length - 1)
+					+ '&#9650;';
+		}
+	}
+
+	function infoCode() {
+		$('#code-title').notify('Press the language title to hide it!', {
+			className : 'info'
+		});
+	}
+
+	function infoQuote() {
+		$('#quote-title').notify('Quotes Quotes Quotes', {
+			className : 'info'
+		});
+	}
+	function infoLine() {
+		$('#line-title').notify('Fancy Markdown Line', {
+			className : 'info'
+		});
+	}
+
+	function hide() {
+		$('.notifyjs-container').click();
+	};
+</script>
+</head>
+<body onload="load(); addNotify();">
+	<div class="round bottom shadow" style="width: auto;">
+		<p>
+			<a href=".">Parent Directory</a>
+		</p>
+		<div style="width: 400px;">
+			<h3>Markdown CSS:</h3>
+			<hr exclude="1">
+			<div id="quote">
+				<h4 id="quote-title" onmouseenter="infoQuote();"
+					onmouseout="hide();">Quote</h4>
+				<hr exclude="1">
+				<quote>Hey! I'm a quote!</quote>
+			</div>
+			<div id="line">
+				<h4 id="line-title" onmouseenter="infoLine();" onmouseout="hide();">Lines
+					And The &#60;hr&#62; Tag</h4>
+				<hr exclude="1">
+				<span>^^ Yes, thats the &#60;hr&#62; tag.</span> <span>Here's
+					a nicer version:</span>
+				<hr></hr>
+			</div>
+			<div id="code">
+				<h4 id="code-title" onmouseenter="infoCode();" onmouseout="hide();">Code
+					Blocks</h4>
+				<hr exclude="1">
+				<h5 id="java" onclick="flip('java')">Java Code:&#9660;</h5>
+				<div id="java-code">
+					<pre class="code prettyprint">
+public static void main(String[] args) {//Main Method, This is a verrrrrrrrrry lonnnnnnnng Stringggg!
+  System.out.println("Hello!");
+}</pre>
+				</div>
+				<h5 id="javascript" onclick="flip('javascript')">Javascript
+					code:&#9660;</h5>
+				<div id="javascript-code">
+					<pre class="code prettyprint">
+function sayHi() {
+  alert('Hi! How are you today? I heard UniKorns are very tasty!');
+}</pre>
+				</div>
+				<h5 id="bash" onclick="flip('bash')">Bash Code:&#9660;</h5>
+				<div id="bash-code">
+					<pre class="code prettyprint">
+echo -n "Hello World"
+while [ true ]
+do
+  echo -n "Halo"
+done
+</pre>
+				</div>
+				<h5 id="css" onclick="flip('css')">CSS Code:&#9660;</h5>
+				<div id="css-code">
+					<pre class="code prettyprint">
+.quote {
+	border-left: 5px solid #EBC17A;
+	background-color: #F7E5C6;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+</pre>
+				</div>
+			</div>
+		</div>
+
+		<sub>Find the CSS for this page <a target="_blank"
+			href="http://teamfreehugs.github.io/styles/markdown-styles.css">here</a>.
+			Also, find the html for this page <a target="_blank"
+			href="https://github.com/TeamFreeHugs/teamfreehugs.github.io/blob/master/styles-demo.html">here
+		</a>. While it was not too hard to put this together, if you need help,
+			post a new comment <a target="_blank"
+			href="https://github.com/TeamFreeHugs/teamfreehugs.github.io/issues/2">here</a>.
+		</sub>
+	</div>
+</body>
+</html>
