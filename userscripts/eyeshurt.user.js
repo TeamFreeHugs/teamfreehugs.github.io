@@ -17,9 +17,16 @@ function isALetter(charVal) {
 		return false;
 }
 
+var urlPattern = new RegExp(
+		"(http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?")
+
 function go() {
 	document.getElementById('input').addEventListener("input", function() {
-		var parts = document.getElementById('input').value.split("");
+		var val = document.getElementById('input').value;
+		if (val.test(urlPattern)) {
+			return;
+		}
+		var parts = val.split("");
 		var out = "";
 		for (i = 0; i < parts.length; ++i) {
 			if (parts[i].trim() === "") {
