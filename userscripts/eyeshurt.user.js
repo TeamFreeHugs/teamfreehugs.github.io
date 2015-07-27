@@ -18,12 +18,13 @@ function isALetter(charVal) {
 }
 
 var urlPattern = new RegExp(
-		"(http|ftp|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?")
+		"(http|ftp|https):\/\/");
 
 function go() {
 	document.getElementById('input').addEventListener("input", function() {
 		var val = document.getElementById('input').value;
-		if (val.test(urlPattern)) {
+		console.log(val.match(urlPattern));
+		if (val.match(urlPattern)) {
 			return;
 		}
 		var parts = val.split("");
