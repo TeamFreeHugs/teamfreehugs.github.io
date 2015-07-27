@@ -3,7 +3,7 @@
 // @namespace    http://meta.stackexchange.com/users/257207/unikitty?tab=profile
 // @version      1.0
 // @description  this is a very useful pice of text...
-// @author       UniKitty
+// @author       Uni*
 // @match        http://meta.stackexchange.com/users/257207/unikitty?tab=profile
 // @match        http://*.stackexchange.com/users/*/*
 // @match        http://stackoverflow.com/users/*/*
@@ -30,7 +30,7 @@ function go() {
 	var aboutMe = document.getElementsByClassName('bio')[0];
 	var title = document.getElementsByClassName('user-card-name')[0];
 	title.innerHTML = "O_o";
-	aboutMe.innerHTML = readTextFile('https://gist.githubusercontent.com/TheCodingMonster/44b13788de780242afa7/raw/29108f549c14a8fd8ebf60279ed316336d60d727/wave.html');
+	aboutMe.innerHTML = readTextFile('http://teamfreehugs.github.io/userscripts/wave-content');
 }
 
 go();

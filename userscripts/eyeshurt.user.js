@@ -3,7 +3,7 @@
 // @namespace    http://chat.meta.stackexchange.com/
 // @version      0.1
 // @description  Your eyes hurt now
-// @author       You
+// @author       Uni*
 // @match        *://chat.meta.stackexchange.com/rooms/*
 // @grant        none
 // ==/UserScript==
