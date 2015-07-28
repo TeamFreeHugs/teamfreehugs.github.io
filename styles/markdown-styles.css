@@ -10,7 +10,7 @@
 
 .code {
 	background-color: #E0E0E0;
-	overflow: scroll;
+	overflow: auto;
 	height: auto !important;
 	height: 500px;
 	max-height: 500px;
