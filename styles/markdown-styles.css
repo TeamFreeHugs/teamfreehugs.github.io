@@ -10,8 +10,11 @@
 
 .code {
 	background-color: #E0E0E0;
-	overflow-x: scroll;
-	max-height: 50px;
+	overflow: scroll;
+	height: auto !important;
+	height: 500px;
+	max-height: 500px;
+	height: 500px;
 }
 
 .markdown-line {
