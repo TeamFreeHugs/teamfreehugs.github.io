@@ -24,5 +24,19 @@
 	background: #2f2f2f;
 	background: rgba(0, 0, 0, 0.86);
 	height: 34px;
-	line-height: 1
+	line-height: 1;
+	transition: none;
+	border: 1px solid #cbcbcb;
+	font-size: 100%;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+	border-radius: 0;
+	padding: 3px;
+	margin: 5px 0 5px 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	display: inline-block;
+	vertical-align: top; width: 980px;
+	margin: 0 auto;
+	height: 34px;
+	text-align: left;
 }
