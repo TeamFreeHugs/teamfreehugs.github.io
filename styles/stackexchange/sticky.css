@@ -28,7 +28,6 @@
 	padding-right: 30px;
 	margin-left: 10px;
 	margin-right: 0;
-	
 	z-index: 10000;
 	font-size: 13px width:100%;
 	background: #2f2f2f;
@@ -45,10 +44,7 @@
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	display: inline-block;
-	vertical-align: top;
 	width: 1000px;
-	height: 34px;
-	text-align: left;
 	display: inline-block;
 	color: #fff;
 	text-indent: 0;
@@ -57,6 +53,9 @@
 	font-size: 11px;
 	line-height: 1;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+	height: 34px;
+	vertical-align: top;
+	text-align: center;
 }
 
 .stickyToolbarLinks {
