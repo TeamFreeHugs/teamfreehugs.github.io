@@ -35,8 +35,24 @@
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
 	display: inline-block;
-	vertical-align: top; width: 980px;
+	vertical-align: top;
+	width: 980px;
 	margin: 0 auto;
 	height: 34px;
 	text-align: left;
+	background-color: #f00;
+	display: inline-block;
+	margin-top: 9px;
+	color: #fff;
+	text-indent: 0;
+	border-radius: 2px;
+	padding: 1px 6px 1px 6px;
+	font-size: 11px;
+	line-height: 1;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+	
+}
+
+.stickyToolbarLinks {
+	
 }
