@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Auto Load Post Activity
+// @name         Edit Bullet Fix
 // @version      1.0
-// @description  Auto Clicks the Load New Content Button
+// @description  \u25BA -> \u26AB
 // @author       Uni*
 // @match        *://*.stackexchange.com/posts/*/edit/*
 // @match        *://*.stackoverflow.com/posts/*/edit/*
