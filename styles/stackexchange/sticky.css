@@ -4,7 +4,6 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 980px;
 	margin: 0 auto;
 	height: 34px;
 	text-align: left;
@@ -25,25 +24,4 @@
 	padding-left: 0;
 	margin-right: 0;
 	z-index: 10000;
-	background: #2f2f2f;
-	height: 34px;
-	line-height: 1;
-	transition: none;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-	border-radius: 0;
-	-moz-border-radius: 0;
-	-webkit-border-radius: 0;
-	white-space: nowrap;
-	display: inline;
-	color: #ffffff;
-	font-size:13px;
-	text-indent: 0;
-	border-radius: 2px;
-	line-height: 1;
-	vertical-align: top;
-	text-align: center;
-}
-
-.stickyToolbarLinks {
-	
 }

@@ -14,15 +14,17 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+document.onload = function() {
 	console.log('StickyToolbar loading...');
 	var head = document.getElementsByTagName('head')[0];
 	var stickStyle = document.createElement('link');
 	stickStyle.rel = 'stylesheet';
 	stickStyle.href = 'http://teamfreehugs.github.io/styles/stackexchange/sticky.css';
 	head.appendChild(stickStyle);
+
 	var toolbar = document.getElementsByClassName('topbar')[0];
+	toolbar.className += "stickyToolbar";
+
 	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
-	toolbarWrap.className = "stickyToolbarWrapper";
-	toolbar.className = "stickyToolbar";
-})();
+	toolbarWrap.className += "stickyToolbarWrapper";
+};
