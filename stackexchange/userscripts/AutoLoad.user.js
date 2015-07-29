@@ -9,7 +9,7 @@
 // @match        *://stackapps.com/*
 // @match        *://*.superuser.com/*
 // @match        *://*.serverfault.com/*
-// @exclude      *://*.askubuntu.com/*
+// @match        *://*.askubuntu.com/*
 // @grant        none
 // ==/UserScript==
 

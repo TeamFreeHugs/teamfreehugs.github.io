@@ -9,7 +9,7 @@
 // @match        *://stackapps.com/posts/*/edit/*
 // @match        *://*.superuser.com/posts/*/edit/*
 // @match        *://*.serverfault.com/posts/*/edit/*
-// @exclude      *://*.askubuntu.com/posts/*/edit/*
+// @match        *://*.askubuntu.com/posts/*/edit/*
 // @grant        none
 // ==/UserScript==
 
