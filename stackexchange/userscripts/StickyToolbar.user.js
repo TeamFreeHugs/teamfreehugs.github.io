@@ -14,7 +14,7 @@
 // @grant        none
 // ==/UserScript==
 
-document.onload = function() {
+(function() {
 	console.log('StickyToolbar loading...');
 	var head = document.getElementsByTagName('head')[0];
 	var stickStyle = document.createElement('link');
@@ -27,4 +27,4 @@ document.onload = function() {
 
 	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
 	toolbarWrap.className += "stickyToolbarWrapper";
-};
+})();
