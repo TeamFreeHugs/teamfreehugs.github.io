@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Sticky Toolbar
+// @name         Auto Load Post Activity
 // @version      1.0
-// @description  Makes SE Toolbar be sticky
+// @description  Auto Clicks the Load New Content Button
 // @author       Uni*
 // @match        *://*.stackexchange.com/*
 // @match        *://*.stackoverflow.com/*
@@ -9,7 +9,7 @@
 // @match        *://stackapps.com/*
 // @match        *://*.superuser.com/*
 // @match        *://*.serverfault.com/*
-// @match        *://*.askubuntu.com/*
+// @exclude      *://*.askubuntu.com/*
 // @grant        none
 // ==/UserScript==
 
@@ -19,7 +19,7 @@
 		var activity = document.getElementsByClassName('new-post-activity')[0];
 		if (activity != undefined) {
 			activity.click();
-			//Should have jQuery
+			// Should have jQuery
 		}
 	}, 1000);
 })();
