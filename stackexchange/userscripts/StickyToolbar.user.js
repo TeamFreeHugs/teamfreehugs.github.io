@@ -21,6 +21,8 @@
 	stickStyle.rel = 'stylesheet';
 	stickStyle.href = 'http://teamfreehugs.github.io/styles/stackexchange/sticky.css';
 	head.appendChild(stickStyle);
-	var toolbar = document.getElementsByClassName('topbar-wrapper')[0];
-	toolbar.className = "stickyToolbarWrapper";
+	var toolbar = document.getElementsByClassName('topbar')[0];
+	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
+	toolbarWrap.className = "stickyToolbarWrapper";
+	toolbar.className = "stickyToolbar";
 })();
