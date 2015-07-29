@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="file:///home/eyeballcode/Eclipse/Workspace/Eclipse/HTML/js/ImgHelper.js"></script>
+<script
+	src="file:///home/eyeballcode/Eclipse/Workspace/Eclipse/HTML/js/ImgurAPI.js"></script>
+<script>
+	function upload() {
+		convertImgToBase64URL(document.getElementById('text').value, function(base64) {
+			
+		}, "");
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="text">
+	<button onclick="upload">Go</button>
+</body>
+</html>
