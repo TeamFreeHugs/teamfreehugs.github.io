@@ -1,6 +1,5 @@
 // ==UserScript==
 // @name         Sticky Toolbar
-// @namespace    http://stackexchange.com/
 // @version      1.0
 // @description  Makes SE Toolbar be sticky
 // @author       Uni*
@@ -10,7 +9,7 @@
 // @match        *://stackapps.com/
 // @match        *://*.superuser.com/
 // @match        *://*.serverfault.com/
-// @match      *://*.askubuntu.com/
+// @match        *://*.askubuntu.com/
 // @grant        none
 // ==/UserScript==
 

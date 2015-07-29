@@ -1,6 +1,5 @@
 // ==UserScript==
 // @name         Sticky Toolbar
-// @namespace    http://stackexchange.com/
 // @version      1.0
 // @description  Makes SE Toolbar be sticky
 // @author       Uni*
