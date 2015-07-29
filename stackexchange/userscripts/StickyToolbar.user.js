@@ -3,13 +3,13 @@
 // @version      1.0
 // @description  Makes SE Toolbar be sticky
 // @author       Uni*
-// @match        *://*.stackexchange.com/
-// @match        *://*.stackoverflow.com/
-// @match        *://*.mathoverflow.net/
-// @match        *://stackapps.com/
-// @match        *://*.superuser.com/
-// @match        *://*.serverfault.com/
-// @exclude      *://*.askubuntu.com/
+// @match        *://*.stackexchange.com/*
+// @match        *://*.stackoverflow.com/*
+// @match        *://*.mathoverflow.net/*
+// @match        *://stackapps.com/*
+// @match        *://*.superuser.com/*
+// @match        *://*.serverfault.com/*
+// @exclude      *://*.askubuntu.com/*
 // @grant        none
 // ==/UserScript==
 
