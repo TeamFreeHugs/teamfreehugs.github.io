@@ -15,7 +15,7 @@
 // ==/UserScript==
 
 (function() {
-	console.log('StickyToolbar loading...');
+	console.log('StickyToolbar is loading...');
 	var head = document.getElementsByTagName('head')[0];
 	var stickStyle = document.createElement('link');
 	stickStyle.rel = 'stylesheet';

@@ -15,6 +15,7 @@
 // ==/UserScript==
 
 (function() {
+	console.log('AutoLoad is loading...');
 	window.setInterval(function() {
 		var activity = document.getElementsByClassName('new-post-activity')[0];
 		if (activity != undefined) {
