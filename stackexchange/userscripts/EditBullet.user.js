@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Edit Bullet Fix
 // @version      1.0
-// @description  \u25BA -> \u26AB
+// @description  ► -> ⚫
 // @author       Uni*
 // @match        *://*.stackexchange.com/posts/*/edit/*
 // @match        *://*.stackoverflow.com/posts/*/edit/*
