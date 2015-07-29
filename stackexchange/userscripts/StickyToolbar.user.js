@@ -16,18 +16,18 @@
 (function() {
 	console.log('StickyToolbar is loading...');
 	var head = document.getElementsByTagName('head')[0];
-	var empty = document.createElement('p');
-	var empty2 = document.createElement('p');
 	var stickStyle = document.createElement('link');
 	stickStyle.rel = 'stylesheet';
 	stickStyle.href = 'http://teamfreehugs.github.io/styles/stackexchange/sticky.css';
 	head.appendChild(stickStyle);
 
 	var toolbar = document.getElementsByClassName('topbar')[0];
+	var empty = document.createElement('p');
+	empty.innerHTML = "&nbsp;";
+	toolbar.parentElement.insertBefore(empty, toolbar);
 	toolbar.className += " stickyToolbar";
 
 	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
 	toolbarWrap.className += " stickyToolbarWrapper";
-	toolbar.parentElement.insertBefore(empty, toolbar);
-	toolbar.parentElement.insertBefore(empty2, toolbar);
+
 })();
