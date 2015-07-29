@@ -23,8 +23,8 @@
 	head.appendChild(stickStyle);
 
 	var toolbar = document.getElementsByClassName('topbar')[0];
-	toolbar.className += "stickyToolbar";
+	toolbar.className += " stickyToolbar";
 
 	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
-	toolbarWrap.className += "stickyToolbarWrapper";
+	toolbarWrap.className += " stickyToolbarWrapper";
 })();
