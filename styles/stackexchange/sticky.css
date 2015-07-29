@@ -19,6 +19,16 @@
 	position: fixed;
 	top: 0;
 	left: 0;
+	width: 980px;
+	margin: 0 auto;
+	height: 34px;
+	text-align: left;
+	width: 1000px;
+	padding-left: 0;
+	padding-right: 30px;
+	margin-left: 10px;
+	margin-right: 0;
+	
 	z-index: 10000;
 	font-size: 13px width:100%;
 	background: #2f2f2f;
@@ -36,13 +46,10 @@
 	-webkit-border-radius: 0;
 	display: inline-block;
 	vertical-align: top;
-	width: 980px;
-	margin: 0 auto;
+	width: 1000px;
 	height: 34px;
 	text-align: left;
-	background-color: #f00;
 	display: inline-block;
-	margin-top: 9px;
 	color: #fff;
 	text-indent: 0;
 	border-radius: 2px;
@@ -50,7 +57,6 @@
 	font-size: 11px;
 	line-height: 1;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-	
 }
 
 .stickyToolbarLinks {
