@@ -7,23 +7,26 @@
 // @grant        none
 // ==/UserScript==
 
-
 (function() {
 
 	console.log('AskUbuntu StickyToolbar is loading...');
-	
+
 	var head = document.getElementsByTagName('head')[0];
+	var stick = document.createElement('link');
+	stick.rel = 'stylesheet';
+	stick.href = 'http://teamfreehugs.github.io/styles/stackexchange/askubuntu.css';
+	head.appendChild(stickStyle);
+
 	var stickStyle = document.createElement('link');
 	stickStyle.rel = 'stylesheet';
-	stickStyle.href = 'http://teamfreehugs.github.io/styles/stackexchange/askubuntu.css';
-	head.appendChild(stickStyle);
+	stickStyle.href = 'http://teamfreehugs.github.io/styles/stackexchange/sticky.css';
 
 	var ubuntuLinks = document.getElementsByClassName('nav-global')[0];
 	ubuntuLinks.parentElement.removeChild(ubuntuLinks);
 
 	var remove = document.getElementById('custom-header');
 	remove.parentElement.removeChild(remove);
-	
+
 	var newUbuntuLinks = document.createElement('div');
 	newUbuntuLinks.className = "links";
 	var linksWrapper = document.createElement('div');
@@ -31,9 +34,9 @@
 	linksWrapper.className = "linksList";
 
 	listOfSites.className = "siteLink";
-	
+
 	console.log(listOfSites.className);
-	
+
 	var ubuntuHome = document.createElement('li');
 	var ubuntuCommunity = document.createElement('li');
 	var askubuntu = document.createElement('li');
@@ -78,12 +81,17 @@
 	listOfSites.appendChild(insights);
 	listOfSites.appendChild(juju);
 	listOfSites.appendChild(shop);
-	
-	
+
 	linksWrapper.appendChild(listOfSites);
 
 	newUbuntuLinks.appendChild(linksWrapper);
-	
+
 	document.body.appendChild(newUbuntuLinks);
-	
+
+	var toolbar = document.getElementsByClassName('topbar')[0];
+	toolbar.className += " stickyToolbar";
+
+	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
+	toolbarWrap.className += " stickyToolbarWrapper";
+
 })();
