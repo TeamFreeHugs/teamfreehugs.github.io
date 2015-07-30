@@ -44,19 +44,15 @@ li.siteLink {
 	display: block;
 }
 
-@CHARSET "ISO-8859-1";
-
 .stickyToolbarWrapper {
 	position: fixed;
 	top: 0;
-	left: 0;
 	z-index: 10001;
 }
 
 .stickyToolbar {
 	position: fixed;
 	top: 0;
-	left: 0;
 	z-index: 10000;
 	margin: 0px auto;
 }
