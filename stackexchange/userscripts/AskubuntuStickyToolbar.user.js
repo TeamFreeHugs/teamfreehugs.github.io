@@ -71,17 +71,17 @@
 	juju.className = "siteLink";
 	shop.innerHTML = "<a href=\"http://shop.ubuntu.com\">Shop</a>";
 	shop.className = "siteLink";
-	apps.innerHTML = "<a href=\"http://apps.ubuntu.com\"></a>";
+	apps.innerHTML = "<a href=\"http://apps.ubuntu.com\">Apps</a>";
 	apps.className = "siteLink";
-	help.innerHTML = "<a href=\"https://help.ubuntu.com\"></a>";
+	help.innerHTML = "<a href=\"https://help.ubuntu.com\">Help</a>";
 	help.className = "siteLink";
-	forum.innerHTML = "<a href=\"http://ubuntuforums.org\"></a>";
+	forum.innerHTML = "<a href=\"http://ubuntuforums.org\">Forum</a>";
 	forum.className = "siteLink";
-	launchpad.innerHTML = "<a href=\"http://launchpad.net\"></a>";
+	launchpad.innerHTML = "<a href=\"http://launchpad.net\">Launchpad</a>";
 	launchpad.className = "siteLink";
-	MAAS.innerHTML = "<a href=\"http://maas.ubuntu.com\"></a>";
+	MAAS.innerHTML = "<a href=\"http://maas.ubuntu.com\">MAAS</a>";
 	MAAS.className = "siteLink";
-	canonical.innerHTML = "<a href=\"http://canonical\"></a>";
+	canonical.innerHTML = "<a href=\"http://canonical\">Canonical</a>";
 	canonical.className = "siteLink";
 
 	listOfSites.appendChild(ubuntuHome);
