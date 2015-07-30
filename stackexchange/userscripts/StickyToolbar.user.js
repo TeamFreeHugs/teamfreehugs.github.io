@@ -22,12 +22,12 @@
 	head.appendChild(stickStyle);
 
 	var toolbar = document.getElementsByClassName('topbar')[0];
-	var empty = document.createElement('p');
-	empty.innerHTML = "&nbsp;";
 	toolbar.className += " stickyToolbar";
 	
-	toolbar.parentElement.insertBefore(empty, toolbar);
-
+	var line = document.createElement('div');
+	line.innerHTML = "<br><br>";
+	toolbar.parentElement.insertBefore(line, toolbar);
+	
 	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
 	toolbarWrap.className += " stickyToolbarWrapper";
 
