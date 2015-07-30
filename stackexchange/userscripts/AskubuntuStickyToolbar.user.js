@@ -70,5 +70,7 @@
 	linksWrapper.appendChild(listOfSites);
 
 	newUbuntuLinks.appendChild(linksWrapper);
-
+	
+	document.body.appendChild(newUbuntuLinks);
+	
 })();
