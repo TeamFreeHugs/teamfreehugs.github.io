@@ -7,8 +7,11 @@
 // @grant        none
 // ==/UserScript==
 
+
 (function() {
 
+	console.log('AskUbuntu StickyToolbar is loading...');
+	
 	var head = document.getElementsByTagName('head')[0];
 	var stickStyle = document.createElement('link');
 	stickStyle.rel = 'stylesheet';
@@ -18,6 +21,9 @@
 	var ubuntuLinks = document.getElementsByClassName('nav-global')[0];
 	ubuntuLinks.parentElement.removeChild(ubuntuLinks);
 
+	var remove = document.getElementById('custom-header');
+	remove.parentElement.removeChild(remove);
+	
 	var newUbuntuLinks = document.createElement('div');
 	newUbuntuLinks.className = "links";
 	var linksWrapper = document.createElement('div');
