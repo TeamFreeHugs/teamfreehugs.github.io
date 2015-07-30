@@ -48,16 +48,25 @@
 	// var more = document.createElement('li');
 
 	ubuntuHome.innerHTML = "<a href=\"http://www.ubuntu.com\">Ubuntu</a>";
+	ubuntuHome.className = "siteLink";
 	ubuntuCommunity.innerHTML = "<a href=\"http://community.ubuntu.com/\">Community</a>";
+	ubuntuCommunity.className = "siteLink";
 	askubuntu.innerHTML = "<a href=\"http://askubuntu.com\">Ask!</a>";
-	askubuntu.className = "activeSite";
+	askubuntu.className = "activeSite siteLink";
 	developer.innerHTML = "<a href=\"http://developer.ubuntu.com\">Developer</a>";
+	developer.className = "siteLink";
 	design.innerHTML = "<a href=\"http://design.ubuntu.com\">Design</a>";
+	design.className = "siteLink";
 	discourse.innerHTML = "<a href=\"http://discourse.ubuntu.com\">Discourse</a>";
+	discourse.className = "siteLink";
 	hardware.innerHTML = "<a href=\"http://www.ubuntu.com/certification\">Hardware</a>";
+	hardware.className = "siteLink";
 	insights.innerHTML = "<a href=\"http://insights.ubuntu.com/\">Insights</a>";
+	insights.className = "siteLink";
 	juju.innerHTML = "<a href=\"http://juju.ubuntu.com\">Juju</a>";
+	juju.className = "siteLink";
 	shop.innerHTML = "<a href=\"http://shop.ubuntu.com\">Shop</a>";
+	shop.className = "siteLink";
 
 	listOfSites.appendChild(ubuntuHome);
 	listOfSites.appendChild(ubuntuCommunity);

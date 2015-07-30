@@ -13,15 +13,6 @@
 }
 
 .linksList {
-	-webkit-transform: rotate(-90deg);
-	/* Firefox */
-	-moz-transform: rotate(-90deg);
-	/* IE */
-	-ms-transform: rotate(-90deg);
-	/* Opera */
-	-o-transform: rotate(-90deg);
-	/* Internet Explorer */
-	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 	-moz-box-sizing: border-box;
 	background: none repeat scroll 0 0 #fff;
 	margin: 0 auto;
@@ -43,5 +34,9 @@
 
 ul.siteLink {
 	list-style: none;
+	list-style-type: none;
 }
 
+a.siteLink {
+	display: block;
+}
