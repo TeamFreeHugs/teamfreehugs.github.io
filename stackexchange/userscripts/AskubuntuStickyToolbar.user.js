@@ -30,6 +30,8 @@
 	var listOfSites = document.createElement('ul');
 	linksWrapper.className = "linksList";
 
+	listOfSites.className = "siteLink";
+	
 	var ubuntuHome = document.createElement('li');
 	var ubuntuCommunity = document.createElement('li');
 	var askubuntu = document.createElement('li');
