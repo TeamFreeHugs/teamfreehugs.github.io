@@ -7,12 +7,18 @@
 	height: 200px;
 	line-height: 19.2px;
 	display: block;
-	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0 3px #ccc; -webkit-box-shadow : 0 0 3px #ccc;
+	box-shadow : 0 0 3px #ccc;
 	font-family: Ubuntu, Arial, "libra sans", sans-serif;
 	font-weight: 300;
+	-webkit-box-shadow: 0 0 3px #ccc;
+	box-shadow: 0 0 3px #ccc;
 }
 
 .linksList {
+	-moz-box-shadow: 0 0 3px #ccc;
+	-webkit-box-shadow: 0 0 3px #ccc;
+	box-shadow: 0 0 3px #ccc;
 	-moz-box-sizing: border-box;
 	background: none repeat scroll 0 0 #fff;
 	margin: 0 auto;
@@ -25,7 +31,7 @@
 }
 
 li.activeSite {
-	border-right: 1px solid rgba(142, 142, 142, 0.07);
+	border-right: 3px solid #dd4814;
 }
 
 ul.siteLink {
