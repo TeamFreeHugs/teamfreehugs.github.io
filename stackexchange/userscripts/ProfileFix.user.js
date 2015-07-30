@@ -14,7 +14,7 @@
 // ==/UserScript==
 
 (function() {
-  var profile = document.getElementsByClassName('bio')[0];
+  var profile = document.getElementsByClassName('about')[0];
   var head = document.getElementsByTagName('head')[0];
   var link = document.createElement('link');
   link.rel = "stylesheet";
