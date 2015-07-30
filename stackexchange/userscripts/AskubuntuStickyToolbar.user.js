@@ -82,7 +82,7 @@
 	launchpad.className = "siteLink";
 	MAAS.innerHTML = "<a href=\"http://maas.ubuntu.com\">MAAS</a>";
 	MAAS.className = "siteLink";
-	canonical.innerHTML = "<a href=\"http://canonical\">Canonical</a>";
+	canonical.innerHTML = "<a href=\"http://canonical.com\">Canonical</a>";
 	canonical.className = "siteLink";
 
 	listOfSites.appendChild(ubuntuHome);
