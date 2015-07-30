@@ -7,7 +7,7 @@
 	display: block;
 	-moz-box-shadow: 0 0 4px #ccc;
 	-webkit-box-shadow: 0 0 4px #ccc;
-	box-shadow: 0 0 3px #ccc;
+	box-shadow: 0 0 4px #ccc;
 	font-family: Ubuntu, Arial, "libra sans", sans-serif;
 	font-weight: 300;
 	-webkit-box-shadow: 0 0 3px #ccc;
@@ -17,7 +17,6 @@
 }
 
 .linksList {
-	box-shadow: 0 0 3px #ccc;
 	-moz-box-sizing: border-box;
 	background: none repeat scroll 0 0 #fff;
 	margin: 0 auto;
