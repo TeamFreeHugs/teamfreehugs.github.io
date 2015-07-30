@@ -14,12 +14,11 @@
 	overflow: auto;
 	height: auto !important;
 	height: 500px;
-	max-width: 600px;
 	max-height: 500px;
 	padding-top: 2px;
 	padding-bottom: 2px;
 	padding-left: 3px;
-	padding-right: 20px;
+	padding-right: 7px;
 	word-wrap: normal;
 }
 
