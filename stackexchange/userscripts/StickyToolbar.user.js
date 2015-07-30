@@ -24,10 +24,10 @@
 	var toolbar = document.getElementsByClassName('topbar')[0];
 	var empty = document.createElement('p');
 	empty.innerHTML = "&nbsp;";
-	toolbar.parentElement.insertBefore(empty, toolbar);
 	toolbar.className += " stickyToolbar";
 
 	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
 	toolbarWrap.className += " stickyToolbarWrapper";
+	toolbar.parentElement.insertBefore(empty, toolbar);
 
 })();
