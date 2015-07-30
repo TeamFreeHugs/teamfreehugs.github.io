@@ -17,12 +17,6 @@
 	stick.href = 'http://teamfreehugs.github.io/styles/stackexchange/askubuntu.css';
 	head.appendChild(stick);
 
-	var stickStyle = document.createElement('link');
-	stickStyle.rel = 'stylesheet';
-	stickStyle.href = 'http://teamfreehugs.github.io/styles/stackexchange/sticky.css';
-	head.appendChild(stickStyle);
-
-	
 	var ubuntuLinks = document.getElementsByClassName('nav-global')[0];
 	ubuntuLinks.parentElement.removeChild(ubuntuLinks);
 
