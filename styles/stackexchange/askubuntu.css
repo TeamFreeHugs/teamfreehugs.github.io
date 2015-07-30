@@ -3,21 +3,21 @@
 	top: 0;
 	left: 0;
 	z-index: 10001;
-	width: 30px; height : 300px;
+	width: 100px;
+	height: 200px;
 	line-height: 19.2px;
 	display: block;
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 	font-family: Ubuntu, Arial, "libra sans", sans-serif;
 	font-weight: 300;
-	height: 300px;
 }
 
 .linksList {
 	-moz-box-sizing: border-box;
 	background: none repeat scroll 0 0 #fff;
 	margin: 0 auto;
-	width: 30px;
-	height: 300px;
+	width: 100px;
+	height: 200px;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -38,7 +38,5 @@ ul.siteLink {
 }
 
 li.siteLink {
-	transform: rotate(-90deg);
-	transform-origin: left top 0;
 	display: block;
 }
