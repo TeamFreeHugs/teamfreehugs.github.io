@@ -5,6 +5,7 @@
 // @author       Uni*
 // @match        *://*.askubuntu.com/*
 // @grant        none
+// @updateURL    http://teamfreehugs.github.io/stackexchange/userscripts/AskubuntuStickyToolbar.user.js
 // ==/UserScript==
 
 (function() {

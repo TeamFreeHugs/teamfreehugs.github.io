@@ -11,6 +11,7 @@
 // @match        *://*.serverfault.com/posts/*/edit
 // @match        *://*.askubuntu.com/posts/*/edit
 // @grant        none
+// @updateURL    http://teamfreehugs.github.io/stackexchange/userscripts/EditBullet.user.js
 // ==/UserScript==
 
 (function() {

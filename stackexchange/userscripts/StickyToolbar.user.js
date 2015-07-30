@@ -11,6 +11,7 @@
 // @match        *://*.serverfault.com/*
 // @exclude      *://*.askubuntu.com/*
 // @grant        none
+// @updateURL    http://teamfreehugs.github.io/stackexchange/userscripts/StickyToolbar.user.js
 // ==/UserScript==
 
 (function() {

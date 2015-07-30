@@ -11,6 +11,7 @@
 // @match        *://*.serverfault.com/*
 // @match        *://*.askubuntu.com/*
 // @grant        none
+// @updateURL    http://teamfreehugs.github.io/stackexchange/userscripts/ProfileFix.user.js
 // ==/UserScript==
 
 (function() {
