@@ -15,6 +15,8 @@
 // ==/UserScript==
 
 (function() {
-  var profile = document.getElementsByClassName('about')[0];
-  profile.style.overflowX = "auto";
+	var profileRemoveScroll = document.getElementsByClassName('bio')[0];
+	var profile = document.getElementsByClassName('about')[0];
+	profile.style.overflowX = "auto";
+	profileRemoveScroll.style.overflow = "none";
 })();
