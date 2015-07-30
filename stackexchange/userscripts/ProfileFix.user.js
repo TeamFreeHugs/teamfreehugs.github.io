@@ -16,10 +16,5 @@
 
 (function() {
   var profile = document.getElementsByClassName('about')[0];
-  var head = document.getElementsByTagName('head')[0];
-  var link = document.createElement('link');
-  link.rel = "stylesheet";
-  link.href = "http://teamfreehugs.github.io/styles/stackexchange/profilefix.css";
-  head.appendChild(link);
-  profile.className += " profile";
+  profile.style.overflowX = "auto";
 })();
