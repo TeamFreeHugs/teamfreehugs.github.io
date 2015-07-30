@@ -46,13 +46,14 @@ li.siteLink {
 
 .stickyToolbarWrapper {
 	position: fixed;
-	top: 0;
+	top: 0px;
+	left: 130px;
 	z-index: 10001;
 }
 
 .stickyToolbar {
 	position: fixed;
-	top: 0;
+	top: 0px;
 	z-index: 10000;
 	margin: 0px auto;
 }
