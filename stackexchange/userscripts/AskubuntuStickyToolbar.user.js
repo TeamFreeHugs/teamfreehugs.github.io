@@ -44,7 +44,12 @@
 	var juju = document.createElement('li');
 	var shop = document.createElement('li');
 	var more = document.createElement('li');
-	// var more = document.createElement('li');
+	var apps = document.createElement('li');
+	var help = document.createElement('li');
+	var forum = document.createElement('li');
+	var launchpad = document.createElement('li');
+	var MAAS = document.createElement('li');
+	var canonical = document.createElement('li');
 
 	ubuntuHome.innerHTML = "<a href=\"http://www.ubuntu.com\">Ubuntu</a>";
 	ubuntuHome.className = "siteLink";
@@ -66,6 +71,18 @@
 	juju.className = "siteLink";
 	shop.innerHTML = "<a href=\"http://shop.ubuntu.com\">Shop</a>";
 	shop.className = "siteLink";
+	apps.innerHTML = "<a href=\"http://apps.ubuntu.com\"></a>";
+	apps.className = "siteLink";
+	help.innerHTML = "<a href=\"https://help.ubuntu.com\"></a>";
+	help.className = "siteLink";
+	forum.innerHTML = "<a href=\"http://ubuntuforums.org\"></a>";
+	forum.className = "siteLink";
+	launchpad.innerHTML = "<a href=\"http://launchpad.net\"></a>";
+	launchpad.className = "siteLink";
+	MAAS.innerHTML = "<a href=\"http://maas.ubuntu.com\"></a>";
+	MAAS.className = "siteLink";
+	canonical.innerHTML = "<a href=\"http://canonical\"></a>";
+	canonical.className = "siteLink";
 
 	listOfSites.appendChild(ubuntuHome);
 	listOfSites.appendChild(ubuntuCommunity);
@@ -89,5 +106,5 @@
 
 	var line = document.createElement('div');
 	line.innerHTML = "<br><br>";
-	toolbar.parentElement.insertBefore(line, toolbar);	
+	toolbar.parentElement.insertBefore(line, toolbar);
 })();
