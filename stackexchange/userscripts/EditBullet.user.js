@@ -15,8 +15,15 @@
 
 (function() {
 	console.log('EditBullets is loading...');
+	  var head = document.getElementsByTagName('head')[0];
+	  var link = document.createElement('link');
+	  link.rel = "stylesheet";
+	  link.href = "http://teamfreehugs.github.io/styles/stackexchange/edit-background.css";
+	  head.appendChild(link);
 	var arrows = document.getElementsByClassName('dingus');
 	for (i = 0; i < arrows.length; ++i) {
 		arrows[i].innerHTML = "⚫";
 	}
+	var panel = document.getElementById('scroller');
+	panel.className += " background";
 })();
