@@ -1,7 +1,5 @@
 .links {
 	position: fixed;
-	top: 0;
-	left: 0;
 	z-index: 10001;
 	width: 100px;
 	height: 310px;
@@ -14,6 +12,8 @@
 	font-weight: 300;
 	-webkit-box-shadow: 0 0 3px #ccc;
 	box-shadow: 0 0 3px #ccc;
+	top: 50%;
+	margin-top: -155px;
 }
 
 .linksList {
@@ -26,9 +26,9 @@
 	width: 100px;
 	height: 310px;
 	position: fixed;
-	top: 0;
-	left: 0;
 	z-index: 10001;
+	top: 50%;
+	margin-top: -155px;
 }
 
 li.activeSite {
