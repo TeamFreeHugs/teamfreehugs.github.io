@@ -24,11 +24,8 @@
 	z-index: 10001;
 }
 
-.activeSite {
-	background-color: rgba(142, 142, 142, 0.07);
-	box-shadow: inset 0 1px 2px rgba(215, 215, 215, 0.3);
-	width: 1px;
-	height: 5px;
+li.activeSite {
+	border-right: 1px solid rgba(142, 142, 142, 0.07);
 }
 
 ul.siteLink {
