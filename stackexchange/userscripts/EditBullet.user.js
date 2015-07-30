@@ -17,8 +17,6 @@
 	console.log('EditBullets is loading...');
 	var arrows = document.getElementsByClassName('dingus');
 	for (i = 0; i < arrows.length; ++i) {
-		a = arrows[i];
-		a.className = "";
-		a.innerHTML = "\u26AB" + a.innerHTML;
+		arrows[i].innerHTML = "⚫";
 	}
 })();
