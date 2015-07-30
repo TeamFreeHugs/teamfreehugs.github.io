@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Profile Fix
-// @version      1.0
+// @version      1.1
 // @description  Fixes the profile
 // @author       Uni*
 // @match        *://*.stackexchange.com/*
