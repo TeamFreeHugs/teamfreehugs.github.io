@@ -3,13 +3,13 @@
 // @version      1.0
 // @description  ► -> ⚫
 // @author       Uni*
-// @match        *://*.stackexchange.com/posts/*/edit/*
-// @match        *://*.stackoverflow.com/posts/*/edit/*
-// @match        *://*.mathoverflow.net/posts/*/edit/*
-// @match        *://stackapps.com/posts/*/edit/*
-// @match        *://*.superuser.com/posts/*/edit/*
-// @match        *://*.serverfault.com/posts/*/edit/*
-// @match        *://*.askubuntu.com/posts/*/edit/*
+// @match        *://*.stackexchange.com/posts/*/edit
+// @match        *://*.stackoverflow.com/posts/*/edit
+// @match        *://*.mathoverflow.net/posts/*/edit
+// @match        *://stackapps.com/posts/*/edit
+// @match        *://*.superuser.com/posts/*/edit
+// @match        *://*.serverfault.com/posts/*/edit
+// @match        *://*.askubuntu.com/posts/*/edit
 // @grant        none
 // ==/UserScript==
 
