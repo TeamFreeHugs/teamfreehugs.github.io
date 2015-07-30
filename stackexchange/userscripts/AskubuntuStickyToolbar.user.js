@@ -87,4 +87,7 @@
 	var toolbar = document.getElementsByClassName('topbar')[0];
 	toolbar.className += " stickyToolbar";
 
+	var line = document.createElement('div');
+	line.innerHTML = "<br><br>";
+	toolbar.parentElement.insertBefore(line, toolbar);	
 })();
