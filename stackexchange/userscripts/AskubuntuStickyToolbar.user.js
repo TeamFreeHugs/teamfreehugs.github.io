@@ -94,6 +94,12 @@
 	listOfSites.appendChild(insights);
 	listOfSites.appendChild(juju);
 	listOfSites.appendChild(shop);
+	listOfSites.appendChild(apps);
+	listOfSites.appendChild(help);
+	listOfSites.appendChild(forum);
+	listOfSites.appendChild(launchpad);
+	listOfSites.appendChild(MAAS);
+	listOfSites.appendChild(canonical);
 
 	linksWrapper.appendChild(listOfSites);
 
