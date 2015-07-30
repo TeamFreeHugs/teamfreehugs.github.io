@@ -1,6 +1,6 @@
 .links {
 	position: fixed;
-	top: 50;
+	top: 0;
 	left: 0;
 	z-index: 10001;
 	width: 30px;
@@ -25,9 +25,10 @@
 	-moz-box-sizing: border-box;
 	background: none repeat scroll 0 0 #fff;
 	margin: 0 auto;
-	width: 1030px;
+	width: 30px;
+	height: 300px;
 	position: fixed;
-	top: 50;
+	top: 0;
 	left: 0;
 	z-index: 10001;
 }
