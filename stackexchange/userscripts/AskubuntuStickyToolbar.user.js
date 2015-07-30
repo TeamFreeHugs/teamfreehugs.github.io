@@ -32,6 +32,8 @@
 
 	listOfSites.className = "siteLink";
 	
+	console.log(listOfSites.className);
+	
 	var ubuntuHome = document.createElement('li');
 	var ubuntuCommunity = document.createElement('li');
 	var askubuntu = document.createElement('li');
