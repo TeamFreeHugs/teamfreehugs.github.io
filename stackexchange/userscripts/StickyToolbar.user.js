@@ -25,9 +25,10 @@
 	var empty = document.createElement('p');
 	empty.innerHTML = "&nbsp;";
 	toolbar.className += " stickyToolbar";
+	
+	toolbar.parentElement.insertBefore(empty, toolbar);
 
 	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
 	toolbarWrap.className += " stickyToolbarWrapper";
-	toolbar.parentElement.insertBefore(empty, toolbar);
 
 })();
