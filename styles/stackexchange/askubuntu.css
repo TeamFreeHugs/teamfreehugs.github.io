@@ -44,14 +44,6 @@ li.siteLink {
 	display: block;
 }
 
-.stickyToolbarWrapper {
-	position: fixed;
-	top: 0px;
-	left: 130px;
-	width: 1000px;
-	z-index: 10001;
-}
-
 .stickyToolbar {
 	position: fixed;
 	top: 0px;

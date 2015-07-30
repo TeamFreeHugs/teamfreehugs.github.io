@@ -87,7 +87,4 @@
 	var toolbar = document.getElementsByClassName('topbar')[0];
 	toolbar.className += " stickyToolbar";
 
-	var toolbarWrap = document.getElementsByClassName('topbar-wrapper')[0];
-	toolbarWrap.className += " stickyToolbarWrapper";
-
 })();
