@@ -48,6 +48,6 @@ li.siteLink {
 	position: fixed;
 	top: 0px;
 	left: 50%;
-	margin: 0 0 0 -37.5%;
+	margin-left: -515px;
 	z-index: 1000;
 }
