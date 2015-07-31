@@ -10,6 +10,8 @@
 (function() {
 	var input = document.getElementById('input');
 	input.addEventListener("input", function() {
+		loc = input.selectionStart;
 		input.value = input.value.replace('e', 'a').replace('E', 'A');
+		input.selectionStart = loc;
 	});
 })();
