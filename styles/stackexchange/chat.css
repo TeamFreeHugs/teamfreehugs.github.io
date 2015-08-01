@@ -1,6 +1,8 @@
 .iconChat {
 	background-image:
-		url("http://cdn.sstatic.net/stackexchangemeta/img/favicon.ico"), none;
+		url("http://cdn.sstatic.net/stackexchangemeta/img/favicon.ico");
 	background-repeat: no-repeat;
 	background-color: transparent;
+	width: 16px;
+	height: 16px;
 }

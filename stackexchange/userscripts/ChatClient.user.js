@@ -22,10 +22,9 @@
 	l.href="http://teamfreehugs.github.io/styles/stackexchange/chat.css";
 	var chat = document.createElement('a');
 	chat.href = "#";
-	chat.className = "topbar-icon yes-hover icon-chat";
 	chat.addEventListener("click", function() {
 
 	});
-
+	chat.innerHTML = "&nbsp;";
 	toolbar.appendChild(chat);
 })();
