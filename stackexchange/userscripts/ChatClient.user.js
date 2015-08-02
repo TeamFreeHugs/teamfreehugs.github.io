@@ -10,7 +10,6 @@
 // @match        *://*.superuser.com/*
 // @match        *://*.serverfault.com/*
 // @match        *://*.askubuntu.com/*
-// @require      http://teamfreehugs.github.io/styles/stackexchange/chatclient.css
 // @grant        none
 // ==/UserScript==
 
@@ -19,7 +18,8 @@
 	var head = document.getElementsByTagName('head')[0];
 	var l = document.createElement('link');
 	l.rel = "stylesheet";
-	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chat.css";
+	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chatclient.css";
+	head.appendChild(l);
 	var chat = document.createElement('a');
 	chat.href = "javascript:void(0);";
 	chat.addEventListener("click", function() {
