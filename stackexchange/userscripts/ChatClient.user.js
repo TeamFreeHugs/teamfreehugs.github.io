@@ -19,12 +19,14 @@
 	var head = document.getElementsByTagName('head')[0];
 	var l = document.createElement('link');
 	l.rel = "stylesheet";
-	l.href="http://teamfreehugs.github.io/styles/stackexchange/chat.css";
+	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chat.css";
 	var chat = document.createElement('a');
 	chat.href = "#";
 	chat.addEventListener("click", function() {
 
 	});
-	chat.innerHTML = "&nbsp;";
+	chat.innerHTML = "C";
+	chat.className = "yes-hover";
+	chat.style = "color: rgb(128, 128, 128); line-height: 30px; font-size: 176%;";
 	toolbar.appendChild(chat);
 })();
