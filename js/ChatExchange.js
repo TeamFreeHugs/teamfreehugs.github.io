@@ -44,9 +44,9 @@ function getEvents(chatSite, room_id, fkey, messageCount) {
 	return req;
 }
 
-function addMessageListener(chatSite, room_id, fkey, run) {
+function addMessageListener(chatSite, room_id, fkey, run, eventCount) {
 	id = window.setInterval(function() {
-		req = getEvents(chatSite, room_id, fkey, 10);
+		req = getEvents(chatSite, room_id, fkey, eventCount);
 		events = JSON.parse(req.responseText).events;
 		for (pos = 0; pos < events.length; ++pos) {
 			event = events[pos];
