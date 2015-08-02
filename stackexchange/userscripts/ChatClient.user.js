@@ -10,7 +10,7 @@
 // @match        *://*.superuser.com/*
 // @match        *://*.serverfault.com/*
 // @match        *://*.askubuntu.com/*
-// @require      
+// @require      http://teamfreehugs.github.io/styles/stackexchange/chatclient.css
 // @grant        none
 // ==/UserScript==
 
@@ -21,12 +21,9 @@
 	l.rel = "stylesheet";
 	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chat.css";
 	var chat = document.createElement('a');
-	chat.href = "#";
+	chat.href = "javascript:void(0);";
 	chat.addEventListener("click", function() {
-
 	});
-	chat.innerHTML = "C";
-	chat.className = "yes-hover";
-	chat.style = "color: rgb(128, 128, 128); line-height: 30px; font-size: 176%;";
+	chat.className = "hover chatButton";
 	toolbar.appendChild(chat);
 })();
