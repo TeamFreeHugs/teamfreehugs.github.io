@@ -22,11 +22,14 @@ var id = 0;
 	var head = document.getElementsByTagName('head')[0];
 	var l = document.createElement('link');
 	var s = document.createElement('script');
+	var s2 = document.createElement('script');
 	s.src = "http://teamfreehugs.github.io/js/ChatExchange.js";
 	l.rel = "stylesheet";
 	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chatclient.css";
+	s2.src = "http://teamfreehugs.github.io/js/URI.js";
 	head.appendChild(l);
 	head.appendChild(s);
+	head.appendChild(s2);
 
 	var chat = document.createElement('a');
 	var chatTab = document.createElement('div');
@@ -61,6 +64,16 @@ var id = 0;
 	set.addEventListener("click", function() {
 		window.clearInterval(id);
 		$('#messages').empty();
+		if ($('#link').val() === "")
+			return;
+		URI
+		u = new URI($('#link').val());
+		if (u.authority.indexOf('chat') == -1
+				&& u.authority.indexOf('stackexchange') == -1)
+			return;
+		id = addMessageListener(u.authority, u.path.split('/')[2]);
+		alert(u.path.split('/')[2]);
+		alert(id);
 	});
 	var titleDiv = document.createElement('div');
 	titleDiv.className = "header";
