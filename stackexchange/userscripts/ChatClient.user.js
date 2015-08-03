@@ -15,8 +15,6 @@
 // @updateURL    http://teamfreehugs.github.io/stackexchange/userscripts/ChatClient.user.js
 // ==/UserScript==
 
-var id = 0;
-
 function createCookie(name, value, days) {
 	var expires;
 	if (days) {
@@ -116,6 +114,7 @@ function getCookie(c_name) {
 								u.path.split('/')[2],
 								getCookie('fkey'),
 								function(event) {
+									console.log(event);
 									if (document.getElementById('chat'
 											+ event.messageId) != undefined) {
 										if (event.event_type == 1) {
@@ -149,8 +148,8 @@ function getCookie(c_name) {
 											messageDiv.appendChild(content);
 										}
 									}
-								}, 100);
-						alert(u.path.split('/')[2]);
+									}, 100);
+							alert(u.path.split('/')[2]);
 						alert(id);
 					});
 	titleDiv.appendChild(title);
@@ -166,6 +165,5 @@ function getCookie(c_name) {
 	if (uri.authority.indexOf('chat') != -1
 			&& uri.authority.indexOf('stack') != -1) {
 		setCookie('fkey', fkey().fkey);
-		alert('Chat, saving fkey');
 	}
 })();
