@@ -30,7 +30,7 @@ function getMessageLink(chatSite, message_id) {
 }
 
 function getEvents(chatSite, room_id, fkey, messageCount) {
-	req = $.ajax({
+	a = $.ajax({
 		type : 'POST',
 		url : 'http://' + chatSite + '/chats/' + room_id + '/events',
 		data : {
@@ -40,19 +40,25 @@ function getEvents(chatSite, room_id, fkey, messageCount) {
 			since : 0
 		},
 		async : false
-	});
-	return req;
+	})
+	return a.responseText;
 }
 
 function addMessageListener(chatSite, room_id, fkey, run, eventCount) {
 	id = window.setInterval(function() {
 		req = getEvents(chatSite, room_id, fkey, eventCount);
-		events = JSON.parse(req.responseText).events;
+		console.log(req);
+		alert(req);
+		events = JSON.parse(req).events;
 		for (pos = 0; pos < events.length; ++pos) {
 			event = events[pos];
-			run(event);
+			if (run !== null | typeof run != 'function') {
+				window.setTimeout(function() {
+					run(event);
+				}, 1);
+			}
 		}
-	}, 16000);
+	}, 5000);
 	return id;
 }
 

@@ -17,6 +17,33 @@
 
 var id = 0;
 
+function createCookie(name, value, days) {
+	var expires;
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+		expires = "; expires=" + date.toGMTString();
+	} else {
+		expires = "";
+	}
+	document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function getCookie(c_name) {
+	if (document.cookie.length > 0) {
+		c_start = document.cookie.indexOf(c_name + "=");
+		if (c_start != -1) {
+			c_start = c_start + c_name.length + 1;
+			c_end = document.cookie.indexOf(";", c_start);
+			if (c_end == -1) {
+				c_end = document.cookie.length;
+			}
+			return unescape(document.cookie.substring(c_start, c_end));
+		}
+	}
+	return "";
+}
+
 (function() {
 	var toolbar = document.getElementsByClassName('network-items')[0];
 	var head = document.getElementsByTagName('head')[0];
@@ -61,31 +88,84 @@ var id = 0;
 	link.id = "link";
 	link.style.width = "300px";
 	link.style.marginRight = "30px";
-	set.addEventListener("click", function() {
-		window.clearInterval(id);
-		$('#messages').empty();
-		if ($('#link').val() === "")
-			return;
-		URI
-		u = new URI($('#link').val());
-		if (u.authority.indexOf('chat') == -1
-				&& u.authority.indexOf('stackexchange') == -1)
-			return;
-		id = addMessageListener(u.authority, u.path.split('/')[2]);
-		alert(u.path.split('/')[2]);
-		alert(id);
-	});
 	var titleDiv = document.createElement('div');
 	titleDiv.className = "header";
 	title.style.marginRight = "4px";
-	titleDiv.appendChild(title);
-	titleDiv.appendChild(link);
-	titleDiv.appendChild(set);
+
 	var messageDiv = document.createElement('div');
 	messageDiv.className = "modal-content";
 	messageDiv.id = "messages";
+
+	set
+			.addEventListener(
+					"click",
+					function() {
+						window.clearInterval(id);
+						$('#messages').empty();
+						if ($('#link').val() === "") {
+							return;
+						}
+						alert('loading...');
+						URI
+						u = new URI($('#link').val());
+						if (u.authority.indexOf('chat') == -1
+								&& u.authority.indexOf('stack') == -1)
+							return;
+						var id = addMessageListener(
+								u.authority,
+								u.path.split('/')[2],
+								getCookie('fkey'),
+								function(event) {
+									if (document.getElementById('chat'
+											+ event.messageId) != undefined) {
+										if (event.event_type == 1) {
+											messageId = event.message_id;
+											text = event.content;
+											user = event.user_name;
+											userId = event.user_id;
+											if (event.parent_id != undefined)
+												reply = event.parent_id;
+											var messageDiv = document
+													.createElement('div');
+											var content = document
+													.createElement('div');
+											var userSpan = document
+													.createElement('span');
+											var message = document
+													.createElement('span');
+											message.innerHTML = text;
+											userSpan.innerHTML = '<a href="http://'
+													+ u.authority
+													+ '/users/'
+													+ userId
+													+ ' target="_blank">'
+													+ user + '</a>"';
+											content.id = "chat" + messageId;
+											messageDiv.appendChild(message);
+											messageDiv.style.padding = "3px";
+											messageDiv.style.borderRaduis = "25px";
+											content.appendChild(userSpan);
+											content.appendChild(messageDiv);
+											messageDiv.appendChild(content);
+										}
+									}
+								}, 100);
+						alert(u.path.split('/')[2]);
+						alert(id);
+					});
+	titleDiv.appendChild(title);
+	titleDiv.appendChild(link);
+	titleDiv.appendChild(set);
 	chatTab.appendChild(titleDiv);
 	chatTab.appendChild(messageDiv);
 	boxes.appendChild(chatTab);
 	links.appendChild(chat);
+
+	URI
+	uri = new URI(window.location.toString());
+	if (uri.authority.indexOf('chat') != -1
+			&& uri.authority.indexOf('stack') != -1) {
+		setCookie('fkey', fkey().fkey);
+		alert('Chat, saving fkey');
+	}
 })();
