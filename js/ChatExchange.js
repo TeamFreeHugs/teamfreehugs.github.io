@@ -34,8 +34,8 @@ function getEvents(chatSite, room_id, fkey, messageCount) {
 	XMLHttpRequest
 	r = new XMLHttpRequest();
 	r.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			text = xmlhttp.responseText;
+		if (r.readyState == 4 && r.status == 200) {
+			text = r.responseText;
 		}
 	}
 
