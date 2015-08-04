@@ -30,18 +30,22 @@ function getMessageLink(chatSite, message_id) {
 }
 
 function getEvents(chatSite, room_id, fkey, messageCount) {
-	text = "";
-	XMLHttpRequest
-	r = new XMLHttpRequest();
-	r.onreadystatechange = function() {
-		if (r.readyState == 4 && r.status == 200) {
-			text = r.responseText;
-		}
-	}
-	r.open('POST', 'http://' + chatSite + '/chats/' + room_id + '/events',
-			true);
-	r.send(null);
-	return text;
+	url = 'http://' + chatSite + '/chats/' + room_id + '/events';
+	a = $.ajax({
+		type : 'POST',
+		url : url,
+		data : {
+			fkey : fkey,
+			mode : 'Messages',
+			since : 0,
+			msgCount : messageCount
+		},
+		async : true,
+		beforeSend : function(xhr) {
+			xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+		},
+	});
+	return a.responseText;
 }
 
 function addMessageListener(chatSite, room_id, fkey, run, eventCount) {
