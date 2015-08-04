@@ -52,7 +52,7 @@ function getCookie(c_name) {
 	l.rel = "stylesheet";
 	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chatclient.css";
 	s2.src = "http://teamfreehugs.github.io/js/URI.js";
-	head.appendChild(l);
+	//head.appendChild(l);
 	head.appendChild(s);
 	head.appendChild(s2);
 
@@ -103,7 +103,6 @@ function getCookie(c_name) {
 						if ($('#link').val() === "") {
 							return;
 						}
-						alert('loading...');
 						URI
 						u = new URI($('#link').val());
 						if (u.authority.indexOf('chat') == -1
@@ -114,7 +113,6 @@ function getCookie(c_name) {
 								u.path.split('/')[2],
 								getCookie('fkey'),
 								function(event) {
-									console.log(event);
 									if (document.getElementById('chat'
 											+ event.messageId) != undefined) {
 										if (event.event_type == 1) {
@@ -148,9 +146,7 @@ function getCookie(c_name) {
 											messageDiv.appendChild(content);
 										}
 									}
-									}, 100);
-							alert(u.path.split('/')[2]);
-						alert(id);
+								}, 100);
 					});
 	titleDiv.appendChild(title);
 	titleDiv.appendChild(link);

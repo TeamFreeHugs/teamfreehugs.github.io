@@ -30,23 +30,25 @@ function getMessageLink(chatSite, message_id) {
 }
 
 function getEvents(chatSite, room_id, fkey, messageCount) {
-	a = $.ajax({
-		type : 'POST',
-		url : 'http://' + chatSite + '/chats/' + room_id + '/events',
-		data : {
-			fkey : fkey,
-			mode : 'Messages',
-			msgCount : messageCount,
-			since : 0
-		},
-		async : false
-	})
+	text = "";
+	XMLHTTPRequest
+	r = new XMLHTTPRequest();
+	r.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			text = xmlhttp.responseText;
+		}
+	}
+
+	r
+			.open('POST', 'http://' + chatSite + '/chats/' + room_id
+					+ '/events', true);
 	return a.responseText;
 }
 
 function addMessageListener(chatSite, room_id, fkey, run, eventCount) {
 	id = window.setInterval(function() {
 		req = getEvents(chatSite, room_id, fkey, eventCount);
+		alert(req);
 		events = JSON.parse(req).events;
 		for (pos = 0; pos < events.length; ++pos) {
 			event = events[pos];
@@ -84,3 +86,5 @@ function demoWithTavern() {
 	return id;
 }
 // Random Lucky Number: 111
+
+//getEvents('chat.stackexchange.com', 35, getCookie('fkey'), 10);
