@@ -42,7 +42,7 @@ function getEvents(chatSite, room_id, fkey, messageCount) {
 	r
 			.open('POST', 'http://' + chatSite + '/chats/' + room_id
 					+ '/events', true);
-	return a.responseText;
+	return r.responseText;
 }
 
 function addMessageListener(chatSite, room_id, fkey, run, eventCount) {
