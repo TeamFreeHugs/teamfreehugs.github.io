@@ -31,8 +31,8 @@ function getMessageLink(chatSite, message_id) {
 
 function getEvents(chatSite, room_id, fkey, messageCount) {
 	text = "";
-	XMLHTTPRequest
-	r = new XMLHTTPRequest();
+	XMLHttpRequest
+	r = new XMLHttpRequest();
 	r.onreadystatechange = function() {
 		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			text = xmlhttp.responseText;

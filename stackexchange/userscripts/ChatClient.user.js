@@ -52,7 +52,7 @@ function getCookie(c_name) {
 	l.rel = "stylesheet";
 	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chatclient.css";
 	s2.src = "http://teamfreehugs.github.io/js/URI.js";
-	//head.appendChild(l);
+	head.appendChild(l);
 	head.appendChild(s);
 	head.appendChild(s2);
 
@@ -67,7 +67,7 @@ function getCookie(c_name) {
 	chat.addEventListener("click", function() {
 	});
 	chat.className = "hover chatButton";
-	toolbar.appendChild(chat);
+	links.appendChild(chat);
 	chat.addEventListener("click", function() {
 		console.log('Loading chat...');
 		chatTab = document.getElementById('chatTab');
@@ -98,6 +98,7 @@ function getCookie(c_name) {
 			.addEventListener(
 					"click",
 					function() {
+						alert();
 						window.clearInterval(id);
 						$('#messages').empty();
 						if ($('#link').val() === "") {
@@ -147,6 +148,7 @@ function getCookie(c_name) {
 										}
 									}
 								}, 100);
+						alert();
 					});
 	titleDiv.appendChild(title);
 	titleDiv.appendChild(link);
