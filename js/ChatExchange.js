@@ -38,11 +38,10 @@ function getEvents(chatSite, room_id, fkey, messageCount) {
 			text = r.responseText;
 		}
 	}
-
-	r
-			.open('POST', 'http://' + chatSite + '/chats/' + room_id
-					+ '/events', true);
-	return r.responseText;
+	r.open('POST', 'http://' + chatSite + '/chats/' + room_id + '/events',
+			true);
+	r.send(null);
+	return text;
 }
 
 function addMessageListener(chatSite, room_id, fkey, run, eventCount) {
@@ -87,4 +86,4 @@ function demoWithTavern() {
 }
 // Random Lucky Number: 111
 
-//getEvents('chat.stackexchange.com', 35, getCookie('fkey'), 10);
+// getEvents('chat.stackexchange.com', 35, getCookie('fkey'), 10);
