@@ -84,6 +84,3 @@ function demoWithTavern() {
       });
   return id;
 }
-// Random Lucky Number: 111
-
-// getEvents('chat.stackexchange.com', 35, getCookie('fkey'), 10);
