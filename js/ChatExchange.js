@@ -41,9 +41,6 @@ function getEvents(chatSite, room_id, fkey, messageCount) {
 			msgCount : messageCount
 		},
 		async : true,
-		beforeSend : function(xhr) {
-			xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-		},
 	});
 	return a.responseText;
 }

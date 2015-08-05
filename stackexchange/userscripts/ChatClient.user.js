@@ -98,7 +98,6 @@ function getCookie(c_name) {
 			.addEventListener(
 					"click",
 					function() {
-						alert();
 						window.clearInterval(id);
 						$('#messages').empty();
 						if ($('#link').val() === "") {
@@ -148,7 +147,6 @@ function getCookie(c_name) {
 										}
 									}
 								}, 100);
-						alert();
 					});
 	titleDiv.appendChild(title);
 	titleDiv.appendChild(link);
