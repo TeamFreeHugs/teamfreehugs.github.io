@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Image Editor</title>
+<link rel="stylesheet" type="text/css"
+	href="http://teamfreehugs.github.io/styles/imgeditor.css"></link>
+<link rel="stylesheet" type="text/css"
+	href="http://teamfreehugs.github.io/styles/menus.css"></link>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+  function showDialog(id) {
+    $('#' + id).fadeIn('slow');
+  }
+  function hideDialog(id) {
+    $('#' + id).fadeOut('slow');
+  }
+
+  function onload() {
+    var canvas = document.getElementById('drawing');
+    context = canvas.getContext('2d');
+    context.font = "30px Arial";
+    context.fillText('Hello World!', 10, 50);
+  }
+</script>
+<script>
+  
+</script>
+</head>
+<body onload="onload()">
+	<div id="menubar" style="top: 0px; left: 0px; position: fixed;"
+		class="menu-wrap">
+		<ul class="verticalList menu">
+			<li><a href="#">File</a>
+				<ul class="menu menuExpand">
+					<li><a href="#">New Image(Hover for more options)</a>
+						<ul class="menu menuExpand">
+							<li><a href="#">New Image</a></li>
+							<li><a href="#" onclick="">New Image From Location</a>
+						</ul></li>
+					<li><a href="#">Delete Image</a></li>
+					<li><a href="#">Exit</a></li>
+				</ul></li>
+			<li><a href="#">Edit</a>
+				<ul class="menu menuExpand">
+					<li><a href="#">Stroke Tools</a>
+						<ul class="menu menuExpand">
+							<li><a href="#">Brushes</a>
+								<ul class="menu menuExpand">
+									<li><a href="#">3px Paintbrush</a></li>
+									<li><a href="#">5px Paintbrush</a></li>
+									<li><a href="#">10px Paintbrush</a></li>
+								</ul></li>
+						</ul></li>
+					<li><a href="#">Pen</a>
+						<ul class="menu menuExpand">
+							<li><a href="#">1px Pen</a></li>
+							<li><a href="#">2px Pen</a></li>
+							<li><a href="#">10px Pen</a></li>
+							<li><a href="#">Cursive Pen</a></li>
+							<li><a href="#">Marker Pen</a></li>
+						</ul></li>
+				</ul></li>
+		</ul>
+	</div>
+	<div
+		style="width: 1000%; height: 1000%; z-index: 20000; background-color: #000000; opacity: 0.3; top: 0; left: 0; position: fixed; display: none"></div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+input[type="text"] {
+	border: none;
+	background-color: #B3B3B3;
+}
+
+input[type="text"]:hover {
+	background-color: #969696;
+}
+
+input[type="text"]:focus {
+	background-color: #DEDEDE;
+}
+
+
+
+.noSelectText {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+button {
+	border-radius: 5px;
+	background-color: #4EDBE6;
+	border: none;
+	padding: 1px;
+}
+
+button:hover {
+	background-color: #56B3BA;
+	color: #E8E8E8;
+}
+
+button:focus {
+	background-color: #59ECF7;
+}
+
+button::-moz-focus-inner {
+	border: 0;
+}
