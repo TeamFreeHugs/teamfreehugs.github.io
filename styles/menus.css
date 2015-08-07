@@ -16,6 +16,7 @@
 .menu>li {
 	padding: 10px;
 	outline: 0;
+	cursor: pointer;
 }
 
 .menu>li:hover {
@@ -52,11 +53,12 @@
 	display: none;
 }
 
-.menu>li>ul>li>a {
+.menu>li>a {
 	color: #FFFFFF;
 	text-decoration: none;
 	font-size: 20px;
 	outline: 0;
+	width: 100%;
 }
 
 .menu>li>ul>li:hover {

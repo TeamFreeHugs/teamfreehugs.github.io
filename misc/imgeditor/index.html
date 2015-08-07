@@ -6,22 +6,30 @@
 <link rel="stylesheet" type="text/css"
 	href="http://teamfreehugs.github.io/styles/imgeditor.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="http://teamfreehugs.github.io/styles/menus.css"></link>
+	href="file:///home/eyeballcode/Eclipse/Workspace/Eclipse/HTML/styles/menus.css"></link>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
-  function showDialog(id) {
-    $('#' + id).fadeIn('slow');
+  var modified = false;
+  
+  function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x : evt.clientX - rect.left,
+      y : evt.clientY - rect.top
+    };
   }
-  function hideDialog(id) {
-    $('#' + id).fadeOut('slow');
+
+  window.onbeforeunload = function() {
+    if (modified) {
+      return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
+    }
   }
 
   function onload() {
-    var canvas = document.getElementById('drawing');
-    context = canvas.getContext('2d');
-    context.font = "30px Arial";
-    context.fillText('Hello World!', 10, 50);
+    $('#exitButton').click(function() {
+      window.location = "..";
+    });
   }
 </script>
 <script>
@@ -31,23 +39,23 @@
 <body onload="onload()">
 	<div id="menubar" style="top: 0px; left: 0px; position: fixed;"
 		class="menu-wrap">
-		<ul class="verticalList menu">
+		<ul class="horizontalList menu">
 			<li><a href="#">File</a>
 				<ul class="menu menuExpand">
 					<li><a href="#">New Image(Hover for more options)</a>
 						<ul class="menu menuExpand">
-							<li><a href="#">New Image</a></li>
-							<li><a href="#" onclick="">New Image From Location</a>
+							<li><a href="#" id="newImgTemplate">New Image</a></li>
+							<li><a href="#" id="newImgLoc">New Image From Location</a>
 						</ul></li>
-					<li><a href="#">Delete Image</a></li>
-					<li><a href="#">Exit</a></li>
+					<li><a href="#" id="deleteAllButton">Delete Image</a></li>
+					<li><a href="#" id="exitButton">Exit</a></li>
 				</ul></li>
 			<li><a href="#">Edit</a>
 				<ul class="menu menuExpand">
 					<li><a href="#">Stroke Tools</a>
 						<ul class="menu menuExpand">
 							<li><a href="#">Brushes</a>
-								<ul class="menu menuExpand">
+								<ul class="menu menuExpand" style="left: -30px;">
 									<li><a href="#">3px Paintbrush</a></li>
 									<li><a href="#">5px Paintbrush</a></li>
 									<li><a href="#">10px Paintbrush</a></li>
