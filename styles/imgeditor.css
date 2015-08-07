@@ -59,3 +59,38 @@ button::-moz-focus-inner {
 	left: 0;
 	border: none;
 }
+
+.popup-box {
+	position: absolute;
+	width: 500px;
+	height: 300px;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -250px;
+	background-color: #FFFFFF;
+	z-index: 100000000;
+	border: 2px solid #000000;
+	border-radius: 15px;
+}
+
+.popup-header {
+	height: 40px;
+	line-height: 40px;
+	margin-top: -19px;
+	border-bottom: 2px solid #000000;
+	background: grey;
+	text-align: center;
+	font-family: Impact, Charcoal, sans-serif;
+	border-top-right-radius: 15px;
+	border-top-left-radius: 15px;
+}
+
+.popup-body {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 40px;
+	background: #FFFFFF;
+	font-family: Impact, Charcoal, sans-serif;
+	text-align: center;
+}

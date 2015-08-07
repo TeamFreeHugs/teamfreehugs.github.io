@@ -9,8 +9,11 @@
 	href="http://teamfreehugs.github.io/styles/menus.css"></link>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://teamfreehugs.github.io/js/FileSaver.js"></script>
 <script>
   var modified = false;
+  
+  var currentMode = 0;
   
   function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
@@ -25,11 +28,66 @@
       return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
     }
   }
+  function keyup(event) {
+    if ($('#popup').css("display") == "block") {
+      if (event.which == 27) {
+        $('#popup').css("display", "none");
+        $('#backdrop-div').css("display", "none");
+      }
+    }
+  }
 
   function onload() {
     $('#exitButton').click(function() {
       window.location = "..";
     });
+    $('#saveButton').click(function() {
+      base64 = $('#canvas')[0].toDataURL();
+      popup = $('#popup');
+      popup.css("display", "block");
+      $('#backdrop-div').css("display", "block");
+      popupHead = $('#popup-header-text');
+      popupHead.html('Save Dialog');
+      popupBody = $('#popup-body');
+      popupBody.html('');
+      info = $(document.createElement('span'));
+      base64Info = $(document.createElement('span'));
+      base64Info.html('Base64 String: ');
+      base64Info.attr('title', 'Why? I don\'t know.');
+      info.html('How would you like to save it?');
+      base64TF = $(document.createElement('textarea'));
+      base64TF.val(base64);
+      base64TF.css({
+        scroll : "none",
+        resize : "disabled",
+        width : "250px",
+        height: "100px"
+      });
+      downloadInfo = $(document.createElement('span'));
+      downloadInfo.html('Or download the image:');
+      downloadButton = $(document.createElement('button'));
+      downloadButton.html('Download Image!');
+      downloadButton.click(function() {
+        $('#canvas')[0].toBlob(function(blob) {
+          saveAs(blob, "doodle.png");
+        });
+      });
+      popupBody.append(info[0]);
+      popupBody.append(document.createElement('br'));
+      popupBody.append(document.createElement('hr'));
+      popupBody.append(base64Info[0]);
+      popupBody.append(document.createElement('br'));
+      popupBody.append(base64TF[0]);
+      popupBody.append(document.createElement('br'));
+      popupBody.append(downloadInfo[0]);
+      popupBody.append(document.createElement('br'));
+      popupBody.append(downloadButton[0]);
+    });
+    $('#backdrop-div').click(function() {
+      $('#popup').css("display", "none");
+      $('#backdrop-div').css("display", "none");
+    });
+    $(document).keyup(keyup);
   }
 </script>
 <script>
@@ -47,28 +105,9 @@
 							<li><a href="#" id="newImgTemplate">New Image</a></li>
 							<li><a href="#" id="newImgLoc">New Image From Location</a>
 						</ul></li>
+					<li><a href="#" id="saveButton">Save</a></li>
 					<li><a href="#" id="deleteAllButton">Delete Image</a></li>
 					<li><a href="#" id="exitButton">Exit</a></li>
-				</ul></li>
-			<li><a href="#">Edit</a>
-				<ul class="menu menuExpand">
-					<li><a href="#">Stroke Tools</a>
-						<ul class="menu menuExpand">
-							<li><a href="#">Brushes</a>
-								<ul class="menu menuExpand" style="left: -30px;">
-									<li><a href="#">3px Paintbrush</a></li>
-									<li><a href="#">5px Paintbrush</a></li>
-									<li><a href="#">10px Paintbrush</a></li>
-								</ul></li>
-						</ul></li>
-					<li><a href="#">Pen</a>
-						<ul class="menu menuExpand">
-							<li><a href="#">1px Pen</a></li>
-							<li><a href="#">2px Pen</a></li>
-							<li><a href="#">10px Pen</a></li>
-							<li><a href="#">Cursive Pen</a></li>
-							<li><a href="#">Marker Pen</a></li>
-						</ul></li>
 				</ul></li>
 		</ul>
 	</div>
@@ -78,5 +117,11 @@
 	<div id="toolbar-div" class="toolbar"></div>
 	<div id="backdrop-div"
 		style="width: 1000%; height: 1000%; z-index: 20000; background-color: #000000; opacity: 0.3; top: 0; left: 0; position: fixed; display: none"></div>
+	<div id="popup" class="popup-box" style="display: none;">
+		<div id="popup-header" class="popup-header">
+			<h3 id="popup-header-text">Header</h3>
+		</div>
+		<div id="popup-body" class="popup-body">Text</div>
+	</div>
 </body>
 </html>
