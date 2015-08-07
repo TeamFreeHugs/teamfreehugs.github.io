@@ -2,7 +2,7 @@
 	width: 100%;
 }
 
-.verticalList>li {
+.horizontal>li {
 	list-style-type: none;
 	display: inline-block;
 }
