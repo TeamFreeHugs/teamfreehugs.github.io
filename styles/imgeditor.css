@@ -11,8 +11,6 @@ input[type="text"]:focus {
 	background-color: #DEDEDE;
 }
 
-
-
 .noSelectText {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -40,4 +38,24 @@ button:focus {
 
 button::-moz-focus-inner {
 	border: 0;
+}
+
+.toolbar {
+	position: absolute;
+	top: 44px;
+	right: 0px;
+	width: 200px;
+	border: none;
+	height: calc(100vh - 44px);
+	background-color: grey;
+}
+
+.canvas {
+	position: absolute;
+	top: 44px;
+	left: 0px;
+	height: calc(100vh - 44px);
+	width: 100%;
+	left: 0;
+	border: none;
 }
