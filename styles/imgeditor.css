@@ -20,23 +20,23 @@ input[type="text"]:focus {
 	user-select: none;
 }
 
-button {
+.button {
 	border-radius: 5px;
 	background-color: #4EDBE6;
 	border: none;
 	padding: 1px;
 }
 
-button:hover {
+.button:hover {
 	background-color: #56B3BA;
 	color: #E8E8E8;
 }
 
-button:focus {
+.button:focus {
 	background-color: #59ECF7;
 }
 
-button::-moz-focus-inner {
+*::-moz-focus-inner {
 	border: 0;
 }
 
@@ -93,4 +93,38 @@ button::-moz-focus-inner {
 	background: #FFFFFF;
 	font-family: Impact, Charcoal, sans-serif;
 	text-align: center;
+}
+
+.rightClickDiv {
+	z-index: 1000000;
+	background-color: #000000;
+	border: 1px solid #FFFFFF;
+	width: 500px;
+	height: 300px;
+	position: fixed;
+	top: 100;
+	left: 100;
+}
+
+.toolbarButton {
+	margin: 3px;
+	background-color: #E3E3E3;
+	border: none;
+	border-radius: 3px;
+	width: 32px;
+	height: 32px;
+	background-repeat: no-repeat;
+}
+
+.toolbarButton:hover {
+	background-color: #D1D1D1;
+	color: #000000;
+}
+
+.activeTool {
+	background-color: #FFB52B;
+}
+
+.activeTool:hover {
+	background-color: #FFA600;
 }
