@@ -55,7 +55,7 @@ input[type="text"]:focus {
 	top: 44px;
 	left: 0px;
 	height: calc(100vh - 44px);
-	width: calc(100vh - 200px);
+	width: calc(100% - 200px);
 	left: 0;
 	border: none;
 }
