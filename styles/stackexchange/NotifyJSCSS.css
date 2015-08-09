@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+@keyframes animateSucessIcon {
+	0% {
+	  length: 0px;
+	}
+	100%{
+		length: 7px;
+	}
+}

@@ -4,32 +4,26 @@
 <meta charset="UTF-8">
 <title>Image Editor</title>
 <link rel="stylesheet" type="text/css"
-	href="http://teamfreehugs.github.io/styles/imgeditor.css"></link>
+	href="file:///home/eyeballcode/Eclipse/Workspace/Eclipse/HTML/styles/imgeditor.css"></link>
 <link rel="stylesheet" type="text/css"
 	href="http://teamfreehugs.github.io/styles/menus.css"></link>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="http://teamfreehugs.github.io/js/FileSaver.js"></script>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
+<link rel="stylesheet"
+	href="http://t4t5.github.io/sweetalert/dist/sweetalert.css"></link>
+<script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
 <script>
   var modified = false;
   
-  var currentMode = 0;
+  var canvas;
   
-  var paint = false;
+  var fgcolor = "#00000";
   
-  var color = "#00000";
+  var bgcolor = "#FFFFFF";
   
-  var clickX = new Array();
-  var clickY = new Array();
-  var clickDrag = new Array();
-  var paint = false;
-  
-  function addClick(x, y, dragging) {
-    clickX.push(x);
-    clickY.push(y);
-    clickDrag.push(dragging);
-  }
-
   window.onbeforeunload = function() {
     if (modified) {
       return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
@@ -44,44 +38,137 @@
     }
   }
 
-  function redraw() {
-    context = document.getElementById('canvas').getContext('2d');
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    
-    context.strokeStyle = color;
-    context.lineJoin = "round";
-    context.lineWidth = 1;
-    
-    for (var i = 0; i < clickX.length; i++) {
-      context.beginPath();
-      if (clickDrag[i] && i) {
-        context.moveTo(clickX[i - 1], clickY[i - 1]);
-      } else {
-        context.moveTo(clickX[i] - 1, clickY[i]);
-      }
-      context.lineTo(clickX[i], clickY[i]);
-      context.closePath();
-      context.stroke();
+  var tool = "#paintMode";
+  
+  function getImgSize(imgSrc) {
+    var newImg = new Image();
+    newImg.src = imgSrc;
+    curHeight = newImg.height;
+    curWidth = newImg.width;
+    return {
+      w : curWidth,
+      h : curHeight
     }
   }
 
-  function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect(), root = document.documentElement;
+  var current;
+  var list = [];
+  var state = [];
+  var index = 0;
+  var index2 = 0;
+  var action = false;
+  var refresh = true;
+  
+  function undo() {
     
-    var mouseX = evt.clientX - rect.left - root.scrollLeft;
-    var mouseY = evt.clientY - rect.top - root.scrollTop;
-    return {
-      x : mouseX,
-      y : mouseY
-    };
+    if (index <= 0) {
+      index = 0;
+      return;
+    }
+    
+    if (refresh === true) {
+      index--;
+      refresh = false;
+    }
+    
+    console.log('undo');
+    
+    index2 = index - 1;
+    current = list[index2];
+    current.setOptions(JSON.parse(state[index2]));
+    
+    index--;
+    current.setCoords();
+    canvas.renderAll();
+    action = true;
   }
 
+  function redo() {
+    
+    action = true;
+    if (index >= state.length - 1) {
+      return;
+    }
+    
+    console.log('redo');
+    
+    index2 = index + 1;
+    current = list[index2];
+    current.setOptions(JSON.parse(state[index2]));
+    
+    index++;
+    current.setCoords();
+    canvas.renderAll();
+  }
 
-  var tool = "#paintMode";
-  
-  var modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode' ];
-  
+  function addUndoRedo() {
+    canvas.on("object:added", function(e) {
+      var object = e.target;
+      console.log('object:modified');
+      
+      if (action === true) {
+        state = [ state[index2] ];
+        list = [ list[index2] ];
+        
+        action = false;
+        console.log(state);
+        index = 1;
+      }
+      object.saveState();
+      
+      console.log(object.originalState);
+      state[index] = JSON.stringify(object.originalState);
+      list[index] = object;
+      index++;
+      index2 = index - 1;
+      
+      refresh = true;
+    });
+    
+    canvas.on("object:modified", function(e) {
+      var object = e.target;
+      console.log('object:modified');
+      
+      if (action === true) {
+        state = [ state[index2] ];
+        list = [ list[index2] ];
+        
+        action = false;
+        console.log(state);
+        index = 1;
+      }
+      
+      object.saveState();
+      
+      state[index] = JSON.stringify(object.originalState);
+      list[index] = object;
+      index++;
+      index2 = index - 1;
+      
+      console.log(state);
+      refresh = true;
+    });
+  }
+
   function onload() {
+    canvas = new fabric.Canvas('canvas', {
+      isDrawingMode : true,
+    });
+    canvas.freeDrawingBrush.color = "red";
+    canvas.freeDrawingBrush.width = 5;
+    id = window.setInterval(function() {
+      canvas.setHeight($(document).height() - 44);
+      canvas.setWidth($(document).width() - 200);
+    }, 1000);
+    
+    canvas.on("object:added", function(obj) {
+      modified = true;
+    })
+
+    addUndoRedo();
+    
+    modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode' ];
+    
     $('#exitButton').click(function() {
       window.location = "..";
     });
@@ -94,7 +181,6 @@
       popupHead = $('#popup-header-text');
       popupHead.html('Save Dialog');
       popupBody = $('#popup-body');
-      popupBody.html('');
       info = $(document.createElement('span'));
       base64Info = $(document.createElement('span'));
       base64Info.html('Base64 String: ');
@@ -114,6 +200,9 @@
       downloadImage.attr('src', base64);
       downloadImage.attr('width', $('#canvas')[0].offsetWidth / 10);
       downloadImage.attr('height', $('#canvas')[0].offsetHeight / 10);
+      downloadImage.mousedown(function() {
+        modified = false;
+      })
       popupBody.append(info[0]);
       popupBody.append(document.createElement('br'));
       popupBody.append(document.createElement('hr'));
@@ -129,43 +218,50 @@
       popupBody.append(document.createElement('br'));
     });
     
+    $('#newLayerLoc')
+        .click(
+            function() {
+              $('#popup-body').empty();
+              popup = $('#popup');
+              popup.css("display", "block");
+              $('#backdrop-div').css("display", "block");
+              popupHead = $('#popup-header-text');
+              popupHead.html('Add Layer Dialog');
+              popupBody = $('#popup-body');
+              urlLink = $(document.createElement('input'));
+              urlLink.attr('id', 'imgURL');
+              urlLink.attr('type', 'text');
+              urlLink.css({
+                "margin-right" : "7px"
+              });
+              ok = $(document.createElement('button'));
+              ok.html('Add Layer!');
+              ok.attr('class', 'button');
+              info = $(document.createElement('span'));
+              info
+                  .html('Add a layer to this image. <br>Link an image\' url in the box below');
+              ok.click(function() {
+                fabric.Image.fromURL(urlLink.val(), function(img) {
+                  o = getImgSize(urlLink.val());
+                  canvas.add(img);
+                  canvas.renderAll();
+                });
+                $('#backdrop-div').click();
+              });
+              popupBody.append(info[0]);
+              popupBody.append(urlLink[0]);
+              popupBody.append(ok[0]);
+            });
+    
     $('#backdrop-div').click(function() {
       $('#popup').css("display", "none");
       $('#backdrop-div').css("display", "none");
     });
     $(document).keyup(keyup);
     
-    $('#canvas').mousedown(function(e) {
-      if (e.which == 1) {
-        var mouseX = e.pageX - this.offsetLeft;
-        var mouseY = e.pageY - this.offsetTop;
-        modified = true;
-        paint = true;
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-        redraw();
-      }
-    });
-    
-    $('#canvas').mousemove(function(e) {
-      if (e.which == 1) {
-        if (paint) {
-          modified = true;
-          addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
-          redraw();
-        }
-      }
-    });
-    $('#canvas').mouseup(function(e) {
-      paint = false;
-    });
-    
-    $('#canvas').mouseleave(function(e) {
-      paint = false;
-    });
-    
-    $(document).on('contextmenu', function() {
-      return false;
-    });
+    //$(document).on('contextmenu', function() {
+    //  return false;
+    //});
     
     modeButtonIds.forEach(function(e) {
       $(e).click(function(event) {
@@ -180,6 +276,23 @@
         })
       })
     });
+    
+    $('#eraserMode').click(function() {
+      
+    });
+    
+    $('#canvas').css({
+      left : "0px",
+      top : "44px"
+    });
+    
+    $('.upper-canvas').css({
+      left : "0px",
+      top : "44px"
+    });
+    
+    $('.canvas-container').attr('style', '');
+   
     
   }
 </script>
@@ -201,6 +314,10 @@
 					<li><a href="#" id="saveButton">Save</a></li>
 					<li><a href="#" id="deleteAllButton">Delete Image</a></li>
 					<li><a href="#" id="exitButton">Exit</a></li>
+				</ul></li>
+			<li><a href="#">Layers</a>
+				<ul class="menu menuExpand">
+					<li><a href="#" id="newLayerLoc">Add Layer From Location</a></li>
 				</ul></li>
 		</ul>
 	</div>

@@ -1,3 +1,7 @@
+body {
+	overflow-y: hidden;
+}
+
 input[type="text"] {
 	border: none;
 	background-color: #B3B3B3;
@@ -41,23 +45,13 @@ input[type="text"]:focus {
 }
 
 .toolbar {
-	position: absolute;
+	position: fixed;
 	top: 44px;
 	right: 0px;
 	width: 200px;
 	border: none;
 	height: calc(100vh - 44px);
 	background-color: grey;
-}
-
-.canvas {
-	position: absolute;
-	top: 44px;
-	left: 0px;
-	height: calc(100vh - 44px);
-	width: calc(100% - 200px);
-	left: 0;
-	border: none;
 }
 
 .popup-box {
