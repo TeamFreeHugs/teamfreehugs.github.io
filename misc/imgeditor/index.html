@@ -77,6 +77,8 @@
     });
     downloadInfo = $(document.createElement('span'));
     downloadInfo.html('Or download the image:');
+    downloadInfo2 = $(document.createElement('span'));
+    downloadInfo2.html('RClick, then select save image.');
     downloadImage = $(document.createElement('img'));
     downloadImage.attr('src', base64);
     downloadImage.attr('width', $('#canvas')[0].offsetWidth / 10);
@@ -94,6 +96,7 @@
     popupBody.append(downloadInfo[0]);
     popupBody.append(document.createElement('br'));
     popupBody.append(downloadImage[0]);
+    popupBody.append(downloadImage2[0]);
     popupBody.append(document.createElement('br'));
     popupBody.append(document.createElement('br'));
     popupBody.append(document.createElement('br'));
