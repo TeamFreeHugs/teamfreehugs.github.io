@@ -157,12 +157,12 @@
   }
   
   function onload() {
-    if (detectIE !== false) {
+    if (detectIE() !== false) {
       var popup = document.getElementById('popup');
       popup.style.display="block";
       var bg = document.getElementById('backdrop-div');
       bg.style.display = "block";
-      var title = document.getElementById('popup-head-text');
+      var title = document.getElementById('popup-header-text');
       title.innerHTML = "ERROR!";
       title.style.backgroundColor = "red";
       text = document.getElementById('popup-body');
