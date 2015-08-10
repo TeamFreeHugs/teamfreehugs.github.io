@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <title>Image Editor</title>
 <link rel="stylesheet" type="text/css"
-	href="/styles/imgeditor.css"></link>
+	href="http://teamfreehugs.github.io/styles/imgeditor.css"></link>
 <link rel="stylesheet" type="text/css"
-	href="/styles/menus.css"></link>
+	href="http://teamfreehugs.github.io/styles/menus.css"></link>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="http://teamfreehugs.github.io/js/FileSaver.js"></script>
@@ -15,7 +15,7 @@
 <link rel="stylesheet"
 	href="http://t4t5.github.io/sweetalert/dist/sweetalert.css"></link>
 <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
-<script src="/js/min/jQuery.hotkeys.js"></script>
+<script src="http://teamfreehugs.github.io/js/min/jQuery.hotkeys.js"></script>
 <script>
   var modified = false;
   
@@ -52,106 +52,122 @@
     }
   }
 
-  var current;
-  var list = [];
-  var state = [];
-  var index = 0;
-  var index2 = 0;
-  var action = false;
-  var refresh = true;
+  function showSave(e) {
+    e.preventDefault();
+    $('#popup-body').empty();
+    base64 = $('#canvas')[0].toDataURL();
+    popup = $('#popup');
+    popup.css("display", "block");
+    $('#backdrop-div').css("display", "block");
+    popupHead = $('#popup-header-text');
+    popupHead.html('Save Dialog');
+    popupBody = $('#popup-body');
+    info = $(document.createElement('span'));
+    base64Info = $(document.createElement('span'));
+    base64Info.html('Base64 String: ');
+    base64Info.attr('title', 'Why? I don\'t know.');
+    info.html('How would you like to save it?');
+    base64TF = $(document.createElement('textarea'));
+    base64TF.val(base64);
+    base64TF.css({
+      scroll : "none",
+      resize : "disabled",
+      width : "250px",
+      height : "100px"
+    });
+    downloadInfo = $(document.createElement('span'));
+    downloadInfo.html('Or download the image:');
+    downloadImage = $(document.createElement('img'));
+    downloadImage.attr('src', base64);
+    downloadImage.attr('width', $('#canvas')[0].offsetWidth / 10);
+    downloadImage.attr('height', $('#canvas')[0].offsetHeight / 10);
+    downloadImage.mousedown(function() {
+      modified = false;
+    })
+    popupBody.append(info[0]);
+    popupBody.append(document.createElement('br'));
+    popupBody.append(document.createElement('hr'));
+    popupBody.append(base64Info[0]);
+    popupBody.append(document.createElement('br'));
+    popupBody.append(base64TF[0]);
+    popupBody.append(document.createElement('br'));
+    popupBody.append(downloadInfo[0]);
+    popupBody.append(document.createElement('br'));
+    popupBody.append(downloadImage[0]);
+    popupBody.append(document.createElement('br'));
+    popupBody.append(document.createElement('br'));
+    popupBody.append(document.createElement('br'));
+  }
+
+  function showNewLayerImg(e) {
+    e.preventDefault;
+    $('#popup-body').empty();
+    popup = $('#popup');
+    popup.css("display", "block");
+    $('#backdrop-div').css("display", "block");
+    popupHead = $('#popup-header-text');
+    popupHead.html('Add Layer Dialog');
+    popupBody = $('#popup-body');
+    urlLink = $(document.createElement('input'));
+    urlLink.attr('id', 'imgURL');
+    urlLink.attr('type', 'text');
+    urlLink.css({
+      "margin-right" : "7px"
+    });
+    ok = $(document.createElement('button'));
+    ok.html('Add Layer!');
+    ok.attr('class', 'button');
+    info = $(document.createElement('span'));
+    info
+        .html('Add a layer to this image. <br>Link an image\' url in the box below');
+    ok.click(function() {
+      fabric.Image.fromURL(urlLink.val(), function(img) {
+        o = getImgSize(urlLink.val());
+        canvas.add(img);
+        canvas.renderAll();
+      });
+      $('#backdrop-div').click();
+    });
+    popupBody.append(info[0]);
+    popupBody.append(urlLink[0]);
+    popupBody.append(ok[0]);
+  }
+
+
+  function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+      var rv = ua.indexOf('rv:');
+      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    var edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+      return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    return false;
+  }
   
-  function undo() {
-    
-    if (index <= 0) {
-      index = 0;
-      return;
-    }
-    
-    if (refresh === true) {
-      index--;
-      refresh = false;
-    }
-    
-    console.log('undo');
-    
-    index2 = index - 1;
-    current = list[index2];
-    current.setOptions(JSON.parse(state[index2]));
-    
-    index--;
-    current.setCoords();
-    canvas.renderAll();
-    action = true;
-  }
-
-  function redo() {
-    
-    action = true;
-    if (index >= state.length - 1) {
-      return;
-    }
-    
-    console.log('redo');
-    
-    index2 = index + 1;
-    current = list[index2];
-    current.setOptions(JSON.parse(state[index2]));
-    
-    index++;
-    current.setCoords();
-    canvas.renderAll();
-  }
-
-  function addUndoRedo() {
-    canvas.on("object:added", function(e) {
-      var object = e.target;
-      console.log('object:modified');
-      
-      if (action === true) {
-        state = [ state[index2] ];
-        list = [ list[index2] ];
-        
-        action = false;
-        console.log(state);
-        index = 1;
-      }
-      object.saveState();
-      
-      console.log(object.originalState);
-      state[index] = JSON.stringify(object.originalState);
-      list[index] = object;
-      index++;
-      index2 = index - 1;
-      
-      refresh = true;
-    });
-    
-    canvas.on("object:modified", function(e) {
-      var object = e.target;
-      console.log('object:modified');
-      
-      if (action === true) {
-        state = [ state[index2] ];
-        list = [ list[index2] ];
-        
-        action = false;
-        console.log(state);
-        index = 1;
-      }
-      
-      object.saveState();
-      
-      state[index] = JSON.stringify(object.originalState);
-      list[index] = object;
-      index++;
-      index2 = index - 1;
-      
-      console.log(state);
-      refresh = true;
-    });
-  }
-
   function onload() {
+    if (detectIE !== false) {
+      var popup = document.getElementById('popup');
+      popup.style.display="block";
+      var bg = document.getElementById('backdrop-div');
+      bg.style.display = "block";
+      var title = document.getElementById('popup-head-text');
+      title.innerHTML = "ERROR!";
+      title.style.backgroundColor = "red";
+      text = document.getElementById('popup-body');
+      text.innerHTML = "ERROR: We detected that you use Internet Explorer! Please use Chrome or Firefox.";
+    }
     canvas = new fabric.Canvas('canvas', {
       isDrawingMode : true,
     });
@@ -166,93 +182,21 @@
       modified = true;
     })
 
-    addUndoRedo();
-    
     modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode' ];
     
     $('#exitButton').click(function() {
       window.location = "..";
     });
-    $('#saveButton').click(function() {
-      $('#popup-body').empty();
-      base64 = $('#canvas')[0].toDataURL();
-      popup = $('#popup');
-      popup.css("display", "block");
-      $('#backdrop-div').css("display", "block");
-      popupHead = $('#popup-header-text');
-      popupHead.html('Save Dialog');
-      popupBody = $('#popup-body');
-      info = $(document.createElement('span'));
-      base64Info = $(document.createElement('span'));
-      base64Info.html('Base64 String: ');
-      base64Info.attr('title', 'Why? I don\'t know.');
-      info.html('How would you like to save it?');
-      base64TF = $(document.createElement('textarea'));
-      base64TF.val(base64);
-      base64TF.css({
-        scroll : "none",
-        resize : "disabled",
-        width : "250px",
-        height : "100px"
-      });
-      downloadInfo = $(document.createElement('span'));
-      downloadInfo.html('Or download the image:');
-      downloadImage = $(document.createElement('img'));
-      downloadImage.attr('src', base64);
-      downloadImage.attr('width', $('#canvas')[0].offsetWidth / 10);
-      downloadImage.attr('height', $('#canvas')[0].offsetHeight / 10);
-      downloadImage.mousedown(function() {
-        modified = false;
-      })
-      popupBody.append(info[0]);
-      popupBody.append(document.createElement('br'));
-      popupBody.append(document.createElement('hr'));
-      popupBody.append(base64Info[0]);
-      popupBody.append(document.createElement('br'));
-      popupBody.append(base64TF[0]);
-      popupBody.append(document.createElement('br'));
-      popupBody.append(downloadInfo[0]);
-      popupBody.append(document.createElement('br'));
-      popupBody.append(downloadImage[0]);
-      popupBody.append(document.createElement('br'));
-      popupBody.append(document.createElement('br'));
-      popupBody.append(document.createElement('br'));
-    });
+    $('#saveButton').click(showSave);
+    $(document).bind('keydown', 'ctrl+s', showSave);
     
-    $('#newLayerLoc')
-        .click(
-            function() {
-              $('#popup-body').empty();
-              popup = $('#popup');
-              popup.css("display", "block");
-              $('#backdrop-div').css("display", "block");
-              popupHead = $('#popup-header-text');
-              popupHead.html('Add Layer Dialog');
-              popupBody = $('#popup-body');
-              urlLink = $(document.createElement('input'));
-              urlLink.attr('id', 'imgURL');
-              urlLink.attr('type', 'text');
-              urlLink.css({
-                "margin-right" : "7px"
-              });
-              ok = $(document.createElement('button'));
-              ok.html('Add Layer!');
-              ok.attr('class', 'button');
-              info = $(document.createElement('span'));
-              info
-                  .html('Add a layer to this image. <br>Link an image\' url in the box below');
-              ok.click(function() {
-                fabric.Image.fromURL(urlLink.val(), function(img) {
-                  o = getImgSize(urlLink.val());
-                  canvas.add(img);
-                  canvas.renderAll();
-                });
-                $('#backdrop-div').click();
-              });
-              popupBody.append(info[0]);
-              popupBody.append(urlLink[0]);
-              popupBody.append(ok[0]);
-            });
+    $('#newLayerLoc').click(showNewLayerImg);
+    $(document).bind('keydown', 'ctrl+shift+l', showNewLayerImg);
+    
+    $(document).bind('keydown', 'ctrl+shift+w', function(e) {
+      e.preventDefault();
+      window.history.go(-1);
+    });
     
     $('#backdrop-div').click(function() {
       $('#popup').css("display", "none");
@@ -293,8 +237,33 @@
     });
     
     $('.canvas-container').attr('style', '');
-   
     
+    //    $(document).bind('keydown', 'ctrl+z', undo);
+    //  $(document).bind('keydown', 'shift+ctrl+z', redo);
+    
+    $('#backgroundPalette').click(function() {
+      $('#popup-body').empty();
+      popup = $('#popup');
+      popup.css("display", "block");
+      $('#backdrop-div').css("display", "block");
+      popupHead = $('#popup-header-text');
+      popupHead.html('Set Background Color');
+      popupBody = $('#popup-body');
+      box = $('<span>');
+      popup.append(box[0]);
+    });
+    
+    $('#foregroundPalette').click(function() {
+      $('#popup-body').empty();
+      popup = $('#popup');
+      popup.css("display", "block");
+      $('#backdrop-div').css("display", "block");
+      popupHead = $('#popup-header-text');
+      popupHead.html('Set Foreground Color');
+      popupBody = $('#popup-body');
+      box = $('<span>');
+      popup.append(box[0]);
+    });
   }
 </script>
 <script>
@@ -323,7 +292,7 @@
 		</ul>
 	</div>
 	<div id="canvas-div">
-		<canvas id="canvas" class="canvas"></canvas>
+		<canvas id="canvas"></canvas>
 	</div>
 	<div id="toolbar-div" class="toolbar">
 		<button class="toolbarButton activeTool"
@@ -335,6 +304,13 @@
 		<button class="toolbarButton"
 			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/eraser.svg');"
 			id="eraserMode" title="Eraser"></button>
+		<div id="colorPalette"
+			style="position: absolute; bottom: 90px; left: 70px;">
+			<div id="backgroundPalette"
+				style="position: absolute; top: 15px; left: 15px; width: 50px; height: 50px; background-color: #FFFFFF; z-index: 0;"></div>
+			<div id="foregroundPalette"
+				style="position: absolute; top: 0; left: 0; width: 50px; height: 50px; background-color: #000000; z-index: 1;"></div>
+		</div>
 	</div>
 	<div id="backdrop-div"
 		style="width: 1000%; height: 1000%; z-index: 20000; background-color: #000000; opacity: 0.3; top: 0; left: 0; position: fixed; display: none"></div>
