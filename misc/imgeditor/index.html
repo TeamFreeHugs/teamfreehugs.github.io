@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Image Editor</title>
-<link rel="stylesheet" type="text/css"
-	href="http://teamfreehugs.github.io/styles/imgeditor.css"></link>
+<!-- <link rel="stylesheet" type="text/css"	href="http://teamfreehugs.github.io/styles/imgeditor.css"></link>-->
 <link rel="stylesheet" type="text/css"
 	href="http://teamfreehugs.github.io/styles/menus.css"></link>
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -16,6 +15,8 @@
 	href="http://t4t5.github.io/sweetalert/dist/sweetalert.css"></link>
 <script src="http://t4t5.github.io/sweetalert/dist/sweetalert.min.js"></script>
 <script src="http://teamfreehugs.github.io/js/min/jQuery.hotkeys.js"></script>
+<link rel="stylesheet"
+	href="file:///home/eyeballcode/Eclipse/Workspace/Eclipse/HTML/styles/imgeditor.css"></link>
 <script>
   var modified = false;
   
@@ -71,9 +72,11 @@
     base64TF.val(base64);
     base64TF.css({
       scroll : "none",
-      resize : "disabled",
+      resize : "none",
       width : "250px",
-      height : "100px"
+      height : "100px",
+      outline : "none",
+      "-moz-outline-style" : "none"
     });
     downloadInfo = $(document.createElement('span'));
     downloadInfo.html('Or download the image:');
@@ -96,6 +99,7 @@
     popupBody.append(downloadInfo[0]);
     popupBody.append(document.createElement('br'));
     popupBody.append(downloadInfo2[0]);
+    popupBody.append(document.createElement('br'));
     popupBody.append(document.createElement('br'));
     popupBody.append(downloadImage[0]);
     popupBody.append(document.createElement('br'));
@@ -159,6 +163,11 @@
     return false;
   }
 
+  function setSize() {
+    canvas.setHeight($(document).height() - 44);
+    canvas.setWidth($(document).width() - 200);
+  }
+
   function onload() {
     if (detectIE() !== false) {
       var popup = document.getElementById('popup');
@@ -176,10 +185,8 @@
     });
     canvas.freeDrawingBrush.color = "red";
     canvas.freeDrawingBrush.width = 5;
-    id = window.setInterval(function() {
-      canvas.setHeight($(document).height() - 44);
-      canvas.setWidth($(document).width() - 200);
-    }, 1000);
+    window.setInterval(setSize, 1000);
+    setSize();
     
     canvas.on("object:added", function(obj) {
       modified = true;
@@ -231,12 +238,14 @@
     
     $('#canvas').css({
       left : "0px",
-      top : "44px"
+      top : "44px",
+      "z-index" : "0"
     });
     
     $('.upper-canvas').css({
       left : "0px",
-      top : "44px"
+      top : "44px",
+      "z-index" : "1"
     });
     
     $('.canvas-container').attr('style', '');
@@ -295,9 +304,6 @@
     
     $(document).bind('keydown', 'ctrl+h', showKBShortcuts);
   }
-</script>
-<script>
-  
 </script>
 </head>
 <body onload="onload()">
