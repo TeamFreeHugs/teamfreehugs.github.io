@@ -141,6 +141,7 @@
     popupBody.append(info[0]);
     popupBody.append(urlLink[0]);
     popupBody.append(ok[0]);
+    urlLink.focus();
   }
 
   function detectIE() {
@@ -241,6 +242,11 @@
     modeButtonIds.forEach(function(e) {
       $(e).click(function(event) {
         a = event;
+        if (event.currentTarget.id == 'eraserMode') {
+          canvas.freeDrawingBrush.color = bgcolor;
+        } else {
+          canvas.freeDrawingBrush.color = fgcolor;
+        }
         modeButtonIds.forEach(function(e2) {
           if (e2 == '#' + event.originalEvent.target.id) {
             $(e2).addClass('activeTool');
@@ -312,6 +318,21 @@
     $('#forceBG').click(function() {
       canvas.backgroundColor = bgcolor;
     });
+    
+    $('canvas').on("contextmenu", function() {
+      return false;
+    });
+    
+    $('#exportSVG').click(function() {
+      $('#popup-body').empty();
+      popup = $('#popup');
+      popup.css("display", "block");
+      $('#backdrop-div').css("display", "block");
+      popupHead = $('#popup-header-text');
+      popupHead.html('Export as SVG');
+      popupBody = $('#popup-body');
+      popupBody.append($('<span>').html('Coming up soon!'));
+    });
   }
 </script>
 </head>
@@ -328,6 +349,10 @@
 							<li><a href="#" id="newImgLoc">New Image From Location</a>
 						</ul></li>
 					<li><a href="#" id="saveButton">Save</a></li>
+					<li><a href="#">Export As</a>
+						<ul class="menu menuExpand" style="width: 50px;">
+							<li><a href="#" id="exportSVG">SVG</a>
+						</ul></li>
 					<li><a href="#" id="exitButton">Exit</a></li>
 				</ul></li>
 			<li><a href="#">Layers</a>
