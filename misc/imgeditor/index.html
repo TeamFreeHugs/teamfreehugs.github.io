@@ -308,6 +308,10 @@
     $('#keyboardShortcuts').click(showKBShortcuts);
     
     $(document).bind('keydown', 'ctrl+h', showKBShortcuts);
+    
+    $('#forceBG').click(function() {
+      canvas.backgroundColor = bgcolor;
+    });
   }
 </script>
 </head>
@@ -329,6 +333,10 @@
 			<li><a href="#">Layers</a>
 				<ul class="menu menuExpand">
 					<li><a href="#" id="newLayerLoc">Add Layer From Location</a></li>
+				</ul></li>
+			<li><a href="#">Colors</a>
+				<ul class="menu menuExtend">
+					<li><a href="#" id="forceBG">Force Background Color</a></li>
 				</ul></li>
 			<li><a href="#">Help</a>
 				<ul class="menu menuExpand">
