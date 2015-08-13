@@ -22,8 +22,6 @@
   
   var bgcolor = "#FFFFFF";
   
-  var eraserStrokes = [];
-  
   window.onbeforeunload = function() {
     if (modified) {
       return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
@@ -191,11 +189,6 @@
     canvas = new fabric.Canvas('canvas', {
       isDrawingMode : true,
     });
-    fgcolor = $('#foregroundPalette').val();
-    bgcolor = $('#backgroundPalette').val();
-    canvas.freeDrawingBrush.color = fgcolor;
-    canvas.backgroundColor = bgcolor;
-    canvas.freeDrawingBrush.width = $('#size')[0].value;
     
     paletteCSS = {
       border : "none",
@@ -218,7 +211,8 @@
       modified = true;
     })
 
-    modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode', '#sprayMode', '#selectMode' ];
+    modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode', '#sprayMode',
+        '#selectMode' ];
     
     $('#exitButton').click(function() {
       window.location = "..";
@@ -244,6 +238,18 @@
     //  return false;
     //});
     
+    $('#pencilMode').click(function() {
+      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+    });
+    
+    $('#paintMode').click(function() {
+      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+    });
+    
+    $('#sprayMode').click(function() {
+      canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+    });
+    
     modeButtonIds.forEach(function(e) {
       $(e).click(function(event) {
         a = event;
@@ -253,10 +259,11 @@
           canvas.isDrawingMode = true;
         }
         if (event.currentTarget.id == 'eraserMode') {
-          canvas.freeDrawingBrush.color = canvas.backgroundColor;
+          canvas.freeDrawingBrush.color = bgcolor;
         } else {
           canvas.freeDrawingBrush.color = fgcolor;
         }
+        canvas.freeDrawingBrush.width = $('#size')[0].value;
         modeButtonIds.forEach(function(e2) {
           if (e2 == '#' + event.originalEvent.target.id) {
             $(e2).addClass('activeTool');
@@ -266,27 +273,6 @@
           }
         })
       })
-    });
-    
-    $('#pencilMode').click(function() {
-      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-      canvas.freeDrawingBrush.color = fgcolor;
-      canvas.backgroundColor = bgcolor;
-      canvas.freeDrawingBrush.width = $('#size')[0].value;
-    });
-    
-    $('#paintMode').click(function() {
-      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-      canvas.freeDrawingBrush.color = fgcolor;
-      canvas.backgroundColor = bgcolor;
-      canvas.freeDrawingBrush.width = $('#size')[0].value;
-    });
-    
-    $('#sprayMode').click(function() {
-      canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
-      canvas.freeDrawingBrush.color = fgcolor;
-      canvas.backgroundColor = bgcolor;
-      canvas.freeDrawingBrush.width = $('#size')[0].value;
     });
     
     $('#canvas').css({
@@ -306,18 +292,17 @@
     //    $(document).bind('keydown', 'ctrl+z', undo);
     //  $(document).bind('keydown', 'shift+ctrl+z', redo);
     
-    canvas.on("object:added", function(e) {
-      if (tool == "#eraserMode")
-        eraserStrokes.push(e.target);
-    })
     $('#backgroundPalette').on("input", function() {
       bgcolor = $(this).val();
-      canvas.freeDrawingBrush.color = bgcolor;
+      if (tool == "#eraserMode") {
+        canvas.freeDrawingBrush.color = bgcolor;
+      }
     });
     
     $('#foregroundPalette').on("input", function() {
       fgcolor = $(this).val();
-      canvas.freeDrawingBrush.color = fgcolor;
+      if (tool != "#eraserMode")
+        canvas.freeDrawingBrush.color = fgcolor;
     });
     
     showKBShortcuts = function(e) {
@@ -348,11 +333,8 @@
     $(document).bind('keydown', 'ctrl+h', showKBShortcuts);
     
     $('#forceBG').click(function() {
-      canvas.backgroundColor = bgcolor;
-      eraserStrokes.forEach(function(e) {
-        e.stroke = bgcolor;
-        canvas.add(e);
-      });
+      canvas.backgroundColor = $('#backgroundPalette')[0].value;
+      canvas.renderAll();
     });
     
     $('canvas').on("contextmenu", function() {
@@ -374,6 +356,13 @@
       popupBody = $('#popup-body');
       popupBody.append($('<span>').html('Coming up soon!'));
     });
+    
+    fgcolor = $('#foregroundPalette').val();
+    bgcolor = $('#backgroundPalette').val();
+    canvas.freeDrawingBrush.color = fgcolor;
+    canvas.backgroundColor = bgcolor;
+    canvas.freeDrawingBrush.width = $('#size')[0].value;
+    canvas.renderAll();
   }
 </script>
 </head>
