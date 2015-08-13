@@ -132,9 +132,13 @@
         .html('Add a layer to this image. <br>Link an image\' url in the box below');
     ok.click(function() {
       fabric.Image.fromURL(urlLink.val(), function(img) {
-        o = getImgSize(urlLink.val());
+        img.hasControls = true;
+        img.hasBorders = true;
+        img.hasRotatingPoint = true;
         canvas.add(img);
         canvas.renderAll();
+      }, {
+        hasControls : true
       });
       $('#backdrop-div').click();
     });
@@ -400,7 +404,7 @@
 			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/eraser.svg');"
 			id="eraserMode" title="Eraser"></button>
 		<button class="toolbarButton"
-			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/sprat.svg');"
+			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/spray.svg');"
 			id="sprayMode" title="Spray"></button>
 		<div id="colorPalette"
 			style="position: absolute; bottom: 90px; left: 70px;">
