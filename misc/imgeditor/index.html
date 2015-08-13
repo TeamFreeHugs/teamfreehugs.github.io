@@ -25,6 +25,8 @@
   
   var bgcolor = "#FFFFFF";
   
+  var eraserStrokes = [];
+  
   window.onbeforeunload = function() {
     if (modified) {
       return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
@@ -132,6 +134,7 @@
         .html('Add a layer to this image. <br>Link an image\' url in the box below');
     ok.click(function() {
       fabric.Image.fromURL(urlLink.val(), function(img) {
+        img.crossOrigin = "anonymous";
         img.hasControls = true;
         img.hasBorders = true;
         img.hasRotatingPoint = true;
@@ -217,7 +220,7 @@
       modified = true;
     })
 
-    modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode' ];
+    modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode', '#sprayMode' ];
     
     $('#exitButton').click(function() {
       window.location = "..";
@@ -247,7 +250,7 @@
       $(e).click(function(event) {
         a = event;
         if (event.currentTarget.id == 'eraserMode') {
-          canvas.freeDrawingBrush.color = bgcolor;
+          canvas.freeDrawingBrush.color = canvas.backgroundColor;
         } else {
           canvas.freeDrawingBrush.color = fgcolor;
         }
@@ -276,6 +279,13 @@
       canvas.freeDrawingBrush.width = $('#size')[0].value;
     });
     
+    $('#sprayMode').click(function() {
+      canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+      canvas.freeDrawingBrush.color = fgcolor;
+      canvas.backgroundColor = bgcolor;
+      canvas.freeDrawingBrush.width = $('#size')[0].value;
+    });
+    
     $('#canvas').css({
       left : "0px",
       top : "44px",
@@ -293,8 +303,13 @@
     //    $(document).bind('keydown', 'ctrl+z', undo);
     //  $(document).bind('keydown', 'shift+ctrl+z', redo);
     
+    canvas.on("object:added", function(e) {
+      if (tool == "#eraserMode") 
+        eraserStrokes.push(e.target);
+    })
     $('#backgroundPalette').on("input", function() {
       bgcolor = $(this).val();
+      canvas.freeDrawingBrush.color = bgcolor;
     });
     
     $('#foregroundPalette').on("input", function() {
@@ -331,6 +346,10 @@
     
     $('#forceBG').click(function() {
       canvas.backgroundColor = bgcolor;
+      eraserStrokes.forEach(function(e) {
+        e.stroke = bgcolor;
+        canvas.add(e);
+      });
     });
     
     $('canvas').on("contextmenu", function() {
@@ -340,8 +359,6 @@
     $('#size').on('input', function() {
       size = this.value;
       canvas.freeDrawingBrush.width = size;
-      progress = $('#sizeBG');
-      progress.attr('value', size / 100);
     });
     
     $('#exportSVG').click(function() {
