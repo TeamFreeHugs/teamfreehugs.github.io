@@ -22,6 +22,8 @@
   
   var bgcolor = "#FFFFFF";
   
+  eraserStrokes = [];
+  
   window.onbeforeunload = function() {
     if (modified) {
       return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
@@ -175,6 +177,12 @@
   }
 
   function onload() {
+    var popup = document.getElementById('popup');
+    popup.style.display = "none";
+    var bg = document.getElementById('backdrop-div');
+    bg.style.display = "none";
+    var title = document.getElementById('popup-header');
+    title.style.backgroundColor = "";
     if (detectIE() !== false) {
       var popup = document.getElementById('popup');
       popup.style.display = "block";
@@ -209,6 +217,9 @@
     
     canvas.on("object:added", function(obj) {
       modified = true;
+      if (tool == "#eraserMode") {
+        eraserStrokes.push(obj.target);
+      }
     })
 
     modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode', '#sprayMode',
@@ -357,6 +368,13 @@
       popupBody.append($('<span>').html('Coming up soon!'));
     });
     
+    $('#forceErasers').click(function() {
+      eraserStrokes.forEach(function(e) {
+        e.stroke = canvas.backgroundColor;
+        canvas.add(e);
+      });
+    });
+    
     fgcolor = $('#foregroundPalette').val();
     bgcolor = $('#backgroundPalette').val();
     canvas.freeDrawingBrush.color = fgcolor;
@@ -392,6 +410,8 @@
 			<li><a href="#">Colors</a>
 				<ul class="menu menuExtend">
 					<li><a href="#" id="forceBG">Force Background Color</a></li>
+					<li><a href="#" id="forceErasers">Force Erasers to turn to
+							BG</a></li>
 				</ul></li>
 			<li><a href="#">Help</a>
 				<ul class="menu menuExpand">
@@ -440,12 +460,14 @@
 		</div>
 	</div>
 	<div id="backdrop-div"
-		style="width: 1000%; height: 1000%; z-index: 20000; background-color: #000000; opacity: 0.3; top: 0; left: 0; position: fixed; display: none"></div>
-	<div id="popup" class="popup-box" style="display: none;">
-		<div id="popup-header" class="popup-header">
-			<h3 id="popup-header-text">Header</h3>
+		style="width: 1000%; height: 1000%; z-index: 20000; background-color: #000000; opacity: 0.3; top: 0; left: 0; position: fixed;"></div>
+	<div id="popup" class="popup-box" style="">
+		<div id="popup-header" class="popup-header"
+			style="background-color: red;">
+			<h3 id="popup-header-text">ERROR</h3>
 		</div>
-		<div id="popup-body" class="popup-body">Text</div>
+		<div id="popup-body" class="popup-body">YOU DON'T HAVE
+			JAVASCRIPT. ENABLE IT, THEN REFRESH THE PAGE!</div>
 	</div>
 </body>
 </html>
