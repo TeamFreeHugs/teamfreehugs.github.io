@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+body {
+	background-image: url(https://minecraft.net/images/bg_main.png);
+	font-family: "Helvetica Neue", sans-serif;
+	color: #E0D0D0;
+}
+
+.head {
+	background-image: url(https://minecraft.net/images/bg_top.png);
+	height: 48px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.menu {
+	list-style: none;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 14px 0 0;
+	width: 415px;
+	margin-top: 0;
+	float: left;
+	margin-left: 0;
+	vertical-align: baseline;
+	border: 0px none;
+}
+
+.menu>li {
+	float: left;
+	margin-left: 10px;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+input[type="text"] {
+	border: none;
+	outline: none;
+}
