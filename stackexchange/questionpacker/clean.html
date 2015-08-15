@@ -10,459 +10,439 @@
 <link rel="stylesheet"
 	href="http://teamfreehugs.github.io/styles/stackexchange-tags.css"></link>
 </head>
-<body onload="go(); addCodeHighlighter();">
+<body onload="go(); addCodeHighlighter();" style="word-wrap: break;">
 	<script>
-		function getCode(name) {
-			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
-					.exec(location.search);
-			return results === null ? "" : decodeURIComponent(results[1]
-					.replace(/\+/g, " "));
-		}
+    function getCode(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex
+          .exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(
+          /\+/g, " "));
+    }
 
-		function readTextFile(file) {
-			var rawFile = new XMLHttpRequest();
-			rawFile.open("GET", file, false);
-			rawFile.onreadystatechange = function() {
-				if (rawFile.readyState === 4) {
-					if (rawFile.status === 200 || rawFile.status == 0) {
-						return rawFile.responseText;
-					}
-				}
-			}
+    function readTextFile(file) {
+      var rawFile = new XMLHttpRequest();
+      rawFile.open("GET", file, false);
+      rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4) {
+          if (rawFile.status === 200 || rawFile.status == 0) {
+            return rawFile.responseText;
+          }
+        }
+      }
 
-			rawFile.onerror = function() {
-				console.log(rawFile.status);
-			}
-			try {
-				rawFile.send(null);
-			} catch (e) {
-				console.log('error');
-				console.log(e);
-			}
-			return rawFile.responseText;
-		}
+      rawFile.onerror = function() {
+        console.log(rawFile.status);
+      }
+      try {
+        rawFile.send(null);
+      } catch (e) {
+        console.log('error');
+        console.log(e);
+      }
+      return rawFile.responseText;
+    }
 
-		function imageExists(image_url) {
+    function imageExists(image_url) {
+      
+      var http = new XMLHttpRequest();
+      
+      http.open('HEAD', image_url, false);
+      http.send();
+      
+      return http.status != 404;
+      
+    }
 
-			var http = new XMLHttpRequest();
+    function generateAvatar(owner) {
+      var userNameTooltip = "";
+      var askerDiv = document.createElement('div');
+      if (owner.user_type == "registered") {
+        askerDiv.className = "userDivRegistered";
+        userNameTooltip = "Registered User. This user is a regular user.";
+      } else if (owner.user_type == "moderator") {
+        userNameTooltip = "Moderator. This user is a moderator.";
+        askerDiv.className = "userDivRegistered";
+      } else {
+        askerDiv.className = "userDivUnregistered";
+        userNameTooltip = "Unregistered User. This user has not associated any OpenIDS with their account.";
+        
+      }
+      var askerImg = document.createElement('img');
+      
+      var askerNameDiv = document.createElement('div');
+      var askerName = document.createElement('span');
+      
+      var askerRepDiv = document.createElement('div');
+      var askerRep = document.createElement('span');
+      
+      var askerInfoDiv = document.createElement('div');
+      
+      askerInfoDiv.className = "inline";
+      
+      if (owner.profile_image != undefined) {
+        askerImg.src = owner.profile_image;
+      } else {
+        askerImg.src = "http://imgur.com/UoyazgJ.png";
+      }
+      askerImg.className = "userImage";
+      
+      if (owner.link != undefined) {
+        var askerNameLink = document.createElement('a');
+        askerNameLink.innerHTML = owner.display_name;
+        if (owner.user_type == "moderator") {
+          askerNameLink.innerHTML += "\u2666";
+        }
+        askerNameLink.title = userNameTooltip;
+        
+        askerNameLink.href = owner.link;
+        askerNameLink.className = "niceText";
+        askerNameLink.target = "_blank";
+        
+        askerName.appendChild(askerNameLink);
+      } else {
+        askerName.innerHTML = owner.display_name;
+      }
+      askerNameDiv.appendChild(askerName);
+      askerNameDiv.className = "inline userInfo";
+      
+      if (owner.reputation != undefined) {
+        askerRep.innerHTML = owner.reputation;
+      } else {
+        askerRep.innerHTML = "0";
+      }
+      askerRep.className = "niceText";
+      askerRepDiv.appendChild(askerRep);
+      askerRepDiv.className = "inline userInfo";
+      
+      askerDiv.appendChild(askerImg);
+      
+      askerInfoDiv.appendChild(askerNameDiv);
+      askerInfoDiv.appendChild(document.createElement('br'));
+      askerInfoDiv.appendChild(askerRepDiv);
+      askerInfoDiv.className = "inline avatarText";
+      
+      askerDiv.appendChild(askerInfoDiv);
+      return askerDiv;
+    }
 
-			http.open('HEAD', image_url, false);
-			http.send();
+    function go() {
+      if (getCode('question') == "") {
+        var text = document.createElement('h2');
+        text.innerHTML = "Sorry, there is no question specified";
+        var text2 = document.createElement('p');
+        text2.innerHTML = "Please specify one by using <code>question=</code> in the URL";
+        text.id = "load";
+        document.body.appendChild(text);
+        document.body.appendChild(text2);
+      } else if (getCode('site') == "") {
+        var text = document.createElement('h2');
+        text.innerHTML = "Sorry, there is no site specified";
+        var text2 = document.createElement('p');
+        text2.innerHTML = "Please specify one by using <code>site=</code> in the URL";
+        text.id = "load";
+        document.body.appendChild(text);
+        document.body.appendChild(text2);
+      } else {
+        var text = document.createElement('h2');
+        text.innerHTML = "Loading...";
+        text.id = "load";
+        document.body.appendChild(text);
+        var questionLink = getCode('question');
+        var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
+            + questionLink + '?site=' + getCode('site')
+            + '&filter=!LcDowK8Qgve9uZLCQGryI_&key=JPRwkkqAelchw)6d9S8wcw((';
+        console.log(linkToAPI);
+        var result = JSON.parse(readTextFile(linkToAPI));
+        if (result.items == undefined) {
+          document.getElementById('load').innerHTML = "Whoops, you seemed to get an error";
+          var text2 = document.createElement('p');
+          text2.innerHTML = "";
+        }
+        if (result.items.length === 0) {
+          document.getElementById('load').innerHTML = "Sorry, that's an invalid question";
+        } else {
+          var question = result.items[0];
+          var site = new URI(question.link).authority.substring(0, new URI(
+              question.link).authority.length - 4);
+          var image = 'http://cdn.sstatic.net/' + site + '/img/favicon.ico';
+          console.log(site);
+          var contentDiv = document.getElementById('content');
+          {
+            //Title
+            text.parentElement.removeChild(text);
+            var title = document.createElement('a');
+            var titleWrap = document.createElement('h3');
+            title.innerHTML = question.title;
+            title.href = question.link;
+            title.target = "_blank";
+            title.className = "niceText";
+            titleWrap.appendChild(title);
+            contentDiv.appendChild(titleWrap);
+            contentDiv.appendChild(document.createElement('hr'));
+          }
+          {
+            //Question
+            var body = question.body;
+            var questionBody = document.createElement('div');
+            var tags = document.createElement('div');
+            questionBody.innerHTML = body;
+            questionBody.className = "postContent";
+            
+            var scoreSpan = document.createElement('span');
+            var details = document.createElement('div');
+            var favDiv = document.createElement('div');
+            
+            var favSpan = document.createElement('span');
+            
+            details.id = 'questionDetails';
+            
+            scoreSpan.id = 'scoreSpan';
+            
+            favSpan.className = "favIcon";
+            
+            console.log(question);
+            
+            favSpan.title = question.favorite_count + " user"
+                + (question.favorite_count == 1 ? "" : "s") + " ha"
+                + (question.favorite_count == 1 ? "s" : "ve")
+                + " favourited this question.";
+            
+            favDiv.appendChild(favSpan);
+            
+            console.log('Site: ' + new URI(question.link).authority);
+            for (var i = 0; i < question.tags.length; ++i) {
+              var tag = question.tags[i];
+              var tagElement = document.createElement('a');
+              tagElement.innerHTML = tag;
+              tagElement.href = 'http://' + new URI(question.link).authority
+                  + '/questions/tagged/' + tag;
+              tagElement.target = "_blank";
+              var apiLink = 'https://api.stackexchange.com/2.2/tags/'
+                  + encodeURIComponent(tag) + '/info?site=' + site
+                  + '&key=JPRwkkqAelchw)6d9S8wcw((';
+              console.log(apiLink);
+              var tagItemJSON = JSON.parse(readTextFile(apiLink));
+              console.log(tagItemJSON)
+              var tagItem = tagItemJSON.items[0];
+              if (tagItem.is_required) {
+                tagElement.className = "post-tag-required";
+                console.log('Req');
+              } else if (tagItem.is_moderator_only) {
+                tagElement.className = "post-tag-mod";
+                
+                console.log('Mod');
+              } else {
+                tagElement.className = "post-tag post-tag-default";
+                console.log('Tag');
+              }
+              tags.appendChild(tagElement);
+            }
+            
+            tags.appendChild(document.createElement('br'));
+            tags.appendChild(document.createElement('br'));
+            
+            var score = question.score;
+            
+            scoreSpan.innerHTML = 'Score: ' + score;
+            if (score > 0) {
+              scoreSpan.className = "postDetails niceText green";
+            } else if (score < 0) {
+              scoreSpan.className = "postDetails niceText red";
+            } else {
+              scoreSpan.className = "postDetails niceText grey";
+            }
+            details.appendChild(scoreSpan);
+            
+            var clickFunction = function() {
+              var details = document.getElementById('questionDetails');
+              console.log(details);
+              
+              var upvoteSpan = document.createElement('span');
+              var downvoteSpan = document.createElement('span');
+              var repEarnedSpan1 = document.createElement('span');
+              var repEarnedSpan2 = document.createElement('span');
+              var repSpan = document.createElement('span');
+              var bar1 = document.createElement('span');
+              var bar2 = document.createElement('span');
+              var bar3 = document.createElement('span');
+              
+              bar1.innerHTML = "&nbsp;|&nbsp;";
+              bar2.innerHTML = "&nbsp;|&nbsp;";
+              bar3.innerHTML = "&nbsp;|&nbsp;";
+              
+              upvoteSpan.innerHTML = 'Upvotes: ' + question.up_vote_count;
+              downvoteSpan.innerHTML = 'Downvotes: ' + question.down_vote_count;
+              upvoteSpan.className = "green";
+              downvoteSpan.className = "red";
+              var repEarned = 0;
+              for (var up = 0; up < question.up_vote_count; ++up) {
+                if (site == "stackapps") {
+                  repEarned += 10;
+                } else {
+                  repEarned += 5;
+                }
+              }
+              
+              for (var down = 0; down < question.down_vote_count; ++down) {
+                repEarned -= 2;
+              }
+              
+              if (question.accepted_answer_id != undefined) {
+                repEarned += 2;
+              }
+              repEarnedSpan1.innerHTML = "The OP has earned ";
+              repSpan.innerHTML = repEarned;
+              repEarnedSpan2.innerHTML = " rep from this question.";
+              
+              if (repEarned > 0) {
+                repSpan.className = "green postDetails";
+              } else if (repEarned < 0) {
+                repSpan.className = "red postDetails";
+              } else {
+                repSpan.className = "grey postDetails";
+              }
+              
+              bar1.className = "postDetails niceText grey";
+              bar2.className = "postDetails niceText grey";
+              bar3.className = "postDetails niceText grey";
+              
+              upvoteSpan.className = "green postDetails";
+              downvoteSpan.className = "red postDetails";
+              repEarnedSpan1.className = "postDetails niceText grey";
+              repEarnedSpan2.className = "postDetails niceText grey";
+              
+              details.appendChild(bar1);
+              details.appendChild(upvoteSpan);
+              details.appendChild(bar2);
+              details.appendChild(downvoteSpan);
+              details.appendChild(bar3);
+              details.appendChild(repEarnedSpan1);
+              details.appendChild(repSpan);
+              details.appendChild(repEarnedSpan2);
+              this.onclick = null;
+            }
 
-			return http.status != 404;
-
-		}
-
-		function generateAvatar(owner) {
-			var userNameTooltip = "";
-			var askerDiv = document.createElement('div');
-			if (owner.user_type == "registered") {
-				askerDiv.className = "userDivRegistered";
-				userNameTooltip = "Registered User. This user is a regular user.";
-			} else if (owner.user_type == "moderator") {
-				userNameTooltip = "Moderator. This user is a moderator.";
-				askerDiv.className = "userDivRegistered";
-			} else {
-				askerDiv.className = "userDivUnregistered";
-				userNameTooltip = "Unregistered User. This user has not associated any OpenIDS with their account.";
-
-			}
-			var askerImg = document.createElement('img');
-
-			var askerNameDiv = document.createElement('div');
-			var askerName = document.createElement('span');
-
-			var askerRepDiv = document.createElement('div');
-			var askerRep = document.createElement('span');
-
-			var askerInfoDiv = document.createElement('div');
-
-			askerInfoDiv.className = "inline";
-
-			if (owner.profile_image != undefined) {
-				askerImg.src = owner.profile_image;
-			} else {
-				askerImg.src = "http://imgur.com/UoyazgJ.png";
-			}
-			askerImg.className = "userImage";
-
-			if (owner.link != undefined) {
-				var askerNameLink = document.createElement('a');
-				askerNameLink.innerHTML = owner.display_name;
-				if (owner.user_type == "moderator") {
-					askerNameLink.innerHTML += "\u2666";
-				}
-				askerNameLink.title = userNameTooltip;
-
-				askerNameLink.href = owner.link;
-				askerNameLink.className = "niceText";
-				askerNameLink.target = "_blank";
-
-				askerName.appendChild(askerNameLink);
-			} else {
-				askerName.innerHTML = owner.display_name;
-			}
-			askerNameDiv.appendChild(askerName);
-			askerNameDiv.className = "inline userInfo";
-
-			if (owner.reputation != undefined) {
-				askerRep.innerHTML = owner.reputation;
-			} else {
-				askerRep.innerHTML = "0";
-			}
-			askerRep.className = "niceText";
-			askerRepDiv.appendChild(askerRep);
-			askerRepDiv.className = "inline userInfo";
-
-			askerDiv.appendChild(askerImg);
-
-			askerInfoDiv.appendChild(askerNameDiv);
-			askerInfoDiv.appendChild(document.createElement('br'));
-			askerInfoDiv.appendChild(askerRepDiv);
-			askerInfoDiv.className = "inline avatarText";
-
-			askerDiv.appendChild(askerInfoDiv);
-			return askerDiv;
-		}
-
-		function go() {
-			if (getCode('question') == "") {
-				var text = document.createElement('h2');
-				text.innerHTML = "Sorry, there is no question specified";
-				var text2 = document.createElement('p');
-				text2.innerHTML = "Please specify one by using <code>question=</code> in the URL";
-				text.id = "load";
-				document.body.appendChild(text);
-				document.body.appendChild(text2);
-			} else if (getCode('site') == "") {
-				var text = document.createElement('h2');
-				text.innerHTML = "Sorry, there is no site specified";
-				var text2 = document.createElement('p');
-				text2.innerHTML = "Please specify one by using <code>site=</code> in the URL";
-				text.id = "load";
-				document.body.appendChild(text);
-				document.body.appendChild(text2);
-			} else {
-				var text = document.createElement('h2');
-				text.innerHTML = "Loading...";
-				text.id = "load";
-				document.body.appendChild(text);
-				var questionLink = getCode('question');
-				var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
-						+ questionLink
-						+ '?site='
-						+ getCode('site')
-						+ '&filter=!LcDowK8Qgve9uZLCQGryI_&key=JPRwkkqAelchw)6d9S8wcw((';
-				console.log(linkToAPI);
-				var result = JSON.parse(readTextFile(linkToAPI));
-				if (result.items == undefined) {
-					document.getElementById('load').innerHTML = "Whoops, you seemed to get an error";
-					var text2 = document.createElement('p');
-					text2.innerHTML = "";
-				}
-				if (result.items.length === 0) {
-					document.getElementById('load').innerHTML = "Sorry, that's an invalid question";
-				} else {
-					var question = result.items[0];
-					var site = new URI(question.link).authority.substring(0,
-							new URI(question.link).authority.length - 4);
-					var image = 'http://cdn.sstatic.net/' + site
-							+ '/img/favicon.ico';
-					console.log(site);
-					var contentDiv = document.getElementById('content');
-					{
-						//Title
-						text.parentElement.removeChild(text);
-						var title = document.createElement('a');
-						var titleWrap = document.createElement('h3');
-						title.innerHTML = question.title;
-						title.href = question.link;
-						title.target = "_blank";
-						title.className = "niceText";
-						titleWrap.appendChild(title);
-						contentDiv.appendChild(titleWrap);
-						contentDiv.appendChild(document.createElement('hr'));
-					}
-					{
-						//Question
-						var body = question.body;
-						var questionBody = document.createElement('div');
-						var tags = document.createElement('div');
-						questionBody.innerHTML = body;
-						questionBody.className = "postContent";
-
-						var scoreSpan = document.createElement('span');
-						var details = document.createElement('div');
-						var favDiv = document.createElement('div');
-
-						var favSpan = document.createElement('span');
-
-						details.id = 'questionDetails';
-
-						scoreSpan.id = 'scoreSpan';
-
-						favSpan.className = "favIcon";
-
-						console.log(question);
-
-						favSpan.title = question.favorite_count + " user"
-								+ (question.favorite_count == 1 ? "" : "s")
-								+ " ha"
-								+ (question.favorite_count == 1 ? "s" : "ve")
-								+ " favourited this question.";
-
-						favDiv.appendChild(favSpan);
-
-						console
-								.log('Site: '
-										+ new URI(question.link).authority);
-						for (var i = 0; i < question.tags.length; ++i) {
-							var tag = question.tags[i];
-							var tagElement = document.createElement('a');
-							tagElement.innerHTML = tag;
-							tagElement.href = 'http://'
-									+ new URI(question.link).authority
-									+ '/questions/tagged/' + tag;
-							tagElement.target = "_blank";
-							var apiLink = 'https://api.stackexchange.com/2.2/tags/'
-									+ encodeURIComponent(tag)
-									+ '/info?site='
-									+ site + '&key=JPRwkkqAelchw)6d9S8wcw((';
-							console.log(apiLink);
-							var tagItemJSON = JSON.parse(readTextFile(apiLink));
-							console.log(tagItemJSON)
-							var tagItem = tagItemJSON.items[0];
-							if (tagItem.is_required) {
-								tagElement.className = "post-tag-required";
-								console.log('Req');
-							} else if (tagItem.is_moderator_only) {
-								tagElement.className = "post-tag-mod";
-
-								console.log('Mod');
-							} else {
-								tagElement.className = "post-tag post-tag-default";
-								console.log('Tag');
-							}
-							tags.appendChild(tagElement);
-						}
-
-						tags.appendChild(document.createElement('br'));
-						tags.appendChild(document.createElement('br'));
-
-						var score = question.score;
-
-						scoreSpan.innerHTML = 'Score: ' + score;
-						if (score > 0) {
-							scoreSpan.className = "postDetails niceText green";
-						} else if (score < 0) {
-							scoreSpan.className = "postDetails niceText red";
-						} else {
-							scoreSpan.className = "postDetails niceText grey";
-						}
-						details.appendChild(scoreSpan);
-
-						var clickFunction = function() {
-							var details = document
-									.getElementById('questionDetails');
-							console.log(details);
-
-							var upvoteSpan = document.createElement('span');
-							var downvoteSpan = document.createElement('span');
-							var repEarnedSpan1 = document.createElement('span');
-							var repEarnedSpan2 = document.createElement('span');
-							var repSpan = document.createElement('span');
-							var bar1 = document.createElement('span');
-							var bar2 = document.createElement('span');
-							var bar3 = document.createElement('span');
-
-							bar1.innerHTML = "&nbsp;|&nbsp;";
-							bar2.innerHTML = "&nbsp;|&nbsp;";
-							bar3.innerHTML = "&nbsp;|&nbsp;";
-
-							upvoteSpan.innerHTML = 'Upvotes: '
-									+ question.up_vote_count;
-							downvoteSpan.innerHTML = 'Downvotes: '
-									+ question.down_vote_count;
-							upvoteSpan.className = "green";
-							downvoteSpan.className = "red";
-							var repEarned = 0;
-							for (var up = 0; up < question.up_vote_count; ++up) {
-								if (site == "stackapps") {
-									repEarned += 10;
-								} else {
-									repEarned += 5;
-								}
-							}
-
-							for (var down = 0; down < question.down_vote_count; ++down) {
-								repEarned -= 2;
-							}
-
-							if (question.accepted_answer_id != undefined) {
-								repEarned += 2;
-							}
-							repEarnedSpan1.innerHTML = "The OP has earned ";
-							repSpan.innerHTML = repEarned;
-							repEarnedSpan2.innerHTML = " rep from this question.";
-
-							if (repEarned > 0) {
-								repSpan.className = "green postDetails";
-							} else if (repEarned < 0) {
-								repSpan.className = "red postDetails";
-							} else {
-								repSpan.className = "grey postDetails";
-							}
-
-							bar1.className = "postDetails niceText grey";
-							bar2.className = "postDetails niceText grey";
-							bar3.className = "postDetails niceText grey";
-
-							upvoteSpan.className = "green postDetails";
-							downvoteSpan.className = "red postDetails";
-							repEarnedSpan1.className = "postDetails niceText grey";
-							repEarnedSpan2.className = "postDetails niceText grey";
-
-							details.appendChild(bar1);
-							details.appendChild(upvoteSpan);
-							details.appendChild(bar2);
-							details.appendChild(downvoteSpan);
-							details.appendChild(bar3);
-							details.appendChild(repEarnedSpan1);
-							details.appendChild(repSpan);
-							details.appendChild(repEarnedSpan2);
-							this.onclick = null;
-						}
-
-						scoreSpan.onclick = clickFunction;
-
-						contentDiv.appendChild(details);
-						contentDiv.appendChild(favDiv);
-						contentDiv.appendChild(document.createElement('br'));
-						contentDiv.appendChild(questionBody);
-						contentDiv.appendChild(tags);
-					}
-					{
-						//Avatar
-						var questionAvatar = generateAvatar(question.owner);
-						contentDiv.appendChild(questionAvatar);
-					}
-					{
-						//Generate answers
-						var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
-								+ questionLink
-								+ '/answers?site='
-								+ getCode('site')
-								+ '&filter=!b0OfNR*h33*3.3&key=JPRwkkqAelchw)6d9S8wcw((&sort=votes';
-						var result = JSON.parse(readTextFile(linkToAPI));
-						var answers = result.items;
-						var answerCount = document.createElement('h4');
-						answerCount.innerHTML = 'There '
-								+ (answers.length > 0 && answers.length < 2 ? "is "
-										: "are ")
-								+ answers.length
-								+ ' answer'
-								+ (answers.length > 0 && answers.length < 2 ? ""
-										: "s");
-						answerCount.className = "postDetails niceText";
-
-						contentDiv.appendChild(document.createElement('hr'));
-
-						contentDiv.appendChild(answerCount);
-
-						for (var i = 0; i < answers.length; ++i) {
-							var answer = answers[i];
-							var avatar = generateAvatar(answer.owner);
-							contentDiv
-									.appendChild(document.createElement('hr'));
-
-							var answerDiv = document.createElement('div');
-							var details = document.createElement('div');
-							var content = document.createElement('div');
-
-							var links = document.createElement('div');
-							var link = document.createElement('a');
-
-							var scoreSpan = document.createElement('span');
-							var acceptedSpan = document.createElement('span');
-
-							var accepted = answer.is_accepted;
-							var score = answer.score;
-							var body = answer.body;
-
-							details.id = "answer" + i;
-
-							content.innerHTML = body;
-							content.className = "postContent";
-
-							link.innerHTML = "link";
-							link.href = answer.link;
-							link.target = "_blank";
-							link.className = "niceText";
-							links.appendChild(link);
-
-							scoreSpan.innerHTML = 'Score: ' + score;
-							scoreSpan.className = "postDetails niceText grey";
-							details.appendChild(scoreSpan);
-
-							if (accepted) {
-								var line = document.createElement('span');
-								line.innerHTML = " | ";
-								acceptedSpan.innerHTML = "Accepted";
-								acceptedSpan.title = "This answer was accepted by the OP.";
-								acceptedSpan.className = "postDetails niceText accepted";
-								line.className = "postDetails niceText";
-								var acceptedIcon = document
-										.createElement('span');
-								acceptedIcon.className = "acceptedIcon";
-								details.appendChild(line);
-								details.appendChild(acceptedSpan);
-								details.appendChild(document
-										.createElement('br'));
-								details.appendChild(acceptedIcon);
-								details.appendChild(document
-										.createElement('br'));
-								details.appendChild(document
-										.createElement('br'));
-							}
-							answerDiv.appendChild(details);
-							answerDiv.appendChild(content);
-							answerDiv.appendChild(links);
-							answerDiv.appendChild(avatar);
-							contentDiv.appendChild(answerDiv);
-						}
-					}
-
-					var preCodes = document.getElementsByTagName('pre');
-					for (var i = 0; i < preCodes.length; ++i) {
-						var entry = preCodes[i];
-						var innerHTML = entry.innerHTML.substring(6,
-								entry.innerHTML.length - 7);
-						entry.innerHTML = innerHTML;
-						entry.className = "prettyprint code";
-						entry.style = "width: 700px;";
-					}
-
-					var aTags = document.getElementsByTagName('a');
-					for (var i = 0; i < aTags.length; ++i) {
-						aTags[i].target = "_blank";
-					}
-
-					var blockquotes = document
-							.getElementsByTagName('blockquote');
-					for (var i = 0; i < blockquotes.length; ++i) {
-						blockquotes[i].className += "quote";
-					}
-					load();
-					console.log('Done!');
-					contentDiv.className = "content";
-					width = $(document).width();
-					contentDiv.style = "width: " + width + "px;";
-					console.log(width);
-				}
-			}
-		}
-	</script>
+            scoreSpan.onclick = clickFunction;
+            
+            contentDiv.appendChild(details);
+            contentDiv.appendChild(favDiv);
+            contentDiv.appendChild(document.createElement('br'));
+            contentDiv.appendChild(questionBody);
+            contentDiv.appendChild(tags);
+          }
+          {
+            //Avatar
+            var questionAvatar = generateAvatar(question.owner);
+            contentDiv.appendChild(questionAvatar);
+          }
+          {
+            //Generate answers
+            var linkToAPI = 'https://api.stackexchange.com/2.2/questions/'
+                + questionLink
+                + '/answers?site='
+                + getCode('site')
+                + '&filter=!b0OfNR*h33*3.3&key=JPRwkkqAelchw)6d9S8wcw((&sort=votes';
+            var result = JSON.parse(readTextFile(linkToAPI));
+            var answers = result.items;
+            var answerCount = document.createElement('h4');
+            answerCount.innerHTML = 'There '
+                + (answers.length > 0 && answers.length < 2 ? "is " : "are ")
+                + answers.length + ' answer'
+                + (answers.length > 0 && answers.length < 2 ? "" : "s");
+            answerCount.className = "postDetails niceText";
+            
+            contentDiv.appendChild(document.createElement('hr'));
+            
+            contentDiv.appendChild(answerCount);
+            
+            for (var i = 0; i < answers.length; ++i) {
+              var answer = answers[i];
+              var avatar = generateAvatar(answer.owner);
+              contentDiv.appendChild(document.createElement('hr'));
+              
+              var answerDiv = document.createElement('div');
+              var details = document.createElement('div');
+              var content = document.createElement('div');
+              
+              var links = document.createElement('div');
+              var link = document.createElement('a');
+              
+              var scoreSpan = document.createElement('span');
+              var acceptedSpan = document.createElement('span');
+              
+              var accepted = answer.is_accepted;
+              var score = answer.score;
+              var body = answer.body;
+              
+              details.id = "answer" + i;
+              
+              content.innerHTML = body;
+              content.className = "postContent";
+              
+              link.innerHTML = "link";
+              link.href = answer.link;
+              link.target = "_blank";
+              link.className = "niceText";
+              links.appendChild(link);
+              
+              scoreSpan.innerHTML = 'Score: ' + score;
+              scoreSpan.className = "postDetails niceText grey";
+              details.appendChild(scoreSpan);
+              
+              if (accepted) {
+                var line = document.createElement('span');
+                line.innerHTML = " | ";
+                acceptedSpan.innerHTML = "Accepted";
+                acceptedSpan.title = "This answer was accepted by the OP.";
+                acceptedSpan.className = "postDetails niceText accepted";
+                line.className = "postDetails niceText";
+                var acceptedIcon = document.createElement('span');
+                acceptedIcon.className = "acceptedIcon";
+                details.appendChild(line);
+                details.appendChild(acceptedSpan);
+                details.appendChild(document.createElement('br'));
+                details.appendChild(acceptedIcon);
+                details.appendChild(document.createElement('br'));
+                details.appendChild(document.createElement('br'));
+              }
+              answerDiv.appendChild(details);
+              answerDiv.appendChild(content);
+              answerDiv.appendChild(links);
+              answerDiv.appendChild(avatar);
+              contentDiv.appendChild(answerDiv);
+            }
+          }
+          
+          var preCodes = document.getElementsByTagName('pre');
+          for (var i = 0; i < preCodes.length; ++i) {
+            var entry = preCodes[i];
+            var innerHTML = entry.innerHTML.substring(6,
+                entry.innerHTML.length - 7);
+            entry.innerHTML = innerHTML;
+            entry.className = "prettyprint code";
+            entry.style = "width: 700px;";
+          }
+          
+          var aTags = document.getElementsByTagName('a');
+          for (var i = 0; i < aTags.length; ++i) {
+            aTags[i].target = "_blank";
+          }
+          
+          var blockquotes = document.getElementsByTagName('blockquote');
+          for (var i = 0; i < blockquotes.length; ++i) {
+            blockquotes[i].className += "quote";
+          }
+          load();
+          console.log('Done!');
+          contentDiv.className = "content";
+          width = $(document).width();
+          contentDiv.style = "width: " + width + "px;";
+          console.log(width);
+        }
+      }
+    }
+  </script>
 	<div id="content"></div>
 </body>
 </html>

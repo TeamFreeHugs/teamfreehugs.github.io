@@ -1,0 +1,88 @@
+@CHARSET "UTF-8";
+
+button {
+	border-radius: 25px;
+	background-color: #BFE8B0;
+	outline: none;
+	border: 2px solid #90C3D4;
+	opacity: 0.8;
+	padding: 10px 30px;
+	transition: border 1s, background-color 1s, opacity 1s;
+	-webkit-transition: border 1s, background-color 1s, opacity 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+	padding: 10px 30px;
+}
+
+button:hover {
+	border: 2px solid #A6DBED;
+	background-color: #AEF097;
+	opacity: 1;
+	transition: border 1s, background-color 1s, opacity 1s;
+	-webkit-transition: border 1s, background-color 1s, opacity 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+	transition: border 1s, background-color 1s, opacity 1s;
+}
+
+hr {
+	height: 1.2px;
+	width: calc(100% - 10px);
+	border: none;
+	background: -webkit-linear-gradient(left, #FFFFFF, #D9D9D9, #FFFFFF);
+	background: -o-linear-gradient(left, #FFFFFF, #D9D9D9, #FFFFFF);
+	background: -moz-linear-gradient(left, #FFFFFF, #D9D9D9, #FFFFFF);
+	background: linear-gradient(left, #FFFFFF, #D9D9D9, #FFFFFF);
+	background: -webkit-linear-gradient(left, #FFFFFF, #D9D9D9, #FFFFFF);
+	border: none;
+}
+
+span:not ([class="kwd"] ), span:not ([class="pln"] ), span:not ([class="pun"]
+	 ), span:not ([class="com"] ), span:not ([class="typ"] ), span:not ([class="str"]
+	 ), kfrmtre {
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+a, button, p, h1, h2, h3, h4, h5, h6 {
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: #54D4FF;
+	transition: color 1s;
+	-webkit-transition: color 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+}
+
+a:visited {
+	color: #358FBD;
+	transition: color 1s;
+	-webkit-transition: color 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+}
+
+code, pre {
+	font-family: "Lucida Console", Monaco, monospace;
+	background-color: #ADADAD;
+	width: 500px;
+	overflow: auto;
+	max-height: 500px;
+}
+
+.website-element {
+	border-radius: 25px;
+	border: 1px solid #000000;
+	
+	padding: 10px 30px;
+}
+
+*::-moz-focus-inner {
+	border: 0;
+}
