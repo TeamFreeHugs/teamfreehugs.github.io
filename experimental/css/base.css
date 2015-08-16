@@ -113,7 +113,6 @@ textarea {
 	width: 500px;
 	height: 200px;
 	scroll: auto;
-	white-space: nowrap;
 	transition: background-color 1s;
 	-webkit-transition: background-color 1s;
 	-webkit-transition-timing-function: ease;
