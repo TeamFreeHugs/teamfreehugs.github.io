@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-button {
+button, input[type="submit"] {
 	border-radius: 25px;
 	background-color: #BFE8B0;
 	outline: none;
@@ -14,7 +14,7 @@ button {
 	padding: 10px 30px;
 }
 
-button:hover {
+button:hover, input[type="submit"]:hover {
 	border: 2px solid #A6DBED;
 	background-color: #AEF097;
 	opacity: 1;
@@ -22,7 +22,15 @@ button:hover {
 	-webkit-transition: border 1s, background-color 1s, opacity 1s;
 	-webkit-transition-timing-function: ease;
 	transition-timing-function: ease;
-	transition: border 1s, background-color 1s, opacity 1s;
+}
+
+button:focus {
+	background-color: #AEF097;
+	transition: background-color 1s;
+	-webkit-transition: background-color 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+	transition: background-color 1s;
 }
 
 hr {
@@ -43,7 +51,8 @@ span:not ([class="kwd"] ), span:not ([class="pln"] ), span:not ([class="pun"]
 	font-family: "Arial Black", Gadget, sans-serif;
 }
 
-a, button, p, h1, h2, h3, h4, h5, h6 {
+a, button, p, h1, h2, h3, h4, h5, h6, sub, sup, small, cite, dt, kbd,
+	input, textarea {
 	font-family: "Arial Black", Gadget, sans-serif;
 }
 
@@ -76,11 +85,69 @@ code, pre {
 	max-height: 500px;
 }
 
-.website-element {
-	border-radius: 25px;
-	border: 1px solid #000000;
-	
-	padding: 10px 30px;
+kbd {
+	/*
+	Stackexchange style!
+	*/
+	padding: .1em .6em;
+	border: 1px solid #ccc;
+	font-size: 11px;
+	background-color: #f7f7f7;
+	-moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff;
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff;
+	border-radius: 3px;
+	display: inline-block;
+	margin: 0 .1em;
+	text-shadow: 0 1px 0 #fff;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+textarea {
+	background-color: #FFFFFF;
+	resize: none;
+	border: 1px solid #B0B0B0;
+	border-radius: 2.3px;
+	font-size: 14px;
+	width: 500px;
+	height: 200px;
+	scroll: auto;
+	white-space: nowrap;
+	transition: background-color 1s;
+	-webkit-transition: background-color 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+	resize: none;
+}
+
+textarea:focus {
+	background-color: #E1F4FA;
+	transition: background-color 1s;
+	-webkit-transition: background-color 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+}
+
+input[type="text"] {
+	background-color: #FFFFFF;
+	border: 1px solid #B0B0B0;
+	border-radius: 2.3px;
+	font-size: 14px;
+	width: 500px;
+	scroll: auto;
+	transition: background-color 1s;
+	-webkit-transition: background-color 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+}
+
+input[type="text"]:focus {
+	background-color: #E1F4FA;
+	transition: background-color 1s;
+	-webkit-transition: background-color 1s;
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
 }
 
 *::-moz-focus-inner {

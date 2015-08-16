@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Clean English</title>
+<link rel="stylesheet"
+	href="file:///home/eyeballcode/Eclipse/Workspace/Eclipse/HTML/experimental/css/base.css" />
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="lib/codemirror.js"></script>
+<link rel="stylesheet" href="../lib/codemirror.css">
+<script src="mode/javascript/javascript.js"></script>
+<script>
+  function go() {
+    reasons = $('#reasons');
+    text = JSON.stringify({
+      i : {
+        exp : "/(^|\s|\()i(\s|,|\.|!|\?|;|\/|\)|\'|$)/",
+        replace : "$1I$2",
+        reason : "'I' should be caps"
+      },
+      u : {
+        exp : "/(^|\s|\()u(\s|,|\.|!|\?|;|\/|\)|\'|$)/",
+        replace : "$1you$2",
+        reason : "'U' should be 'you'"
+      }
+    }, null, 4);
+    reasons.val(text);
+  }
+  
+  var codeBox = new CodeMirror($('#codeBox')[0]);
+  
+</script>
+</head>
+<body onload="go();">
+	<h3>English Cleaner</h3>
+	<hr>
+	<p>What's this? Its a piece of code to clean up your english.</p>
+	<div style="display: inline-block;">
+		<p>Enter your text here:</p>
+		<textarea id="badEng"></textarea>
+	</div>
+	<div style="display: inline-block; margin-left: 20px; position: fixed;" id="codeBox">
+		<p>Enter your reasons here:</p>
+		<textarea id="reasons" style="white-space: pre;" autocomplete="off"></textarea>
+		<br>
+		<button id="formatButton">Format!</button>
+	</div>
+	<h5 style="text-align: left;">Here's the output</h5>
+	<hr>
+	<textarea id="goodEng"></textarea>
+	<p>Edit Reasoning:</p>
+	<textarea id="reason"></textarea>
+</body>
+</html>
