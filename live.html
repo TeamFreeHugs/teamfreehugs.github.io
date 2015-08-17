@@ -29,10 +29,11 @@
     $(document).bind('keydown', 'ctrl+s', function(e) {
       e.preventDefault()
     });
-    $('#htmlbody').keydown(update);
-    $('#htmlhead').keydown(update);
-    $('#js').keydown(update);
-    $('#css').keydown(update);
+    window.setInterval(update, 1000);
+    //$('#htmlbody').keydown(update);
+    //$('#htmlhead').keydown(update);
+    //$('#js').keydown(update);
+    //$('#css').keydown(update);
   }
 </script>
 </head>
