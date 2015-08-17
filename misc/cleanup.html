@@ -4,31 +4,125 @@
 <meta charset="UTF-8">
 <title>Clean English</title>
 <link rel="stylesheet"
-	href="file:///home/eyeballcode/Eclipse/Workspace/Eclipse/HTML/experimental/css/base.css" />
+	href="http://teamfreehugs.github.io/experimental/css/base.css" />
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="lib/codemirror.js"></script>
-<link rel="stylesheet" href="../lib/codemirror.css">
-<script src="mode/javascript/javascript.js"></script>
 <script>
   function go() {
     reasons = $('#reasons');
     text = JSON.stringify({
       i : {
-        exp : "/(^|\s|\()i(\s|,|\.|!|\?|;|\/|\)|\'|$)/",
+        exp : "(^|\\s|\\()i(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
         replace : "$1I$2",
         reason : "'I' should be caps"
       },
       u : {
-        exp : "/(^|\s|\()u(\s|,|\.|!|\?|;|\/|\)|\'|$)/",
+        exp : "(^|\\s|\\()u(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
         replace : "$1you$2",
         reason : "'U' should be 'you'"
+      },
+      why : {
+        exp : "(^|\\s|\\()(y|wai)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1why$3",
+        reason : "'y' or 'wai' should be 'why'"
+      },
+      help : {
+        exp : "(^|\\s|\\()(h*[e|a]*l*p*)?(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1help$3",
+        reason : "'y' or 'wai' should be 'why'"
+      },
+      your : {
+        exp : "(^|\\s|\\()(ur|yr)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1your$3",
+        reason : "Expanded short form to 'your'"
+      },
+      wont : {
+        exp : "(^|\\s|\\()wont(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1won't$2",
+        reason : "Added apostrophe for 'wont'"
+      },
+      cant : {
+        exp : "(^|\\s|\\()cant(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1can't$2",
+        reason : "Added apostrophe for 'cant'"
+      },
+      dont : {
+        exp : "(^|\\s|\\()dont(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1don't$2",
+        reason : "Added apostrophe for 'dont'"
+      },
+      didnt : {
+        exp : "(^|\\s|\\()didnt(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1didn't$2",
+        reason : "Added apostrophe for 'didnt'"
+      },
+      shouldnt : {
+        exp : "(^|\\s|\\()shouldnt(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1shouldn't$2",
+        reason : "Added apostrophe for 'shouldnt'"
+      },
+      plz : {
+        exp : "(^|\\s|\\()(plz|pls)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "i",
+        replace : "$1please$3",
+        reason : "Expanded short form of 'please'"
+      },
+      space : {
+        exp : "(^|\\s|\\() (\\ )*(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+        args : "",
+        replace : " ",
+        reason : "Cleaned up extra spaces"
+      },
+      punctuation : {
+        exp : " (\\.|\\?|\\!|\\,)",
+        args : "",
+        replace : "$1 ",
+        reason : "Cleaned up punctuation"
+      },
+      extrapunctuation : {
+        exp : "(\\.|\\?|\\!|\\,)*",
+        args : "",
+        replace : "$1",
+        reason : "Cleaned up punctuation"
       }
     }, null, 4);
     reasons.val(text);
+    $('#formatButton')
+        .click(
+            function() {
+              input = $('#badEng').val();
+              end = input;
+              endReason = "";
+              parsed = JSON.parse($('#reasons').val());
+              for (type in parsed) {
+                //   if (parsed[type].exp == undefined)
+                
+                var regex = new RegExp(parsed[type].exp);
+                //   if (parsed[type].replace == undefined)
+                var replacement = parsed[type].replace;
+                var reason = (parsed[type].reason != undefined ? parsed[type].reason
+                    : "");
+                tmp = end;
+                end = end.replace(new RegExp(regex, 'g' + parsed[type].args),
+                    replacement);
+                if (reason.trim() != "" && end != tmp)
+                  endReason += reason + ";\n";
+              }
+              if (endReason === "")
+                endReason = "Nothing to replace;";
+              $('#goodEng').val(end);
+              $('#reasonBox').val(endReason);
+            });
   }
-  
-  var codeBox = new CodeMirror($('#codeBox')[0]);
-  
 </script>
 </head>
 <body onload="go();">
@@ -36,19 +130,32 @@
 	<hr>
 	<p>What's this? Its a piece of code to clean up your english.</p>
 	<div style="display: inline-block;">
-		<p>Enter your text here:</p>
+		<p id="in">Enter your text here:</p>
 		<textarea id="badEng"></textarea>
 	</div>
-	<div style="display: inline-block; margin-left: 20px; position: fixed;" id="codeBox">
+	<div style="display: inline-block; margin-left: 20px; position: fixed;"
+		id="codeBox">
 		<p>Enter your reasons here:</p>
-		<textarea id="reasons" style="white-space: pre;" autocomplete="off"></textarea>
+		<textarea id="reasons" spellcheck='false'></textarea>
 		<br>
-		<button id="formatButton">Format!</button>
+		<button id="formatButton" style="margin-top: 6px;">Format!</button>
 	</div>
-	<h5 style="text-align: left;">Here's the output</h5>
+	<div
+		style="display: inline-block; margin-left: 550px; position: fixed;">
+		<p>
+			<a href="#in" id="scrollInput">Input</a>
+		</p>
+		<p>
+			<a href="#out" id="scrollOutput">Output</a>
+		</p>
+		<p>
+			<a href="#reason" id="scrollReason">Reasoning</a>
+		</p>
+	</div>
+	<h5 style="text-align: left;" id="out">Here's the output</h5>
 	<hr>
-	<textarea id="goodEng"></textarea>
-	<p>Edit Reasoning:</p>
-	<textarea id="reason"></textarea>
+	<textarea id="goodEng" autocomplete="off"></textarea>
+	<p id="reason">Edit Reasoning:</p>
+	<textarea id="reasonBox"></textarea>
 </body>
 </html>
