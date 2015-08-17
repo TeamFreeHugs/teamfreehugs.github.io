@@ -93,9 +93,16 @@
         args : "",
         replace : "$1",
         reason : "Cleaned up punctuation"
+      },
+      firstCaps : {
+        exp : "(\\.|\\?|\\!) (\w)*",
+        args : "i",
+        adv : "caps",
+        reason : "Capitalized first letter"
       }
     }, null, 4);
     reasons.val(text);
+    
     $('#formatButton')
         .click(
             function() {
@@ -111,9 +118,18 @@
                 var replacement = parsed[type].replace;
                 var reason = (parsed[type].reason != undefined ? parsed[type].reason
                     : "");
+                var f = (parsed[type].adv != undefined ? parsed[type].adv
+                    : null);
                 tmp = end;
-                end = end.replace(new RegExp(regex, 'g' + parsed[type].args),
-                    replacement);
+                
+                if (f == null)
+                  end = end.replace(new RegExp(regex, 'g' + parsed[type].args),
+                      replacement);
+                else {
+                  if (typeof f == "function")
+                    end = f(regex, parsed[type].args);
+                }
+                
                 if (reason.trim() != "" && end != tmp)
                   endReason += reason + ";\n";
               }
@@ -129,19 +145,29 @@
 	<h3>English Cleaner</h3>
 	<hr>
 	<p>What's this? Its a piece of code to clean up your english.</p>
-	<div style="display: inline-block;">
-		<p id="in">Enter your text here:</p>
+
+	<div style="display: inline-block; left: 0;">
+		<h3 id="in">Enter your text here:</h3>
+		<hr>
 		<textarea id="badEng"></textarea>
+		<h3 id="out">Here's the output</h3>
+		<hr>
+		<textarea id="goodEng" autocomplete="off"></textarea>
+		<h3 id="reason">Edit Reasoning:</h3>
+		<hr>
+		<textarea id="reasonBox"></textarea>
 	</div>
-	<div style="display: inline-block; margin-left: 20px; position: fixed;"
+
+	<div style="display: inline-block; left: 590px; position: fixed;"
 		id="codeBox">
-		<p>Enter your reasons here:</p>
+		<h3>Enter your reasons here:</h3>
+		<hr>
 		<textarea id="reasons" spellcheck='false'></textarea>
-		<br>
-		<button id="formatButton" style="margin-top: 6px;">Format!</button>
+		<h3>Functions:</h3>
+		<textarea id="functions" spellcheck='false' style="margin-top: 6px"></textarea>
 	</div>
-	<div
-		style="display: inline-block; margin-left: 550px; position: fixed;">
+
+	<div style="display: inline-block; right: 50px; position: fixed;">
 		<p>
 			<a href="#in" id="scrollInput">Input</a>
 		</p>
@@ -151,11 +177,8 @@
 		<p>
 			<a href="#reason" id="scrollReason">Reasoning</a>
 		</p>
+		<br>
+		<button id="formatButton" style="margin-top: 6px;">Format!</button>
 	</div>
-	<h5 style="text-align: left;" id="out">Here's the output</h5>
-	<hr>
-	<textarea id="goodEng" autocomplete="off"></textarea>
-	<p id="reason">Edit Reasoning:</p>
-	<textarea id="reasonBox"></textarea>
 </body>
 </html>

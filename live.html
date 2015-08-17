@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Editor</title>
+<link rel="stylesheet"
+	href="http://teamfreehugs.github.io/experimental/css/base.css" />
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://teamfreehugs.github.io/js/min/jQuery.hotkeys.js"></script>
+<script>
+  old = "";
+  function update() {
+    screen = $('#out')[0];
+    src = "<html><head>";
+    if ($('#js').val().trim() != "")
+      src += "<script>" + $('#js').val() + "<\/script>";
+    if ($('#css').val().trim() != "")
+      src += "<style>" + $('#css').val() + "</style>";
+    if ($('#htmlhead').val().trim() != "")
+      src += $('#htmlhead').val();
+    src += "</head><body>" + $('#htmlbody').val() + " </body></html>";
+    if (old == src)
+      return;
+    old = src;
+    screen.srcdoc = src;
+  }
+
+  function go() {
+    $(document).bind('keydown', 'ctrl+s', function(e) {
+      e.preventDefault()
+    });
+    $('#htmlbody').keydown(update);
+    $('#htmlhead').keydown(update);
+    $('#js').keydown(update);
+    $('#css').keydown(update);
+  }
+</script>
+</head>
+<body onload="go()">
+	<div style="position: fixed;">
+		<h5>HTML Code:</h5>
+		<textarea id="htmlbody"
+			style="height: calc(( 100vh - 250px)/3); width: 250px; display: inline-block;"
+			placeholder="HTML BODY"></textarea>
+		<textarea id="htmlhead"
+			style="height: calc(( 100vh - 250px)/3); width: 250px; display: inline-block;"
+			placeholder="HTML HEADERS">
+&lt;link rel=&quot;stylesheet&quot; href=&quot;http://teamfreehugs.github.io/experimental/css/base.css&quot;&gt;
+&lt;script src=&quot;http://code.jquery.com/jquery-2.1.4.min.js&quot;&gt;&lt;/script&gt;</textarea>
+		<h5>JavaScript Code:</h5>
+		<textarea id="js" style="height: calc(( 100vh - 250px)/3);"
+			placeholder="JS"></textarea>
+		<h5>CSS Code:</h5>
+		<textarea id="css" style="height: calc(( 100vh - 250px)/3);"
+			placeholder="CSS"></textarea>
+	</div>
+	<div
+		style="height: calc(100vh - 20px); top: 10px; position: fixed; right: 60px;">
+		<iframe id="out"
+			style="height: calc(100vh - 20px); width: calc(100vh);"></iframe>
+	</div>
+</body>
+</html>
