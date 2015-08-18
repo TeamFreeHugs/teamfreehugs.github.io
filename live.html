@@ -8,10 +8,32 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="http://teamfreehugs.github.io/js/min/jQuery.hotkeys.js"></script>
 <script>
+  function addLog(text, color) {
+    textE = document.createElement('span');
+    textE.innerHTML = text;
+    textE.style.color = color;
+    $('#jsOutput').append(textE);
+    $('#jsOutput').append(document.createElement('br'));
+  }
+
+  function log(text) {
+    addLog(text, '#000000');
+  }
+
+  function error(text) {
+    addLog(text, '#FF0000');
+  }
+
   old = "";
   function update() {
     screen = $('#out')[0];
     src = "<html><head>";
+    
+    src += "<script>console.log=function(text){$(parent.document.getElementById('jsOutput')).append($('<span>').html(text).css('color', '#000000').append($('<br>')));}<\/script>";
+    src += "<script>console.error=function(text){$(parent.document.getElementById('jsOutput')).append($('<span>').html(text).css('color', '#FF0000').append($('<br>')));};console.exception=console.error;<\/script>";
+    src += "<script>console.debug=function(text){$(parent.document.getElementById('jsOutput')).append($('<span>').html(text).css('color', '#00A1D6').append($('<br>')));};<\/script>";
+
+        src += "<script src=\"http://code.jquery.com/jquery-2.1.4.min.js\"><\/script>";
     if ($('#js').val().trim() != "")
       src += "<script>" + $('#js').val() + "<\/script>";
     if ($('#css').val().trim() != "")
@@ -22,6 +44,7 @@
     if (old == src)
       return;
     old = src;
+    $('#jsOutput').empty();
     screen.srcdoc = src;
   }
 
@@ -29,36 +52,54 @@
     $(document).bind('keydown', 'ctrl+s', function(e) {
       e.preventDefault()
     });
-    window.setInterval(update, 500);
     $('#htmlbody').keydown(update);
     $('#htmlhead').keydown(update);
     $('#js').keydown(update);
     $('#css').keydown(update);
+    $('#jsOutput')[0].innerHTML = "";
   }
 </script>
+<style>
+textarea {
+	font-size: calc(100vh/ 50);
+}
+
+jsOutput {
+	font-family: "Courier New", Courier, monospace;
+}
+</style>
 </head>
 <body onload="go()">
-	<div style="position: fixed;">
+	<div
+		style="position: absolute; margin-right: calc(100vw/ 2 - 60px); width: calc(100vw / 2)">
 		<h5>HTML Code:</h5>
 		<textarea id="htmlbody"
-			style="height: calc(( 100vh - 250px)/3); width: 250px; display: inline-block;"
+			style="height: calc(( 100vh - 250px) / 3); display: inline-block; width: calc(( 100vw / 2 - 100px) / 2);"
 			placeholder="HTML BODY"></textarea>
 		<textarea id="htmlhead"
-			style="height: calc(( 100vh - 250px)/3); width: 250px; display: inline-block;"
+			style="height: calc(( 100vh - 250px) / 3); display: inline-block; width: calc(( 100vw / 2 - 100px) / 2);"
 			placeholder="HTML HEADERS">
 &lt;link rel=&quot;stylesheet&quot; href=&quot;http://teamfreehugs.github.io/experimental/css/base.css&quot;&gt;
 &lt;script src=&quot;http://code.jquery.com/jquery-2.1.4.min.js&quot;&gt;&lt;/script&gt;</textarea>
 		<h5>JavaScript Code:</h5>
-		<textarea id="js" style="height: calc(( 100vh - 250px)/3);"
+		<textarea id="js"
+			style="height: calc(( 100vh - 250px) / 3); width: calc(100vw / 2 - 100px);"
 			placeholder="JS"></textarea>
 		<h5>CSS Code:</h5>
-		<textarea id="css" style="height: calc(( 100vh - 250px)/3);"
+		<textarea id="css"
+			style="height: calc(( 100vh - 250px) / 3); width: calc(100vw / 2 - 100px);"
 			placeholder="CSS"></textarea>
 	</div>
 	<div
-		style="height: calc(100vh - 20px); top: 10px; position: fixed; right: 60px;">
+		style="top: 10px; position: absolute; margin-left: calc(( 100vw / 2) - 60px);">
 		<iframe id="out"
-			style="height: calc(100vh - 20px); width: calc(100vh);"></iframe>
+			style="height: calc(100vh - ( 100vh / 3)); width: calc(100vw / 2); z-index: 1000; background-color: #FFFFFF;"></iframe>
+	</div>
+	<div
+		style="border: 1px solid #000000; position: absolute; margin-top: calc(( 100vh - ( 100vh / 3)) + 50px); margin-left: calc(100vw / 2 - 60px);">
+		<pre class="jsOutput" id="jsOutput"
+			style="margin: 0px; padding: 0px; background-color: #FFFFFF; height: calc(100vh - ( 100vh - ( 100vh / 3)) - 70px);">
+        </pre>
 	</div>
 </body>
 </html>

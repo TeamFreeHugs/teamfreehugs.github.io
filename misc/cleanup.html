@@ -82,16 +82,16 @@
         replace : " ",
         reason : "Cleaned up extra spaces"
       },
-      punctuation : {
-        exp : " (\\.|\\?|\\!|\\,)",
-        args : "",
-        replace : "$1 ",
-        reason : "Cleaned up punctuation"
-      },
       extrapunctuation : {
-        exp : "(\\.|\\?|\\!|\\,)*",
+        exp : " ?(\\.|\\?|\\!|\\,)(\\.|\\?|\\!|\\,)*",
         args : "",
         replace : "$1",
+        reason : "Cleaned up punctuation"
+      },
+      punctuation : {
+        exp : "\\ (\\.|\\?|\\!|\\,)",
+        args : "",
+        replace : "$1 ",
         reason : "Cleaned up punctuation"
       },
       firstCaps : {
@@ -106,6 +106,7 @@
     $('#formatButton')
         .click(
             function() {
+              functions = new Function($('#functions').val());
               input = $('#badEng').val();
               end = input;
               endReason = "";
@@ -122,7 +123,7 @@
                     : null);
                 tmp = end;
                 
-                if (f == null)
+                if (f === null)
                   end = end.replace(new RegExp(regex, 'g' + parsed[type].args),
                       replacement);
                 else {
