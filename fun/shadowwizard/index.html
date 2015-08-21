@@ -3,18 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Index of /fun/shadowwizard</title>
-	<link rel="stylesheet"
-		  href="http://teamfreehugs.github.io/experimental/css/base.css" />
+<link rel="stylesheet"
+	href="http://teamfreehugs.github.io/experimental/css/base.css" />
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="http://notifyjs.com/dist/notify-combined.min.js"></script>
 <script>
-	function warn() {
-		$('#pee').notify('Not for those with weak stomachs!', {position: 'right', className: 'info'});
-	}
+  function warn() {
+    $.notify('Not for those with weak stomachs!', {
+      position : 'right',
+      className : 'info'
+    });
+  }
 
-	function hide() {
-		$('.notifyjs-container').click();
-	};
+  function hide() {
+    $('.notifyjs-container').click();
+  };
 </script>
 </head>
 <body>
@@ -30,8 +33,8 @@
 				id="pee">/pee</a>
 		</p>
 		<p>
-			<a href="pee.html" onmouseover="warn();" onmouseout="hide();"
-			   id="pee++">/pee++</a>
+			<a href="pee++.html" onmouseover="warn();" onmouseout="hide();"
+				id="pee++">/pee++</a>
 		</p>
 	</div>
 </body>
