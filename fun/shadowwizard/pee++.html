@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ShadowWizard takes a pee++</title>
+<link rel="stylesheet"
+	href="http://teamfreehugs.github.io/experimental/css/base.css" />
+<link rel="stylesheet"
+	href="http://teamfreehugs.github.io/styles/markdown-styles.css" />
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://teamfreehugs.github.io/js/min/jQuery.hotkeys.js"></script>
+<script>
+  var slide = 0;
+  var slides = {
+    slide1 : {
+      text : "<span title=\"Not again\">Shadow Wizard</span> was a rich man."
+          + " He liked peeing. He was once <a href=\"pee.html\">caught for peeing publicly</a>,"
+          + " but now he came outta jail.",
+      imgURL : "http://i.imgur.com/BdrWSgJ.png"
+    },
+    slide2 : {
+      text : "One day, <a href=\"http://stackexchange.com/users/3934463\">@Uni</a> was feeling bored. He went into "
+          + "<a href=\"http://chat.meta.stackexchange.com/rooms/721/\">The Den</a> and said: <br><br>"
+          + "<blockquote class=\"quote\"><a href=\"http://chat.meta.stackexchange.com/transcript/message/3856473#3856473\">Thinks of something to do...</a></blockquote>"
+          + "",
+      imgURL : "http://i.imgur.com/EPeXO30.png"
+    },
+    slide3 : {
+      text : "So, <a href=\"http://stackexchange.com/users/201110\">@ShadowWizard</a> replied: <br><br>"
+          + "<blockquote class=\"quote\">pissing on a tree so that @Uni can make a drawing and not get bored</blockquote><br><br>"
+          + "And so that's how this got started...",
+      imgURL : "http://i.imgur.com/HQia4NX.png"
+    },
+    slide4 : {
+      text : "<span style=\"font-size: 20px;\">One day</span>,<br>"
+          + "&nbsp;&nbsp;&nbsp;&nbsp;There lived a man named <a href=\"http://stackexchange.com/users/201110\">@ShadowWizard</a>. He peed on a tree, just to entertain the crowd in The Den.",
+      imgURL : "http://i.imgur.com/KcnOssT.png"
+    },
+    slide5 : {
+      text : "However, the pee overflowed, causing a <code>java.lang.PeeOverflowError</code>, and the whole Den fell apart.",
+      imgURL : "http://i.imgur.com/1UInlzz.png"
+    },
+    slide6 : {
+      text : "@Sha didn't notice the bird sitting on the tree at first, and continued entertaining the crowd",
+      imgURL : "http://i.imgur.com/XfGrSh5.png"
+    },
+    slide7 : {
+      text : "The bird was alarmed to see so much pee. However, it was knocked forwards by a sudden gush of wind, and into the pee. Since it's feathers were all wet, "
+          + "it couldn't fly and started swimming instead.",
+      imgURL : "http://i.imgur.com/dEVGI4J.png"
+    },
+    slide8 : {
+      text : "@Sha couldn't bear to see a bird suffer like that. Therefore he brought a boat and saved the bird!",
+      imgURL : "http://i.imgur.com/o7hysTm.png"
+    },
+    slide9 : {
+      text : "@Sha brought the bird back to the Den, and they lived happily ever after!",
+      imgURL : "http://i.imgur.com/mlN5Mbb.png"
+    }
+  
+  }
+  function next() {
+    var img = document.getElementById('img');
+    var text = document.getElementById('text');
+    var nextSlide = slides["slide" + (slide + 1)];
+    if (nextSlide = undefined)
+      slide = 1;
+    var currentSlide = slides["slide" + slide];
+    if (currentSlide == undefined) {
+      slide = 1;
+      currentSlide = slides["slide" + slide];
+    }
+    img.src = currentSlide.imgURL;
+    text.innerHTML = currentSlide.text;
+    slide++;
+  }
+  function preload() {
+    for (i = 1; i <= 9; ++i) {
+      slideName = "slide";
+      slideName += i;
+      $.get(slides[slideName].imgURL);
+    }
+  }
+</script>
+</head>
+<body onload="$('#next').click(next);$('#next').click(); preload();">
+	<div style="height: auto;">
+		<p id="back">
+			<a href=".">Parent Directory</a>
+		</p>
+		<div
+			style="border: 5px; border-style: outset; width: 640px; border-color: blue;">
+			<img src="" alt="Loading... Please wait..." id="img"></img>
+		</div>
+		<p id="text">
+			<sub>Loading...</sub>
+		</p>
+		<br>
+		<div
+			style="border: 5px; border-radius: 25px; border-style: outset; width: 100px; border-color: blue; position: fixed; bottom: 400px; left: 800px;">
+			<button style="width: 100px;" id="next">NEXT</button>
+		</div>
+	</div>
+</body>
+</html>
