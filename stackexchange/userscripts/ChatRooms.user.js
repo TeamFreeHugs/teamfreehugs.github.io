@@ -32,8 +32,8 @@ roomDivs = [];
               "z-index" : "999",
               position : "absolute",
               background : "#FFFFFF",
-              overflow-y: "scroll",
-              overflow-x: "wrap"
+              "overflow-y": "scroll",
+              "overflow-x": "wrap"
             });
             roomDiv.attr('id', 'popup-room-' + roomID);
             roomsList.mouseover(function() {

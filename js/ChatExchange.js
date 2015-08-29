@@ -1,8 +1,10 @@
 function sendMessage(chatSite, room_id, message, fkey) {
-	$.post('http://' + chatSite + '/chats/' + room_id + '/messages/new', {
-		text : message,
-		fkey : fkey,
-
+	$.ajax({
+		url : 'http://' + chatSite + '/chats/' + room_id + '/messages/new',
+		data : {
+			text : message,
+			fkey : fkey
+		},
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Origin", "http://" + chatSite);
 		}
@@ -10,10 +12,12 @@ function sendMessage(chatSite, room_id, message, fkey) {
 };
 
 function editMessage(chatSite, message_id, newMessage, fkey) {
-	$.post('http://' + chatSite + '/messages/' + message_id, {
-		fkey : fkey,
-		text : newMessage,
-
+	$.ajax({
+		url : 'http://' + chatSite + '/messages/' + message_id,
+		data : {
+			fkey : fkey,
+			text : newMessage
+		},
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Origin", "http://" + chatSite);
 		}
@@ -21,9 +25,11 @@ function editMessage(chatSite, message_id, newMessage, fkey) {
 }
 
 function deleteMessage(chatSite, message_id, fkey) {
-	$.post('http://' + chatSite + '/messages/' + message_id + '/delete', {
-		fkey : fkey,
-
+	$.ajax({
+		url : 'http://' + chatSite + '/messages/' + message_id + '/delete',
+		data : {
+			fkey : fkey
+		},
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Origin", "http://" + chatSite);
 		}
@@ -31,9 +37,11 @@ function deleteMessage(chatSite, message_id, fkey) {
 }
 
 function toggleStar(chatSite, message_id, fkey) {
-	$.post('http://' + chatSite + '/messages/' + message_id + '/star', {
-		fkey : fkey,
-
+	$.ajax({
+		url : 'http://' + chatSite + '/messages/' + message_id + '/star',
+		data : {
+			fkey : fkey
+		},
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Origin", "http://" + chatSite);
 		}
@@ -57,7 +65,6 @@ function getEvents(chatSite, room_id, fkey, messageCount) {
 			msgCount : messageCount
 		},
 		async : false,
-
 		beforeSend : function(xhr) {
 			xhr.setRequestHeader("Origin", "http://" + chatSite);
 		}
@@ -84,7 +91,7 @@ function addMessageListener(chatSite, room_id, fkey, run, eventCount) {
 function contains(array, test) {
 	for (a = 0; a < array.length; ++a) {
 		if (array[a] == test)
-			return true
+			return true;
 	}
 	return false;
 }
