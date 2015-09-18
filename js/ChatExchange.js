@@ -1,5 +1,6 @@
 function sendMessage(chatSite, room_id, message, fkey) {
 	$.ajax({
+		type : 'POST',
 		url : 'http://' + chatSite + '/chats/' + room_id + '/messages/new',
 		data : {
 			text : message,
@@ -13,6 +14,7 @@ function sendMessage(chatSite, room_id, message, fkey) {
 
 function editMessage(chatSite, message_id, newMessage, fkey) {
 	$.ajax({
+		type : 'POST',
 		url : 'http://' + chatSite + '/messages/' + message_id,
 		data : {
 			fkey : fkey,
@@ -26,6 +28,7 @@ function editMessage(chatSite, message_id, newMessage, fkey) {
 
 function deleteMessage(chatSite, message_id, fkey) {
 	$.ajax({
+		type : 'POST',
 		url : 'http://' + chatSite + '/messages/' + message_id + '/delete',
 		data : {
 			fkey : fkey
@@ -38,6 +41,7 @@ function deleteMessage(chatSite, message_id, fkey) {
 
 function toggleStar(chatSite, message_id, fkey) {
 	$.ajax({
+		type : 'POST',
 		url : 'http://' + chatSite + '/messages/' + message_id + '/star',
 		data : {
 			fkey : fkey

@@ -43,26 +43,42 @@ function getCookie(c_name) {
 }
 
 (function() {
+	if (window.location.toString().indexOf('/login') != -1) {
+		createCookie('fkey', document.getElementsByName('fkey')[0].value);
+	}
+	URI
+	uri = new URI(window.location.toString());
+	if (uri.authority.indexOf('chat') != -1
+			&& uri.authority.indexOf('stack') != -1) {
+		createCookie('fkey', fkey().fkey);
+	}
 	var toolbar = document.getElementsByClassName('network-items')[0];
 	var head = document.getElementsByTagName('head')[0];
 	var l = document.createElement('link');
 	var s = document.createElement('script');
 	var s2 = document.createElement('script');
-	s.src = "http://teamfreehugs.github.io/js/ChatExchange.js";
+	s.src = "https://teamfreehugs.github.io/js/ChatExchange.js";
 	l.rel = "stylesheet";
-	l.href = "http://teamfreehugs.github.io/styles/stackexchange/chatclient.css";
-	s2.src = "http://teamfreehugs.github.io/js/URI.js";
+	l.href = "https://teamfreehugs.github.io/styles/stackexchange/chatclient.css";
+	s2.src = "https://teamfreehugs.github.io/js/URI.js";
 	head.appendChild(l);
 	head.appendChild(s);
 	head.appendChild(s2);
 
 	var chat = document.createElement('a');
 	var chatTab = document.createElement('div');
+	var frame = document.createElement('iframe');
 	var links = document.getElementsByClassName('topbar-links')[0];
 	var boxes = document.getElementsByClassName('js-topbar-dialog-corral')[0];
 
+	frame.id = "chat-client";
+
+	frame.style.opacity = 0;
+	document.body.appendChild(frame);
+
 	chatTab.className = "topbar-dialog chatDialog dno";
 	chatTab.id = "chatTab";
+	chat.id = "chatButton";
 	chat.href = "javascript:void(0);";
 	chat.addEventListener("click", function() {
 	});
@@ -94,6 +110,49 @@ function getCookie(c_name) {
 	messageDiv.className = "modal-content";
 	messageDiv.id = "messages";
 
+	window.setInterval(function() {
+		var frame = $('#chat-client')[0];
+		frame.src = $('#link').val();
+		URI
+		u = new URI($('#link').val());
+		var text = frame.contentWindow.$.ajax({
+			url : 'http://' + u.authority + '/chats/' + u.path.split('/')[2]
+					+ '/events',
+			type : 'POST',
+			data : {
+				fkey : getCookie('fkey'),
+				mode : 'Messages',
+				since : 0,
+				msgCount : messageCount
+			},
+			async : false,
+			beforeSend : function(xhr) {
+				xhr.setRequestHeader("Origin", "http://" + chatSite);
+			}
+		});
+		var event = JSON.parse(text.responseText);
+		messageId = event.message_id;
+		text = event.content;
+		user = event.user_name;
+		userId = event.user_id;
+		if (event.parent_id != undefined)
+			reply = event.parent_id;
+		var messageDiv = document.createElement('div');
+		var content = document.createElement('div');
+		var userSpan = document.createElement('span');
+		var message = document.createElement('span');
+		message.innerHTML = text;
+		userSpan.innerHTML = '<a href="http://' + u.authority + '/users/'
+				+ userId + ' target="_blank">' + user + '</a>"';
+		content.id = "chat" + messageId;
+		messageDiv.appendChild(message);
+		messageDiv.style.padding = "3px";
+		messageDiv.style.borderRaduis = "25px";
+		content.appendChild(userSpan);
+		content.appendChild(messageDiv);
+		messageDiv.appendChild(content);
+	}, 3000);
+
 	set
 			.addEventListener(
 					"click",
@@ -108,6 +167,7 @@ function getCookie(c_name) {
 						if (u.authority.indexOf('chat') == -1
 								&& u.authority.indexOf('stack') == -1)
 							return;
+						$('#chat-client').attr('src', u.authority);
 						var id = addMessageListener(
 								u.authority,
 								u.path.split('/')[2],
@@ -156,10 +216,5 @@ function getCookie(c_name) {
 	boxes.appendChild(chatTab);
 	links.appendChild(chat);
 
-	URI
-	uri = new URI(window.location.toString());
-	if (uri.authority.indexOf('chat') != -1
-			&& uri.authority.indexOf('stack') != -1) {
-		setCookie('fkey', fkey().fkey);
-	}
+	$('#chatButton').click();
 })();

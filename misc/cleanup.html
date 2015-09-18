@@ -7,139 +7,147 @@
 	href="http://teamfreehugs.github.io/experimental/css/base.css" />
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
-  function go() {
-    reasons = $('#reasons');
-    text = JSON.stringify({
-      i : {
-        exp : "(^|\\s|\\()i(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1I$2",
-        reason : "'I' should be caps"
-      },
-      u : {
-        exp : "(^|\\s|\\()u(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1you$2",
-        reason : "'U' should be 'you'"
-      },
-      why : {
-        exp : "(^|\\s|\\()(y|wai)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1why$3",
-        reason : "'y' or 'wai' should be 'why'"
-      },
-      help : {
-        exp : "(^|\\s|\\()(h*[e|a]*l*p*)?(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1help$3",
-        reason : "'y' or 'wai' should be 'why'"
-      },
-      your : {
-        exp : "(^|\\s|\\()(ur|yr)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1your$3",
-        reason : "Expanded short form to 'your'"
-      },
-      wont : {
-        exp : "(^|\\s|\\()wont(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1won't$2",
-        reason : "Added apostrophe for 'wont'"
-      },
-      cant : {
-        exp : "(^|\\s|\\()cant(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1can't$2",
-        reason : "Added apostrophe for 'cant'"
-      },
-      dont : {
-        exp : "(^|\\s|\\()dont(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1don't$2",
-        reason : "Added apostrophe for 'dont'"
-      },
-      didnt : {
-        exp : "(^|\\s|\\()didnt(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1didn't$2",
-        reason : "Added apostrophe for 'didnt'"
-      },
-      shouldnt : {
-        exp : "(^|\\s|\\()shouldnt(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1shouldn't$2",
-        reason : "Added apostrophe for 'shouldnt'"
-      },
-      plz : {
-        exp : "(^|\\s|\\()(plz|pls)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "i",
-        replace : "$1please$3",
-        reason : "Expanded short form of 'please'"
-      },
-      space : {
-        exp : "(^|\\s|\\() (\\ )*(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
-        args : "",
-        replace : " ",
-        reason : "Cleaned up extra spaces"
-      },
-      extrapunctuation : {
-        exp : " ?(\\.|\\?|\\!|\\,)(\\.|\\?|\\!|\\,)*",
-        args : "",
-        replace : "$1",
-        reason : "Cleaned up punctuation"
-      },
-      punctuation : {
-        exp : "\\ (\\.|\\?|\\!|\\,)",
-        args : "",
-        replace : "$1 ",
-        reason : "Cleaned up punctuation"
-      },
-      firstCaps : {
-        exp : "(\\.|\\?|\\!) (\w)*",
-        args : "i",
-        adv : "caps",
-        reason : "Capitalized first letter"
-      }
-    }, null, 4);
-    reasons.val(text);
-    
-    $('#formatButton')
-        .click(
-            function() {
-              functions = new Function($('#functions').val());
-              input = $('#badEng').val();
-              end = input;
-              endReason = "";
-              parsed = JSON.parse($('#reasons').val());
-              for (type in parsed) {
-                //   if (parsed[type].exp == undefined)
-                
-                var regex = new RegExp(parsed[type].exp);
-                //   if (parsed[type].replace == undefined)
-                var replacement = parsed[type].replace;
-                var reason = (parsed[type].reason != undefined ? parsed[type].reason
-                    : "");
-                var f = (parsed[type].adv != undefined ? parsed[type].adv
-                    : null);
-                tmp = end;
-                
-                if (f === null)
-                  end = end.replace(new RegExp(regex, 'g' + parsed[type].args),
-                      replacement);
-                else {
-                  if (typeof f == "function")
-                    end = f(regex, parsed[type].args);
-                }
-                
-                if (reason.trim() != "" && end != tmp)
-                  endReason += reason + ";\n";
-              }
-              if (endReason === "")
-                endReason = "Nothing to replace;";
-              $('#goodEng').val(end);
-              $('#reasonBox').val(endReason);
-            });
-  }
+	function go() {
+		reasons = $('#reasons');
+		text = JSON
+				.stringify(
+						{
+							i : {
+								exp : "(^|\\s|\\()i(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1I$2",
+								reason : "'I' should be caps"
+							},
+							u : {
+								exp : "(^|\\s|\\()u(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1you$2",
+								reason : "'U' should be 'you'"
+							},
+							why : {
+								exp : "(^|\\s|\\()(y|wai)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1why$3",
+								reason : "'y' or 'wai' should be 'why'"
+							},
+							help : {
+								exp : "(^|\\s|\\()(h*[e|a]*l*p*)?(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1help$3",
+								reason : "'y' or 'wai' should be 'why'"
+							},
+							your : {
+								exp : "(^|\\s|\\()(ur|yr)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1your$3",
+								reason : "Expanded short form to 'your'"
+							},
+							wont : {
+								exp : "(^|\\s|\\()wont(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1won't$2",
+								reason : "Added apostrophe for 'wont'"
+							},
+							cant : {
+								exp : "(^|\\s|\\()cant(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1can't$2",
+								reason : "Added apostrophe for 'cant'"
+							},
+							dont : {
+								exp : "(^|\\s|\\()dont(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1don't$2",
+								reason : "Added apostrophe for 'dont'"
+							},
+							didnt : {
+								exp : "(^|\\s|\\()didnt(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1didn't$2",
+								reason : "Added apostrophe for 'didnt'"
+							},
+							shouldnt : {
+								exp : "(^|\\s|\\()shouldnt(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1shouldn't$2",
+								reason : "Added apostrophe for 'shouldnt'"
+							},
+							plz : {
+								exp : "(^|\\s|\\()(plz|pls)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1please$3",
+								reason : "Expanded short form of 'please'"
+							},
+							space : {
+								exp : "(^|\\s|\\()\ (\\ )*(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "",
+								replace : " ",
+								reason : "Cleaned up extra spaces"
+							},
+							extrapunctuation : {
+								exp : " ?(\\.|\\?|\\!|\\,|\\_)(\\.|\\?|\\!|\\,|\\_)*",
+								args : "",
+								replace : "$1",
+								reason : "Cleaned up punctuation"
+							},
+							punctuation : {
+								exp : "\\ (\\.|\\?|\\!|\\,)",
+								args : "",
+								replace : "$1 ",
+								reason : "Cleaned up punctuation"
+							},
+							firstCaps : {
+								exp : "(\\.|\\?|\\!) (\w)*",
+								args : "i",
+								adv : "caps",
+								reason : "Capitalized first letter"
+							},
+							ever : {
+								exp : "(^|\\s|\\()(eva[a?]*)(\\s|,|\\.|!|\\?|;|\\/|\\)|\\'|$)",
+								args : "i",
+								replace : "$1ever$3",
+								reason : "'Eva' should be 'ever'"
+							}
+						}, null, 4);
+		reasons.val(text);
+
+		$('#formatButton')
+				.click(
+						function() {
+							functions = new Function($('#functions').val());
+							input = $('#badEng').val();
+							end = input;
+							endReason = "";
+							parsed = JSON.parse($('#reasons').val());
+							for (type in parsed) {
+								//   if (parsed[type].exp == undefined)
+
+								var regex = new RegExp(parsed[type].exp);
+								//   if (parsed[type].replace == undefined)
+								var replacement = parsed[type].replace;
+								var reason = (parsed[type].reason != undefined ? parsed[type].reason
+										: "");
+								var f = (parsed[type].adv != undefined ? parsed[type].adv
+										: null);
+								tmp = end;
+
+								if (f === null)
+									end = end.replace(new RegExp(regex, 'g'
+											+ parsed[type].args), replacement);
+								else {
+									if (typeof f == "function")
+										end = f(regex, parsed[type].args);
+								}
+
+								if (reason.trim() != "" && end != tmp)
+									endReason += reason + ";\n";
+							}
+							if (endReason === "")
+								endReason = "Nothing to replace;";
+							$('#goodEng').val(end);
+							$('#reasonBox').val(endReason);
+						});
+	}
 </script>
 </head>
 <body onload="go();">
