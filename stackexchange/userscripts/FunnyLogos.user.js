@@ -20,7 +20,7 @@ function addScripts() {
 	head.appendChild(uri);
 }
 
-(function() {
+window.onload = function() {
   addScripts()
   url = new URI(window.location.toString())
   logo = $('#hlogo > a')
@@ -31,4 +31,4 @@ function addScripts() {
         height : "80px"
     });
   }
-})()
+}
