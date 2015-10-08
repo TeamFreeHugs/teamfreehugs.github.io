@@ -4,7 +4,6 @@ $(document).ready(function () {
 
     var playgroundInput = $('#playground').find('.input');
 
-
     var messageList = $('.message-list');
 
     function addMessage() {
@@ -12,10 +11,12 @@ $(document).ready(function () {
             display: 'block'
         });
         var innerMessage = $('<div>').attr('class', 'message');
-        var bubbleText = $('<div>').attr('c lass', 'bubble bubble-text');
+        var bubbleText = $('<div>').attr('class', 'bubble bubble-text');
         var messageText = $('<div>').attr('class', 'message-text');
         var selectableText = $('<span>').attr('class', 'selectable-text').text(playgroundInput.text());
         main.append(innerMessage.append(bubbleText.append(messageText.append(selectableText))));
+
+
         main.click(function () {
                 $('body').append($('<div>').css({
                     opacity: 0.6,
@@ -147,5 +148,4 @@ $(document).ready(function () {
             inputBox.text('');
         }
     });
-})
-;
+});
