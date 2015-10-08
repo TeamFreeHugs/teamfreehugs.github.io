@@ -1,0 +1,88 @@
+#leftControls {
+    float: left;
+    width: 30%;
+    height: calc(100vh - 7px);
+    border: 1px solid #000000;
+    display: inline-block;
+    padding-top: 5px;
+}
+
+#playground {
+    float: right;
+    width: 69%;
+    height: calc(100vh - 7px);
+    border: 1px solid #000000;
+    display: inline-block;
+    padding-top: 5px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+div.input, div.input2 {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 50px;
+    width: 90%;
+    height: 30px;
+    background-color: #F2F3F4;
+    outline: 0 none;
+    padding-top: 10px;
+    padding-left: 20px;
+    font-family: "Arial Black", Gadget, sans-serif;
+    overflow: auto;
+    margin: 0 10px 0 auto;
+}
+
+#sendDiv, #sendDiv button {
+    width: 70px;
+    height: 60px;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    background-color: #ffffff;
+}
+
+.message-list {
+    overflow-y: auto;
+    height: calc(100vh - 100px);
+}
+
+div.messageWrap {
+    background-color: #A7FC00;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    border-radius: 14px;
+    padding: 5px 5px 5px 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-family: "Arial Black", Gadget, sans-serif;
+    margin-bottom: 5px;
+}
+
+div.messageWrap.message-in {
+    margin-right: 5px;
+    margin-left: 5px;
+    background-color: #DBD7D2;
+}
+
+#inputBox {
+    position: absolute;
+    top: calc(100vh - 76px);
+    width: calc(100vw * 0.69 - 2px);
+}
+
+#console {
+    background-color: #989898;
+    font-family: "Courier New", Courier, monospace;
+    width: 100%;
+    height: calc(100vh - 78px);
+    overflow-y: auto;
+}
+
+#console * {
+    height: 19px;
+    margin: 1px;
+}
