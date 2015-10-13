@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="compiler.js"></script>
+    <script src="animater.js"></script>
+    <script src="../js/URI.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+    <script>
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                    results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+
+        $(document).ready(function () {
+            if (getParameterByName('userProfileImg') === '') {
+                document.body = compileHTML({
+                    nodeTag: 'body',
+                    children: [
+                        {
+                            nodeTag: 'h2',
+                            textContent: 'Whoops, you didn\'t specify the user\'s profile picture.'
+                        }
+                    ]
+                });
+                return;
+            }
+            var parser = new URI(decodeURI(getParameterByName('userProfileImg')));
+            if (parser.authority === null) {
+                document.body = compileHTML({
+                    nodeTag: 'body',
+                    children: [
+                        {
+                            nodeTag: 'h2',
+                            textContent: 'Whoops, you didn\'t specify a valid profile picture.'
+                        }
+                    ]
+                });
+                return;
+            }
+            var rawURL = parser.scheme + '://' + parser.authority + parser.path;
+            var randomChild = {nodeTag: 'div'};
+            var random = Math.floor(Math.random() * (2 - 1 + 1)) + 1;
+            random = 1;
+            switch (random) {
+                case 1:
+                    randomChild.children = [
+                        compileStyle({
+                            "#profile": {
+                                'animation-name': 'bounce',
+                                'animation-duration': '5s',
+                                'position': 'absolute',
+                                'animation-iteration-count': 'infinite'
+                            }
+                        }), {
+                            nodeTag: 'style',
+                            textContent: '@keyframes bounce {\n' +
+                            '  0% {top: 0; left: 0;}\n' +
+                            '  10% {top: 100px; left: 400px}' +
+                            '  25% {top: 500px; left: 500px}' +
+                            '  50% {top: calc(100vh - 300px); left: 800px}' +
+                            '  60% {top: 300px; left: 100px}' +
+                            '  75% {top: 400px; left: 1000px}' +
+                            '  80% {top: 400px; left: 1000px; transform: rotate(-360deg)}' +
+                            '  85% {top: 400px; left: 300px; transform: rotate(360deg)}' +
+                            '  94% {top: 60px; left: 700px;}' +
+                            '  100% {top: 0; left: 0}' +
+                            '}\n\n@-webkit-keyframes bounce {\n' +
+                            '  0% {top: 0; left: 0;}\n' +
+                            '  10% {top: 100px; left: 400px}' +
+                            '  25% {top: 500px; left: 500px}' +
+                            '  50% {top: calc(100vh - 3000px); left: 800px}' +
+                            '  60% {top: 300px; left: 100px}' +
+                            '  75% {top: 400px; left: 1000px}' +
+                            '  80% {top: 400px; left: 1000px; transform: rotate(-360deg)}' +
+                            '  85% {top: 400px; left: 300px; transform: rotate(360deg)}' +
+                            '  94% {top: 60px; left: 700px;}' +
+                            '  100% {top: 0; left: 0}' +
+                            '}'
+                        }];
+                    break;
+            }
+            document.body = compileHTML({
+                nodeTag: 'body',
+                children: [
+                    {
+                        nodeTag: 'img',
+                        attributes: {
+                            src: rawURL,
+                            width: '128px',
+                            height: '128px',
+                            id: 'profile'
+                        }
+                    },
+                    randomChild
+                ]
+            });
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>
