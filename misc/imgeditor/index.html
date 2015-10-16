@@ -1,459 +1,461 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Image Editor</title>
-<link rel="stylesheet" type="text/css"
-	href="http://teamfreehugs.github.io/styles/imgeditor.css"></link>
-  
-  var bgcolor = "#FFFFFF";
-  
-  eraserStrokes = [];
-  
-  window.onbeforeunload = function() {
-    if (modified) {
-      return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
-    }
-  }
-  function keyup(event) {
-    if ($('#popup').css("display") == "block") {
-      if (event.which == 27) {
-        $('#popup').css("display", "none");
-        $('#backdrop-div').css("display", "none");
-      }
-    }
-  }
+    <meta charset="UTF-8">
+    <title>Image Editor</title>
+    <link rel="stylesheet" type="text/css"
+          href="../../styles/imgeditor.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../styles/menus.css">
+    <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+    <script src="../../js/min/jQuery.hotkeys.js"></script>
+    <script>
+        var bgcolor = "#FFFFFF";
 
-  var tool = "#paintMode";
-  
-  function getImgSize(imgSrc) {
-    var newImg = new Image();
-    newImg.src = imgSrc;
-    curHeight = newImg.height;
-    curWidth = newImg.width;
-    return {
-      w : curWidth,
-      h : curHeight
-    }
-  }
+        eraserStrokes = [];
 
-  function showSave(e) {
-    e.preventDefault();
-    $('#popup-body').empty();
-    base64 = $('#canvas')[0].toDataURL();
-    popup = $('#popup');
-    popup.css("display", "block");
-    $('#backdrop-div').css("display", "block");
-    popupHead = $('#popup-header-text');
-    popupHead.html('Save Dialog');
-    popupBody = $('#popup-body');
-    info = $(document.createElement('span'));
-    base64Info = $(document.createElement('span'));
-    base64Info.html('Base64 String: ');
-    base64Info.attr('title', 'Why? I don\'t know.');
-    info.html('How would you like to save it?');
-    base64TF = $(document.createElement('textarea'));
-    base64TF.val(base64);
-    base64TF.css({
-      scroll : "none",
-      resize : "none",
-      width : "250px",
-      height : "100px",
-      outline : "none",
-      "-moz-outline-style" : "none"
-    });
-    downloadInfo = $(document.createElement('span'));
-    downloadInfo.html('Or download the image:');
-    downloadInfo2 = $(document.createElement('span'));
-    downloadInfo2.html('RClick, then select save image.');
-    downloadImage = $(document.createElement('img'));
-    downloadImage.attr('src', base64);
-    downloadImage.attr('width', $('#canvas')[0].offsetWidth / 10);
-    downloadImage.attr('height', $('#canvas')[0].offsetHeight / 10);
-    downloadImage.mousedown(function() {
-      modified = false;
-    })
-    downloadImage.css({
-      border : "2px solid #000000"
-    });
-    popupBody.append(info[0]);
-    popupBody.append(document.createElement('br'));
-    popupBody.append(document.createElement('hr'));
-    popupBody.append(base64Info[0]);
-    popupBody.append(document.createElement('br'));
-    popupBody.append(base64TF[0]);
-    popupBody.append(document.createElement('br'));
-    popupBody.append(downloadInfo[0]);
-    popupBody.append(document.createElement('br'));
-    popupBody.append(downloadInfo2[0]);
-    popupBody.append(document.createElement('br'));
-    popupBody.append(document.createElement('br'));
-    popupBody.append(downloadImage[0]);
-    popupBody.append(document.createElement('br'));
-    popupBody.append(document.createElement('br'));
-    popupBody.append(document.createElement('br'));
-  }
-
-  function showNewLayerImg(e) {
-    e.preventDefault;
-    $('#popup-body').empty();
-    popup = $('#popup');
-    popup.css("display", "block");
-    $('#backdrop-div').css("display", "block");
-    popupHead = $('#popup-header-text');
-    popupHead.html('Add Layer Dialog');
-    popupBody = $('#popup-body');
-    urlLink = $(document.createElement('input'));
-    urlLink.attr('id', 'imgURL');
-    urlLink.attr('type', 'text');
-    urlLink.css({
-      "margin-right" : "7px"
-    });
-    ok = $(document.createElement('button'));
-    ok.html('Add Layer!');
-    ok.attr('class', 'button');
-    info = $(document.createElement('span'));
-    info
-        .html('Add a layer to this image. <br>Link an image\' url in the box below');
-    ok.click(function() {
-      fabric.Image.fromURL(urlLink.val(), function(img) {
-        img.crossOrigin = "anonymous";
-        img.hasControls = true;
-        img.hasBorders = true;
-        img.hasRotatingPoint = true;
-        
-        canvas.add(img);
-        canvas.renderAll();
-      }, {
-        hasControls : true
-      });
-      $('#backdrop-div').click();
-    });
-    popupBody.append(info[0]);
-    popupBody.append(urlLink[0]);
-    popupBody.append(ok[0]);
-    urlLink.focus();
-  }
-
-  function detectIE() {
-    var ua = window.navigator.userAgent;
-    
-    var msie = ua.indexOf('MSIE ');
-    if (msie > 0) {
-      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
-    }
-    
-    var trident = ua.indexOf('Trident/');
-    if (trident > 0) {
-      var rv = ua.indexOf('rv:');
-      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
-    }
-    
-    var edge = ua.indexOf('Edge/');
-    if (edge > 0) {
-      return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
-    }
-    
-    return false;
-  }
-
-  function setSize() {
-    canvas.setHeight($(document).height() - 44);
-    canvas.setWidth($(document).width() - 200);
-  }
-
-  function onload() {
-    var popup = document.getElementById('popup');
-    popup.style.display = "none";
-    var bg = document.getElementById('backdrop-div');
-    bg.style.display = "none";
-    var title = document.getElementById('popup-header');
-    title.style.backgroundColor = "";
-    if (detectIE() !== false) {
-      var popup = document.getElementById('popup');
-      popup.style.display = "block";
-      var bg = document.getElementById('backdrop-div');
-      bg.style.display = "block";
-      var title = document.getElementById('popup-header-text');
-      title.innerHTML = "ERROR!";
-      title.style.backgroundColor = "red";
-      text = document.getElementById('popup-body');
-      text.innerHTML = "ERROR: We detected that you use Internet Explorer! Please use Chrome or Firefox.";
-    }
-    canvas = new fabric.Canvas('canvas', {
-      isDrawingMode : true,
-    });
-    
-    paletteCSS = {
-      border : "none",
-      outline : "none",
-      padding : "0",
-      "border-radius" : 0,
-      width : "55px",
-      height : "50px",
-      background : "none"
-    }
-
-    $('#backgroundPalette').css(paletteCSS);
-    
-    $('#foregroundPalette').css(paletteCSS);
-    
-    resizeID = window.setInterval(setSize, 500);
-    setSize();
-    
-    canvas.on("object:added", function(obj) {
-      modified = true;
-      if (tool == "#eraserMode") {
-        eraserStrokes.push(obj.target);
-      }
-    })
-
-    modeButtonIds = [ '#paintMode', '#pencilMode', '#eraserMode', '#sprayMode',
-        '#selectMode' ];
-    
-    $('#exitButton').click(function() {
-      window.location = "..";
-    });
-    $('#saveButton').click(showSave);
-    $(document).bind('keydown', 'ctrl+s', showSave);
-    
-    $('#newLayerLoc').click(showNewLayerImg);
-    $(document).bind('keydown', 'ctrl+shift+l', showNewLayerImg);
-    
-    $(document).bind('keydown', 'ctrl+shift+w', function(e) {
-      e.preventDefault();
-      window.location = "..";
-    });
-    
-    $('#backdrop-div').click(function() {
-      $('#popup').css("display", "none");
-      $('#backdrop-div').css("display", "none");
-    });
-    $(document).keyup(keyup);
-    
-    //$(document).on('contextmenu', function() {
-    //  return false;
-    //});
-    
-    $('#pencilMode').click(function() {
-      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-    });
-    
-    $('#paintMode').click(function() {
-      canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
-    });
-    
-    $('#sprayMode').click(function() {
-      canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
-    });
-    
-    modeButtonIds.forEach(function(e) {
-      $(e).click(function(event) {
-        a = event;
-        if (event.currentTarget.id == 'selectMode') {
-          canvas.isDrawingMode = false;
-        } else {
-          canvas.isDrawingMode = true;
+        window.onbeforeunload = function () {
+            if (modified) {
+                return 'WARNING: You have unsaved changes in the drawing. Do you really want to exit?';
+            }
+        };
+        function keyup(event) {
+            if ($('#popup').css("display") == "block") {
+                if (event.which == 27) {
+                    $('#popup').css("display", "none");
+                    $('#backdrop-div').css("display", "none");
+                }
+            }
         }
-        if (event.currentTarget.id == 'eraserMode') {
-          canvas.freeDrawingBrush.color = bgcolor;
-        } else {
-          canvas.freeDrawingBrush.color = fgcolor;
-        }
-        canvas.freeDrawingBrush.width = $('#size')[0].value;
-        modeButtonIds.forEach(function(e2) {
-          if (e2 == '#' + event.originalEvent.target.id) {
-            $(e2).addClass('activeTool');
-            tool = e2;
-          } else {
-            $(e2).removeClass('activeTool');
-          }
-        })
-      })
-    });
-    
-    $('#canvas').css({
-      left : "0px",
-      top : "44px",
-      "z-index" : "0"
-    });
-    
-    $('.upper-canvas').css({
-      left : "0px",
-      top : "44px",
-      "z-index" : "1"
-    });
-    
-    $('.canvas-container').attr('style', '');
-    
-    //    $(document).bind('keydown', 'ctrl+z', undo);
-    //  $(document).bind('keydown', 'shift+ctrl+z', redo);
-    
-    $('#backgroundPalette').on("input", function() {
-      bgcolor = $(this).val();
-      if (tool == "#eraserMode") {
-        canvas.freeDrawingBrush.color = bgcolor;
-      }
-    });
-    
-    $('#foregroundPalette').on("input", function() {
-      fgcolor = $(this).val();
-      if (tool != "#eraserMode")
-        canvas.freeDrawingBrush.color = fgcolor;
-    });
-    
-    showKBShortcuts = function(e) {
-      e.preventDefault();
-      $('#popup-body').empty();
-      popup = $('#popup');
-      popup.css("display", "block");
-      $('#backdrop-div').css("display", "block");
-      popupHead = $('#popup-header-text');
-      popupHead.html('Keyboard Shortcuts');
-      popupBody = $('#popup-body');
-      list = $('<ul>');
-      save = $('<li>').html('Save: Control + S');
-      exit = $('<li>').html('Exit: Shift + Control + W');
-      newLayerImg = $('<li>').html('New Layer From Image: Shift + Control + L');
-      helpKBS = $('<li>').html('Keyboard Shortcuts: Control + H');
-      esc = $('<li>').html('Exit Popup: Esacpe');
-      list.append(save);
-      list.append(exit);
-      list.append(newLayerImg);
-      list.append(helpKBS);
-      list.append(esc);
-      popupBody.append(list);
-    }
 
-    $('#keyboardShortcuts').click(showKBShortcuts);
-    
-    $(document).bind('keydown', 'ctrl+h', showKBShortcuts);
-    
-    $('#forceBG').click(function() {
-      canvas.backgroundColor = $('#backgroundPalette')[0].value;
-      canvas.renderAll();
-    });
-    
-    $('canvas').on("contextmenu", function() {
-      return false;
-    });
-    
-    $('#size').on('input', function() {
-      size = this.value;
-      canvas.freeDrawingBrush.width = size;
-    });
-    
-    $('#exportSVG').click(function() {
-      $('#popup-body').empty();
-      popup = $('#popup');
-      popup.css("display", "block");
-      $('#backdrop-div').css("display", "block");
-      popupHead = $('#popup-header-text');
-      popupHead.html('Export as SVG');
-      popupBody = $('#popup-body');
-      popupBody.append($('<span>').html('Coming up soon!'));
-    });
-    
-    $('#forceErasers').click(function() {
-      eraserStrokes.forEach(function(e) {
-        e.stroke = canvas.backgroundColor;
-        canvas.add(e);
-      });
-    });
-    
-    fgcolor = $('#foregroundPalette').val();
-    bgcolor = $('#backgroundPalette').val();
-    canvas.freeDrawingBrush.color = fgcolor;
-    canvas.backgroundColor = bgcolor;
-    canvas.freeDrawingBrush.width = $('#size')[0].value;
-    canvas.renderAll();
-  }
-</script>
+        var tool = "#paintMode";
+
+        function getImgSize(imgSrc) {
+            var newImg = new Image();
+            newImg.src = imgSrc;
+            var curHeight = newImg.height;
+            var curWidth = newImg.width;
+            return {
+                w: curWidth,
+                h: curHeight
+            }
+        }
+
+        function showSave(e) {
+            e.preventDefault();
+            $('#popup-body').empty();
+            var base64 = $('#canvas')[0].toDataURL();
+            var popup = $('#popup');
+            popup.css("display", "block");
+            $('#backdrop-div').css("display", "block");
+            var popupHead = $('#popup-header-text');
+            popupHead.html('Save Dialog');
+            var popupBody = $('#popup-body');
+            var info = $(document.createElement('span'));
+            var base64Info = $(document.createElement('span'));
+            base64Info.html('Base64 String: ');
+            base64Info.attr('title', 'Why? I don\'t know.');
+            info.html('How would you like to save it?');
+            var base64TF = $(document.createElement('textarea'));
+            base64TF.val(base64);
+            base64TF.css({
+                scroll: "none",
+                resize: "none",
+                width: "250px",
+                height: "100px",
+                outline: "none",
+                "-moz-outline-style": "none"
+            });
+            var downloadInfo = $(document.createElement('span'));
+            downloadInfo.html('Or download the image:');
+            var downloadInfo2 = $(document.createElement('span'));
+            downloadInfo2.html('RClick, then select save image.');
+            var downloadImage = $(document.createElement('img'));
+            downloadImage.attr('src', base64);
+            downloadImage.attr('width', $('#canvas')[0].offsetWidth / 10);
+            downloadImage.attr('height', $('#canvas')[0].offsetHeight / 10);
+            downloadImage.mousedown(function () {
+                window.modified = false;
+            });
+            downloadImage.css({
+                border: "2px solid #000000"
+            });
+            popupBody.append(info[0]);
+            popupBody.append(document.createElement('br'));
+            popupBody.append(document.createElement('hr'));
+            popupBody.append(base64Info[0]);
+            popupBody.append(document.createElement('br'));
+            popupBody.append(base64TF[0]);
+            popupBody.append(document.createElement('br'));
+            popupBody.append(downloadInfo[0]);
+            popupBody.append(document.createElement('br'));
+            popupBody.append(downloadInfo2[0]);
+            popupBody.append(document.createElement('br'));
+            popupBody.append(document.createElement('br'));
+            popupBody.append(downloadImage[0]);
+            popupBody.append(document.createElement('br'));
+            popupBody.append(document.createElement('br'));
+            popupBody.append(document.createElement('br'));
+        }
+
+        function showNewLayerImg(e) {
+            e.preventDefault();
+            $('#popup-body').empty();
+            var popup = $('#popup');
+            popup.css("display", "block");
+            $('#backdrop-div').css("display", "block");
+            var popupHead = $('#popup-header-text');
+            popupHead.html('Add Layer Dialog');
+            var popupBody = $('#popup-body');
+            var urlLink = $(document.createElement('input'));
+            urlLink.attr('id', 'imgURL');
+            urlLink.attr('type', 'text');
+            urlLink.css({
+                "margin-right": "7px"
+            });
+            var ok = $(document.createElement('button'));
+            ok.html('Add Layer!');
+            ok.attr('class', 'button');
+            var info = $(document.createElement('span'));
+            info
+                    .html('Add a layer to this image. <br>Link an image\' url in the box below');
+            ok.click(function () {
+                fabric.Image.fromURL(urlLink.val(), function (img) {
+                    img.crossOrigin = "anonymous";
+                    img.hasControls = true;
+                    img.hasBorders = true;
+                    img.hasRotatingPoint = true;
+
+                    canvas.add(img);
+                    canvas.renderAll();
+                }, {
+                    hasControls: true
+                });
+                $('#backdrop-div').click();
+            });
+            popupBody.append(info[0]);
+            popupBody.append(urlLink[0]);
+            popupBody.append(ok[0]);
+            urlLink.focus();
+        }
+
+        function detectIE() {
+            var ua = window.navigator.userAgent;
+
+            var msie = ua.indexOf('MSIE ');
+            if (msie > 0) {
+                return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+            }
+
+            var trident = ua.indexOf('Trident/');
+            if (trident > 0) {
+                var rv = ua.indexOf('rv:');
+                return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+            }
+
+            var edge = ua.indexOf('Edge/');
+            if (edge > 0) {
+                return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+            }
+
+            return false;
+        }
+
+        function setSize() {
+            canvas.setHeight($(document).height() - 44);
+            canvas.setWidth($(document).width() - 200);
+        }
+
+        function onload() {
+            var popup = document.getElementById('popup');
+            popup.style.display = "none";
+            var bg = document.getElementById('backdrop-div');
+            bg.style.display = "none";
+            var title = document.getElementById('popup-header');
+            title.style.backgroundColor = "";
+            if (detectIE() !== false) {
+                document.getElementById('popup').style.display = "block";
+                document.getElementById('backdrop-div').style.display = "block";
+                document.getElementById('popup-header-text').innerHTML = "ERROR!";
+                title.style.backgroundColor = "red";
+                var text = document.getElementById('popup-body');
+                text.innerHTML = "ERROR: We detected that you use Internet Explorer! Please use Chrome or Firefox.";
+            }
+            window.canvas = new fabric.Canvas('canvas', {
+                isDrawingMode: true
+            });
+
+            window.paletteCSS = {
+                border: "none",
+                outline: "none",
+                padding: "0",
+                "border-radius": 0,
+                width: "55px",
+                height: "50px",
+                background: "none"
+            };
+
+            $('#backgroundPalette').css(paletteCSS);
+
+            $('#foregroundPalette').css(paletteCSS);
+
+            window.resizeID = window.setInterval(setSize, 500);
+            setSize();
+
+            canvas.on("object:added", function (obj) {
+                window.modified = true;
+                if (tool == "#eraserMode") {
+                    eraserStrokes.push(obj.target);
+                }
+            });
+
+            var modeButtonIds = ['#paintMode', '#pencilMode', '#eraserMode', '#sprayMode',
+                '#selectMode'];
+
+            $('#exitButton').click(function () {
+                window.location = "..";
+            });
+            $('#saveButton').click(showSave);
+            $(document).bind('keydown', 'ctrl+s', showSave);
+
+            $('#newLayerLoc').click(showNewLayerImg);
+            $(document).bind('keydown', 'ctrl+shift+l', showNewLayerImg);
+
+            $(document).bind('keydown', 'ctrl+shift+w', function (e) {
+                e.preventDefault();
+                window.location = "..";
+            });
+
+            $('#backdrop-div').click(function () {
+                $('#popup').css("display", "none");
+                $('#backdrop-div').css("display", "none");
+            });
+            $(document).keyup(keyup);
+
+            //$(document).on('contextmenu', function() {
+            //  return false;
+            //});
+
+            $('#pencilMode').click(function () {
+                canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+            });
+
+            $('#paintMode').click(function () {
+                canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+            });
+
+            $('#sprayMode').click(function () {
+                canvas.freeDrawingBrush = new fabric.SprayBrush(canvas);
+            });
+
+            modeButtonIds.forEach(function (e) {
+                $(e).click(function (event) {
+                    canvas.isDrawingMode = event.currentTarget.id != 'selectMode';
+                    if (event.currentTarget.id == 'eraserMode') {
+                        canvas.freeDrawingBrush.color = bgcolor;
+                    } else {
+                        canvas.freeDrawingBrush.color = fgcolor;
+                    }
+                    canvas.freeDrawingBrush.width = $('#size')[0].value;
+                    modeButtonIds.forEach(function (e2) {
+                        if (e2 == '#' + event.originalEvent.target.id) {
+                            $(e2).addClass('activeTool');
+                            tool = e2;
+                        } else {
+                            $(e2).removeClass('activeTool');
+                        }
+                    })
+                })
+            });
+
+            $('#canvas').css({
+                left: "0px",
+                top: "44px",
+                "z-index": "0"
+            });
+
+            $('.upper-canvas').css({
+                left: "0px",
+                top: "44px",
+                "z-index": "1"
+            });
+
+            $('.canvas-container').attr('style', '');
+
+            //    $(document).bind('keydown', 'ctrl+z', undo);
+            //  $(document).bind('keydown', 'shift+ctrl+z', redo);
+
+            $('#backgroundPalette').on("input", function () {
+                bgcolor = $(this).val();
+                if (tool == "#eraserMode") {
+                    canvas.freeDrawingBrush.color = bgcolor;
+                }
+            });
+
+            $('#foregroundPalette').on("input", function () {
+                fgcolor = $(this).val();
+                if (tool != "#eraserMode")
+                    canvas.freeDrawingBrush.color = fgcolor;
+            });
+
+            var showKBShortcuts = function (e) {
+                e.preventDefault();
+                $('#popup-body').empty();
+                popup = $('#popup');
+                popup.css("display", "block");
+                $('#backdrop-div').css("display", "block");
+                var popupHead = $('#popup-header-text');
+                popupHead.html('Keyboard Shortcuts');
+                var popupBody = $('#popup-body');
+                var list = $('<ul>');
+                var save = $('<li>').html('Save: Control + S');
+                var exit = $('<li>').html('Exit: Shift + Control + W');
+                var newLayerImg = $('<li>').html('New Layer From Image: Shift + Control + L');
+                var helpKBS = $('<li>').html('Keyboard Shortcuts: Control + H');
+                var esc = $('<li>').html('Exit Popup: Esacpe');
+                list.append(save);
+                list.append(exit);
+                list.append(newLayerImg);
+                list.append(helpKBS);
+                list.append(esc);
+                popupBody.append(list);
+            };
+
+            $('#keyboardShortcuts').click(showKBShortcuts);
+
+            $(document).bind('keydown', 'ctrl+h', showKBShortcuts);
+
+            $('#forceBG').click(function () {
+                canvas.backgroundColor = $('#backgroundPalette')[0].value;
+                canvas.renderAll();
+            });
+
+            $('canvas').on("contextmenu", function () {
+                return false;
+            });
+
+            $('#size').on('input', function () {
+                canvas.freeDrawingBrush.width = this.value;
+            });
+
+            $('#exportSVG').click(function () {
+                $('#popup-body').empty();
+                popup = $('#popup');
+                popup.css("display", "block");
+                $('#backdrop-div').css("display", "block");
+                var popupHead = $('#popup-header-text');
+                popupHead.html('Export as SVG');
+                var popupBody = $('#popup-body');
+                popupBody.append($('<span>').html('Coming up soon!'));
+            });
+
+            $('#forceErasers').click(function () {
+                eraserStrokes.forEach(function (e) {
+                    e.stroke = canvas.backgroundColor;
+                    canvas.add(e);
+                });
+            });
+
+            var fgcolor = $('#foregroundPalette').val();
+            var bgcolor = $('#backgroundPalette').val();
+            canvas.freeDrawingBrush.color = fgcolor;
+            canvas.backgroundColor = bgcolor.toString();
+            canvas.freeDrawingBrush.width = $('#size')[0].value;
+            canvas.renderAll();
+        }
+    </script>
 </head>
 <body onload="onload()">
-	<div id="menubar"
-		style="top: 0px; left: 0px; position: fixed; z-index: 10; height:"
-		class="menu-wrap">
-		<ul class="horizontalList menu">
-			<li><a href="#">File</a>
-				<ul class="menu menuExpand">
-					<li><a href="#">New Image(Hover for more options)</a>
-						<ul class="menu menuExpand">
-							<li><a href="#" id="newImgTemplate">New Image</a></li>
-							<li><a href="#" id="newImgLoc">New Image From Location</a>
-						</ul></li>
-					<li><a href="#" id="saveButton">Save</a></li>
-					<li><a href="#">Export As</a>
-						<ul class="menu menuExpand" style="width: 50px;">
-							<li><a href="#" id="exportSVG">SVG</a>
-						</ul></li>
-					<li><a href="#" id="exitButton">Exit</a></li>
-				</ul></li>
-			<li><a href="#">Layers</a>
-				<ul class="menu menuExpand">
-					<li><a href="#" id="newLayerLoc">Add Layer From Location</a></li>
-				</ul></li>
-			<li><a href="#">Colors</a>
-				<ul class="menu menuExtend">
-					<li><a href="#" id="forceBG">Force Background Color</a></li>
-					<li><a href="#" id="forceErasers">Force Erasers to turn to
-							BG</a></li>
-				</ul></li>
-			<li><a href="#">Help</a>
-				<ul class="menu menuExpand">
-					<li><a href="#" id="keyboardShortcuts">Keyboard Shortcuts</a></li>
-				</ul></li>
-		</ul>
-	</div>
-	<div id="canvas-div">
-		<canvas id="canvas"></canvas>
-	</div>
-	<div id="toolbar-div" class="toolbar">
-		<button class="toolbarButton activeTool"
-			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/paintbrush.svg');"
-			id="paintMode" title="Paintbrush"></button>
-		<button class="toolbarButton"
-			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/pencil.svg');"
-			id="pencilMode" title="Pencil"></button>
-		<button class="toolbarButton"
-			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/eraser.svg');"
-			id="eraserMode" title="Eraser"></button>
-		<button class="toolbarButton"
-			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/spray.svg');"
-			id="sprayMode" title="Spray"></button>
-		<button class="toolbarButton"
-			style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/select.svg');"
-			id="selectMode" title="Select Mode"></button>
-		<div id="colorPalette"
-			style="position: absolute; bottom: 90px; left: 70px;">
-			<div style="position: absolute; top: 15px; left: 15px; z-index: 0;">
-				<input type="color" id="backgroundPalette" value="#FFFFFF"></input>
-			</div>
-			<div
-				style="position: absolute; top: 0; left: 0; width: 50px; height: 50px; z-index: 1;">
-				<input type="color" id="foregroundPalette" value="#000000"></input>
-			</div>
-			<div id="toolOptions"
-				style="position: absolute; top: -200px; left: -70px; border-top: 2px solid #000000; width: 200px; z-index: 1;">
-				<div>
-					<div style="z-index: 100; display: inline-block">
-						<span style="margin-top: -6px;">Tool size: </span> <input
-							id="size" type="range"
-							style="width: 70px; border: 0px solid #FFFFFF;"></input>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="backdrop-div"
-		style="width: 1000%; height: 1000%; z-index: 20000; background-color: #000000; opacity: 0.3; top: 0; left: 0; position: fixed;"></div>
-	<div id="popup" class="popup-box" style="">
-		<div id="popup-header" class="popup-header"
-			style="background-color: red;">
-			<h3 id="popup-header-text">ERROR</h3>
-		</div>
-		<div id="popup-body" class="popup-body">YOU DON'T HAVE
-			JAVASCRIPT. ENABLE IT, THEN REFRESH THE PAGE!</div>
-	</div>
+<div id="menubar"
+     style="top: 0; left: 0; position: fixed; z-index: 10; height: 34px;"
+     class="menu-wrap">
+    <ul class="horizontalList menu">
+        <li><a href="#">File</a>
+            <ul class="menu menuExpand">
+                <li><a href="#">New Image(Hover for more options)</a>
+                    <ul class="menu menuExpand">
+                        <li><a href="#" id="newImgTemplate">New Image</a></li>
+                        <li><a href="#" id="newImgLoc">New Image From Location</a>
+                    </ul>
+                </li>
+                <li><a href="#" id="saveButton">Save</a></li>
+                <li><a href="#">Export As</a>
+                    <ul class="menu menuExpand" style="width: 50px;">
+                        <li><a href="#" id="exportSVG">SVG</a>
+                    </ul>
+                </li>
+                <li><a href="#" id="exitButton">Exit</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Layers</a>
+            <ul class="menu menuExpand">
+                <li><a href="#" id="newLayerLoc">Add Layer From Location</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Colors</a>
+            <ul class="menu menuExtend">
+                <li><a href="#" id="forceBG">Force Background Color</a></li>
+                <li><a href="#" id="forceErasers">Force Erasers to turn to
+                    BG</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Help</a>
+            <ul class="menu menuExpand">
+                <li><a href="#" id="keyboardShortcuts">Keyboard Shortcuts</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div id="canvas-div">
+    <canvas id="canvas"></canvas>
+</div>
+<div id="toolbar-div" class="toolbar">
+    <button class="toolbarButton activeTool"
+            style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/paintbrush.svg');"
+            id="paintMode" title="Paintbrush"></button>
+    <button class="toolbarButton"
+            style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/pencil.svg');"
+            id="pencilMode" title="Pencil"></button>
+    <button class="toolbarButton"
+            style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/eraser.svg');"
+            id="eraserMode" title="Eraser"></button>
+    <button class="toolbarButton"
+            style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/spray.svg');"
+            id="sprayMode" title="Spray"></button>
+    <button class="toolbarButton"
+            style="background-image: url('http://teamfreehugs.github.io/misc/imgeditor/images/toolbar/select.svg');"
+            id="selectMode" title="Select Mode"></button>
+    <div id="colorPalette"
+         style="position: absolute; bottom: 90px; left: 70px;">
+        <div style="position: absolute; top: 15px; left: 15px; z-index: 0;">
+            <label for="backgroundPalette"></label><input type="color" id="backgroundPalette" value="#FFFFFF"/>
+        </div>
+        <div
+                style="position: absolute; top: 0; left: 0; width: 50px; height: 50px; z-index: 1;">
+            <label for="foregroundPalette"></label><input type="color" id="foregroundPalette" value="#000000"/>
+        </div>
+        <div id="toolOptions"
+             style="position: absolute; top: -200px; left: -70px; border-top: 2px solid #000000; width: 200px; z-index: 1;">
+            <div>
+                <div style="z-index: 100; display: inline-block">
+                    <span style="margin-top: -6px;">Tool size: </span> <label for="size"></label><input
+                        id="size" type="range"
+                        style="width: 70px; border: 0 solid #FFFFFF;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="backdrop-div"
+     style="width: 1000%; height: 1000%; z-index: 20000; background-color: #000000; opacity: 0.3; top: 0; left: 0; position: fixed;"></div>
+<div id="popup" class="popup-box" style="">
+    <div id="popup-header" class="popup-header"
+         style="background-color: red;">
+        <h3 id="popup-header-text">ERROR</h3>
+    </div>
+    <div id="popup-body" class="popup-body">YOU DON'T HAVE
+        JAVASCRIPT. ENABLE IT, THEN REFRESH THE PAGE!
+    </div>
+</div>
 </body>
 </html>

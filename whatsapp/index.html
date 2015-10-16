@@ -19,7 +19,25 @@
     <div id="inputBox">
         <div class="input" contenteditable="true" style="width: 70%; float: left; margin-left: 5px;">
         </div>
-        <div id="sendDiv"><button style="background-image: url('mic.svg');" title="Mic?"></button></div>
+        <div id="sendDiv">
+            <button style="background-image: url('mic.svg');" title="Mic?"></button>
+        </div>
+    </div>
+
+</div>
+<div id="overlay"
+     style="opacity: 0.6; background-color: rgb(255, 255, 255); width: 100vw; height: 100vh; z-index: 0;"></div>
+<div style="height: 50%; width: 50%; top: 25%; left: 25%; background-color: rgb(208, 240, 192); z-index: 1; position: absolute; text-align: center;"
+     id="overlay-box">
+    <p>Hello! This is my Whatsapp API. This is just a sandbox, because I don't have a phone to test it on.</p>
+
+    <p>Feel free to try it out <a href="https://web.whatsapp.com/">here</a></p>
+
+    <div style="position: absolute; bottom: 0;">
+        <button style="border-radius: 5px; background-color: rgb(0, 117, 94); border: medium none; left: calc(100vw * 0.125 * 2); position: absolute; top: calc(100% - 20px);"
+                onclick="$('#overlay').remove(); $('#overlay-box').remove();">
+            Ok
+        </button>
     </div>
 </div>
 </body>
