@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Let's get past CSP!</title>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+
+    function getQuery(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&#]" + name + "=([^&#]*)"), results = regex
+                .exec(location.hash);
+        return results === null ? "" : decodeURIComponent(results[1].replace(
+                /\+/g, " "));
+    }
+
+    $(function () {
+        if (getQuery('access_token') === '') {
+//            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp&response_type=token';
+        }
+        var access_token = getQuery('access_token');
+        if (getQuery('media_id') === '') {
+            document.body.innerHTML = '<h1>Sorry, please provide a "media_id" from Instagram!</h1>';
+        }
+        var media_id = getQuery('media_id');
+        console.log('http://api.instagram.com/oembed?url=http://instagram.com/p/' + media_id);
+        $.ajax({
+            url: 'http://api.instagram.com/oembed?url=http://instagram.com/p/' + media_id,
+            cache: false,
+            type: 'GET',
+            dataType: "jsonp",
+            async: false,
+            success: function (data) {
+                console.log(data);
+                var find_real_id = data.media_id;
+                $.ajax({
+                    url: 'https://api.instagram.com/v1/media/' + find_real_id,
+                    cache: false,
+                    dataType: "jsonp",
+                    data: {
+                        access_token: access_token
+                    },
+                    type: 'GET',
+                    async: false,
+                    success: function (data) {
+                        document.body.innerHTML = JSON.stringify(data);
+                        if (window.opener)
+                            window.opener.postMessage(response, '*');
+                    }
+                });
+            }
+        });
+
+    });
+
+</script>
+</body>
+</html>
