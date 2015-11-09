@@ -9,17 +9,17 @@
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
 
-    function getQuery(name) {
+    function getQuery(name, url) {
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&#]" + name + "=([^&#]*)"), results = regex
-                .exec(location.hash);
+                .exec(url || location.hash);
         return results === null ? "" : decodeURIComponent(results[1].replace(
                 /\+/g, " "));
     }
 
     $(function () {
         if (getQuery('access_token') === '') {
-            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp' + (getQuery('media_id') === "" ? '' : '#media_id=' + getQuery('media_id')) + '&response_type=token';
+            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp' + (getQuery('media_id', location.href) === "" ? '' : '#media_id=' + getQuery('media_id', location.href)) + '&response_type=token';
         }
         var access_token = getQuery('access_token');
         if (getQuery('media_id') === '') {
