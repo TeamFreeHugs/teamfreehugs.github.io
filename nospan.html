@@ -7,7 +7,7 @@
     <script>
         $(document).ready(function () {
             $('#input').on('input', function () {
-                $('#output').val($('#input').val().replace(/<span ?.*>(.+)<\/span>/, '$1'));
+                $('#output').val($('#input').val().replace(/<span.*>(.+)<\/span>/g, '$1'));
             });
         });
     </script>

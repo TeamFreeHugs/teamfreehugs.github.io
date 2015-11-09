@@ -19,7 +19,7 @@
 
     $(function () {
         if (getQuery('access_token') === '') {
-            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp&response_type=token';
+            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp' + (getQuery('media_id') === "" ? '' : '?media_id=' + getQuery('media_id')) + '&response_type=token';
         }
         var access_token = getQuery('access_token');
         if (getQuery('media_id') === '') {
@@ -32,19 +32,15 @@
             cache: false,
             type: 'GET',
             dataType: "jsonp",
-            async: false,
             success: function (data) {
                 console.log(data);
                 var find_real_id = data.media_id;
+                console.log('https://api.instagram.com/v1/media/' + find_real_id + '?access_token=' + access_token)
                 $.ajax({
-                    url: 'https://api.instagram.com/v1/media/' + find_real_id,
+                    url: 'https://api.instagram.com/v1/media/' + find_real_id + '?access_token=' + access_token,
                     cache: false,
                     dataType: "jsonp",
-                    data: {
-                        access_token: access_token
-                    },
                     type: 'GET',
-                    async: false,
                     success: function (data) {
                         document.body.innerHTML = JSON.stringify(data);
                         if (window.opener)
