@@ -51,8 +51,8 @@
                     type: 'GET',
                     success: function (data) {
                         document.body.innerHTML = JSON.stringify(data);
-                        if (window.opener)
-                            window.opener.postMessage(response, '*');
+                        if (window.opener !== null)
+                            window.opener.postMessage(JSON.stringify(data), '*');
                     }
                 });
             }
