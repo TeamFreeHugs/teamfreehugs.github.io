@@ -27,7 +27,7 @@
 
     $(function () {
         if (getQueryHash('access_token') === '') {
-            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp' + ((getQueryHash('media_id') || getQueryString('media_id')) === "" ? '' : '#media_id=' + getQueryHash('media_id') || getQueryString('media_id')) + '&response_type=token';
+            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp' + ((getQueryHash('media_id') || getQueryString('media_id')) === "" ? '' : '?media_id=' + getQueryHash('media_id') || getQueryString('media_id')) + '&response_type=token';
         }
         var access_token = getQueryHash('access_token');
         if (getQueryHash('media_id') || getQueryString('media_id') === '') {
