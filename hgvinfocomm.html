@@ -2,11 +2,11 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>CSS Transform!</title>
+    <title>CSS Transform! </title>
     <style>
         .l-element {
             position: absolute;
-            left: 37px;
+            left: 33px;
         }
 
         .r-element {
@@ -41,7 +41,7 @@
             content: 'L';
             transform: scaleX(-1);
             position: absolute;
-            left: -30px;
+            left: -26px;
         }
 
         .container-pseudo-element {
@@ -50,11 +50,17 @@
             width: 1425px;
         }
 
+        * {
+            font-family: "Open Sans";
+            font-weight: 300;
+        }
+
 
     </style>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class="container-element">
+<div class="container-element container">
     <div class="r-element">
         <span>R</span>
     </div>
@@ -63,7 +69,7 @@
     </div>
 </div>
 
-<div class="container-pseudo-element">
+<div class="container-pseudo-element container">
     <span class="r-pseudo-element">R</span>
 </div>
 
