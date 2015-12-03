@@ -1,90 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Team Free Hugs</title>
+    <meta charset="UTF-8">
+    <title>Team Free Hugs</title>
     <link rel="stylesheet"
-          href="http://teamfreehugs.github.io/experimental/css/base.css" />
+          href="http://teamfreehugs.github.io/experimental/css/base.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script id="troll">
+
+        function getQueryHash(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&#]" + name + "=([^&#]*)"), results = regex
+                    .exec(location.hash);
+            return results === null ? "" : decodeURIComponent(results[1].replace(
+                    /\+/g, " "));
+        }
+
+        $(function () {
+            if (!!getQueryHash('_')) {
+                document.write('<h1>HI I KNOW YOU CAME FROM ASK.FM OK? BYE!!!</h1><br>' +
+                        '<a href="http://ask.fm/">GO HOME!</a>');
+            }
+        });
+
+    </script>
 </head>
 <body>
-	<div id="main" 	style="width: 1000px; height: auto; margin: 0 auto;">
-		<h1>Team Free Hugs</h1>
-		<h2>About us</h2>
-		<hr>
-		<div id="aboutUs">
-			<p>We are a group of students in Singapore</p>
-			<p>
-				We go to <a target="_blank"
-					href="http://www.hillgrovesec.moe.edu.sg/">Hillgrove Secondary
-					School</a>
-			</p>
-		</div>
-		<h2>Who's here</h2>
-		<hr>
-		<div id="whoshere">
-			<ul>
-				<li><a target="_blank" href="https://github.com/eyeballcode"
-					title="Eyeballcode">Eyeballcode</a>
-					<p>
-						I am currently kinda like the lead dev here, as I code almost
-						everything. Most things on <a target="_blank"
-							href="https://github.com/Plantsguy">@Plants</a> profile is
-						actually mine.<br> <a target="_blank"
-							href="http://stackexchange.com/users/3934463/unicorns-are-very-very-yummy"><img
-							src="http://stackexchange.com/users/flair/3934463.png"
-							width="208" height="58"
-							alt="profile for Unicorns Are Very Very Yummy on Stack Exchange, a network of free, community-driven Q&amp;A sites"
-							title="profile for Unicorns Are Very Very Yummy on Stack Exchange, a network of free, community-driven Q&amp;A sites" /></a>
-					</p></li>
-				<li><a target="_blank" href="https://github.com/Plantsguy"
-					title="Plantsguy">Plantsguy</a>
-					<p>Hi, I'm plants guy, and I'm always happy.</p></li>
-				<li><a target="_blank" href="https://github.com/kcpyeung"
-					title="Kcpyeung">Kcpyeung</a>
-					<p style="color: grey;">
-						<i title="Sorry SE!">Apparently, this user prefers to keep an
-							air of mystery about them.</i>
-					</p></li>
-				<li><a target="_blank"
-					href="https://github.com/TheCodingMonster" title="TheCodingMonster">TheCodingMonster</a>
-					<p>
-						Hi, I'm <a target="_blank" href="https://github.com/Eyeballcode">@Eyeball</a>'s
-						other account, don't worry
-					</p></li>
-			</ul>
-		</div>
-		<h2>Links</h2>
-		<hr>
-		<div id="links">
-			<p>
-				<a href="stackexchange/">/stackexchange</a>
-			</p>
-			<p>
-				<a href="fun/">/fun</a>
-			</p>
-			<p>
-				<a href="projects/" title="WARNING: STILL UNDER DEVELOPMENT!">/projects</a>
-			</p>
-			<p>
-				<a href="misc/">/misc</a>
-			</p>
-			<p>
-				<a href="live.html">/live</a>
-			</p>
-			<p>
-				<a href="scripts.html">/scripts</a>
-			</p>
-			<p>
-				<a href="whatsapp/">/whatsapp</a>
-			</p>
-		</div>
-		<h2 style="display: none;">Bugs</h2>
-		<hr style="display: none;">
-		<div id="bugs" style="display: none;">
-			<h4>
-				Found a bug? Report it <a href="bugs.html">here</a>!
-			</h4>
-		</div>
-	</div>
+<div id="main" style="width: 1000px; height: auto; margin: 0 auto;">
+    <h1>Team Free Hugs</h1>
+
+    <h2>About us</h2>
+    <hr>
+    <div id="aboutUs">
+        <p>We are a group of students in Singapore</p>
+
+        <p>
+            We go to <a target="_blank"
+                        href="http://www.hillgrovesec.moe.edu.sg/">Hillgrove Secondary
+            School</a>
+        </p>
+    </div>
+    <h2>Who's here</h2>
+    <hr>
+    <div id="whoshere">
+        <ul>
+            <li><a target="_blank" href="https://github.com/eyeballcode"
+                   title="Eyeballcode">Eyeballcode</a>
+
+                <p>
+                    I am currently kinda like the lead dev here, as I code almost
+                    everything. Most things on <a target="_blank"
+                                                  href="https://github.com/Plantsguy">@Plants</a> profile is
+                    actually mine.<br> <a target="_blank"
+                                          href="http://stackexchange.com/users/3934463/unicorns-are-very-very-yummy"><img
+                        src="http://stackexchange.com/users/flair/3934463.png"
+                        width="208" height="58"
+                        alt="profile for Unicorns Are Very Very Yummy on Stack Exchange, a network of free, community-driven Q&amp;A sites"
+                        title="profile for Unicorns Are Very Very Yummy on Stack Exchange, a network of free, community-driven Q&amp;A sites"/></a>
+                </p></li>
+            <li><a target="_blank" href="https://github.com/Plantsguy"
+                   title="Plantsguy">Plantsguy</a>
+
+                <p>Hi, I'm plants guy, and I'm always happy.</p></li>
+            <li><a target="_blank" href="https://github.com/kcpyeung"
+                   title="Kcpyeung">Kcpyeung</a>
+
+                <p style="color: grey;">
+                    <i title="Sorry SE!">Apparently, this user prefers to keep an
+                        air of mystery about them.</i>
+                </p></li>
+            <li><a target="_blank"
+                   href="https://github.com/TheCodingMonster" title="TheCodingMonster">TheCodingMonster</a>
+
+                <p>
+                    Hi, I'm <a target="_blank" href="https://github.com/Eyeballcode">@Eyeball</a>'s
+                    other account, don't worry
+                </p></li>
+        </ul>
+    </div>
+    <h2>Links</h2>
+    <hr>
+    <div id="links">
+        <p>
+            <a href="stackexchange/">/stackexchange</a>
+        </p>
+
+        <p>
+            <a href="fun/">/fun</a>
+        </p>
+
+        <p>
+            <a href="projects/" title="WARNING: STILL UNDER DEVELOPMENT!">/projects</a>
+        </p>
+
+        <p>
+            <a href="misc/">/misc</a>
+        </p>
+
+        <p>
+            <a href="live.html">/live</a>
+        </p>
+
+        <p>
+            <a href="scripts.html">/scripts</a>
+        </p>
+
+        <p>
+            <a href="whatsapp/">/whatsapp</a>
+        </p>
+    </div>
+    <h2 style="display: none;">Bugs</h2>
+    <hr style="display: none;">
+    <div id="bugs" style="display: none;">
+        <h4>
+            Found a bug? Report it <a href="bugs.html">here</a>!
+        </h4>
+    </div>
+</div>
 </body>
 </html>
