@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CSS Transform! </title>
+    <style>
+        .l-element {
+            position: absolute;
+            left: 33px;
+        }
+
+        .r-element {
+            transform: scaleX(-1);
+            position: absolute;
+            left: 0;
+        }
+
+        .container-pseudo-element *, .container-element * {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            font-size: 100px;
+        }
+
+        .container-element {
+            display: block;
+            height: 115px;
+            width: 1425px;
+        }
+
+        .r-pseudo-element {
+            transform: scaleX(-1);
+            display: inline-block;
+        }
+
+        .r-pseudo-element::before {
+            display: inline-block;
+            content: 'L';
+            transform: scaleX(-1);
+            position: absolute;
+            left: -26px;
+        }
+
+        .container-pseudo-element {
+            display: block;
+            height: 115px;
+            width: 1425px;
+        }
+
+        * {
+            font-family: "Open Sans";
+            font-weight: 300;
+        }
+
+    </style>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container-element container">
+    <div class="r-element">
+        <span>R</span>
+    </div>
+    <div class="l-element">
+        <span>L</span>
+    </div>
+</div>
+
+<div class="container-pseudo-element container">
+    <span class="r-pseudo-element">R</span>
+</div>
+
+
+</body>
+</html>
