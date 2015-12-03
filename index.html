@@ -18,8 +18,12 @@
 
         $(function () {
             if (!!getQueryHash('_')) {
-                document.write('<h1>HI I KNOW YOU CAME FROM ASK.FM OK? BYE!!!</h1><br>' +
-                        '<a href="http://ask.fm/">GO HOME!</a>');
+                document.body.innerHTML = '<h1>HI I KNOW YOU CAME FROM ASK.FM OK? BYE!!!</h1><br>' +
+                        '<a id="click" href="http://ask.fm/">GO HOME!</a>';
+                $('#click').click(function (e) {
+                    e.preventDefault();
+                    close();
+                });
             }
         });
 
